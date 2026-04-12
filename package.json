@@ -1,0 +1,19 @@
+{
+  "name": "outspeed.me",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "bun run --parallel --filter '!e2e' test",
+    "lint": "bun run --parallel --filter '*' lint",
+    "format": "bun run --parallel --filter '*' format",
+    "typecheck": "bun run --parallel --filter '*' typecheck",
+    "build": "bun run --parallel --filter '*' build",
+    "dev": "bun run  --elide-lines 0 --parallel --filter '*' dev"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^6.0.2"
+  }
+}
