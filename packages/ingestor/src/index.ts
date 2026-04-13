@@ -34,7 +34,14 @@ export {
   buildSpeedEffects,
   toDisplayLabel,
 } from "./speed-tiers/effects";
-export { groupBySpeedTier, speedTiersToCsv } from "./speed-tiers/output";
+export {
+  compareSpeedTierPokemon,
+  formatEffect,
+  formatNature,
+  formatSpread,
+  groupBySpeedTier,
+  speedTiersToCsv,
+} from "./speed-tiers/output";
 export {
   COMBINATION_RULES,
   DOUBLE_SPEED_ABILITIES,

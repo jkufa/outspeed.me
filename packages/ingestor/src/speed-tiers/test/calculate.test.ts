@@ -113,12 +113,8 @@ describe("buildSpeedTierCombinations", () => {
 
     expect(combinations).toContainEqual({
       id: 1,
-      pokedex_no: 3,
+      pokedexNo: 3,
       name: "Venusaur",
-      EVs: 252,
-      ability: "chlorophyll",
-      nature: "positive",
-      item: "choice-scarf",
       spread: {
         nature: "positive",
         evs: 252,
@@ -141,9 +137,8 @@ describe("buildSpeedTierCombinations", () => {
           multiplier: 1.5,
         },
       ],
-      rawSpeed: 145,
       finalSpeed: 435,
-      tier: 435,
+      speed: 435,
     });
   });
 });

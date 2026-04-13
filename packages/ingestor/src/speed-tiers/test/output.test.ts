@@ -1,30 +1,29 @@
 import { describe, expect, it } from "vitest";
-import { groupBySpeedTier, speedTiersToCsv } from "../output";
+import {
+  formatEffect,
+  formatNature,
+  formatSpread,
+  groupBySpeedTier,
+  speedTiersToCsv,
+} from "../output";
 import type { SpeedTierPokemon } from "../types";
 
 function speedTierPokemon(overrides: Partial<SpeedTierPokemon> = {}): SpeedTierPokemon {
-  const nature = overrides.nature ?? "neutral";
-  const evs = overrides.EVs ?? 0;
-  const rawSpeed = overrides.rawSpeed ?? 100;
+  const spread = overrides.spread ?? {
+    nature: "neutral",
+    evs: 0,
+    ivs: 31,
+    level: 50,
+    rawSpeed: 100,
+  };
 
   return {
     id: 1,
-    pokedex_no: 25,
+    pokedexNo: 25,
     name: "Pikachu",
-    EVs: evs,
-    ability: null,
-    nature,
-    item: null,
-    spread: {
-      nature,
-      evs,
-      ivs: 31,
-      level: 50,
-      rawSpeed,
-    },
+    spread,
     effects: [],
-    rawSpeed,
-    finalSpeed: overrides.finalSpeed ?? rawSpeed,
+    finalSpeed: overrides.finalSpeed ?? spread.rawSpeed,
     ...overrides,
   };
 }
@@ -34,43 +33,51 @@ describe("groupBySpeedTier", () => {
     expect(
       groupBySpeedTier([
         {
-          tier: 100,
+          speed: 100,
           ...speedTierPokemon({ id: 2, name: "Pikachu" }),
         },
         {
-          tier: 200,
+          speed: 200,
           ...speedTierPokemon({
             id: 3,
-            pokedex_no: 6,
+            pokedexNo: 6,
             name: "Charizard",
-            EVs: 252,
-            nature: "positive",
-            rawSpeed: 167,
+            spread: {
+              nature: "positive",
+              evs: 252,
+              ivs: 31,
+              level: 50,
+              rawSpeed: 167,
+            },
             finalSpeed: 167,
           }),
         },
         {
-          tier: 100,
+          speed: 100,
           ...speedTierPokemon({ id: 1, name: "Pikachu-A" }),
         },
       ]),
     ).toEqual([
       {
-        tier: 200,
+        speed: 200,
         pokemon: [
           speedTierPokemon({
             id: 3,
-            pokedex_no: 6,
+            pokedexNo: 6,
             name: "Charizard",
-            EVs: 252,
-            nature: "positive",
-            rawSpeed: 167,
+            spread: {
+              nature: "positive",
+              evs: 252,
+              ivs: 31,
+              level: 50,
+              rawSpeed: 167,
+            },
             finalSpeed: 167,
           }),
         ],
       },
       {
-        tier: 100,
+        speed: 100,
         pokemon: [
           speedTierPokemon({ id: 1, name: "Pikachu-A" }),
           speedTierPokemon({ id: 2, name: "Pikachu" }),
@@ -85,19 +92,52 @@ describe("speedTiersToCsv", () => {
     expect(
       speedTiersToCsv([
         {
-          tier: 100,
+          speed: 100,
           pokemon: [
             speedTierPokemon({
               id: 1,
-              pokedex_no: 122,
+              pokedexNo: 122,
               name: "Mr. Mime, Jr.",
-              ability: "filter",
+              effects: [
+                {
+                  kind: "ability",
+                  source: "chlorophyll",
+                  label: "Chlorophyll",
+                  multiplier: 2,
+                  condition: "sun",
+                },
+              ],
             }),
           ],
         },
       ]),
     ).toBe(
-      'tier,id,pokedex_no,name,EVs,ability,nature,item\n100,1,122,"Mr. Mime, Jr.",0,filter,neutral,\n',
+      'speed,id,pokedex_no,name,spread,effects\n100,1,122,"Mr. Mime, Jr.",neutral 0 EVs,2x Chlorophyll (sun)\n',
     );
+  });
+});
+
+describe("format helpers", () => {
+  it("formats spreads, natures, and effects for CSV review", () => {
+    expect(formatNature("positive")).toBe("+Spe");
+    expect(formatNature("neutral")).toBe("neutral");
+    expect(formatNature("negative")).toBe("-Spe");
+    expect(
+      formatSpread({
+        nature: "positive",
+        evs: 252,
+        ivs: 31,
+        level: 50,
+        rawSpeed: 145,
+      }),
+    ).toBe("+Spe 252 EVs");
+    expect(
+      formatEffect({
+        kind: "item",
+        source: "choice-scarf",
+        label: "Choice Scarf",
+        multiplier: 1.5,
+      }),
+    ).toBe("1.5x Choice Scarf");
   });
 });

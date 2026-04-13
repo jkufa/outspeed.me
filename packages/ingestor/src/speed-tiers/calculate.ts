@@ -40,17 +40,12 @@ export function buildSpeedTierCombinations(pokedex: PokedexPokemon[]): SpeedTier
 
             return {
               id: pokemon.id,
-              pokedex_no: pokemon.pokedexNumber,
+              pokedexNo: pokemon.pokedexNumber,
               name: pokemon.name,
-              EVs: evs,
-              ability,
-              nature,
-              item,
               spread,
               effects: calculation.effects,
-              rawSpeed: calculation.rawSpeed,
               finalSpeed: calculation.finalSpeed,
-              tier: calculation.finalSpeed,
+              speed: calculation.finalSpeed,
             };
           }),
         );

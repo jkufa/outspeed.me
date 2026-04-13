@@ -46,25 +46,20 @@ export type SpeedCalculation = {
 
 export type SpeedTierPokemon = {
   id: number;
-  pokedex_no: number;
+  pokedexNo: number;
   name: string;
-  EVs: SpeedEv;
-  ability: string | null;
-  nature: Nature;
-  item: HeldItem | null;
   spread: SpeedSpread;
   effects: SpeedEffect[];
-  rawSpeed: number;
   finalSpeed: number;
 };
 
 export type SpeedTier = {
-  tier: number;
+  speed: number;
   pokemon: SpeedTierPokemon[];
 };
 
 export type SpeedTierCombination = SpeedTierPokemon & {
-  tier: number;
+  speed: number;
 };
 
 export type CombinationContext = {
