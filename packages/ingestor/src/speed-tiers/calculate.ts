@@ -8,7 +8,7 @@ import {
   SPEED_EVS,
   STAGE_SPEED_ABILITIES,
 } from "./rules";
-import { buildSpeedEffects } from "./effects";
+import { buildAbilityEffect, buildSpeedEffects } from "./effects";
 import type {
   CombinationContext,
   HeldItem,
@@ -133,19 +133,13 @@ export function getSpeedAbilityNames(pokemon: PokedexPokemon) {
 }
 
 export function applyAbilityModifier(speed: number, ability: string | null) {
-  if (!ability) {
+  const effect = buildAbilityEffect(ability);
+
+  if (effect?.multiplier === undefined) {
     return speed;
   }
 
-  if (DOUBLE_SPEED_ABILITIES.has(ability)) {
-    return speed * 2;
-  }
-
-  if (STAGE_SPEED_ABILITIES.has(ability)) {
-    return Math.floor(speed * 1.5);
-  }
-
-  throw new Error(`Unsupported speed ability: ${ability}`);
+  return Math.floor(speed * effect.multiplier);
 }
 
 export function getNatureModifier(nature: Nature) {

@@ -1,12 +1,5 @@
-import { DOUBLE_SPEED_ABILITIES, STAGE_SPEED_ABILITIES } from "./rules";
+import { STAGE_SPEED_ABILITIES, WEATHER_SPEED_ABILITY_EFFECTS } from "./rules";
 import type { HeldItem, SpeedEffect } from "./types";
-
-const DOUBLE_SPEED_ABILITY_CONDITIONS = new Map([
-  ["chlorophyll", "sun"],
-  ["sand-rush", "sand"],
-  ["slush-rush", "snow"],
-  ["swift-swim", "rain"],
-]);
 
 export function buildSpeedEffects(ability: string | null, item: HeldItem | null): SpeedEffect[] {
   return [buildAbilityEffect(ability), buildItemEffect(item)].filter(
@@ -19,13 +12,15 @@ export function buildAbilityEffect(ability: string | null): SpeedEffect | null {
     return null;
   }
 
-  if (DOUBLE_SPEED_ABILITIES.has(ability)) {
+  if (isWeatherSpeedAbility(ability)) {
+    const effect = WEATHER_SPEED_ABILITY_EFFECTS[ability];
+
     return {
       kind: "ability",
       source: ability,
       label: toDisplayLabel(ability),
-      multiplier: 2,
-      condition: DOUBLE_SPEED_ABILITY_CONDITIONS.get(ability),
+      multiplier: effect.multiplier,
+      condition: effect.condition,
     };
   }
 
@@ -65,4 +60,10 @@ export function toDisplayLabel(slug: string) {
     .split("-")
     .map((word) => `${word[0]?.toUpperCase() ?? ""}${word.slice(1)}`)
     .join(" ");
+}
+
+function isWeatherSpeedAbility(
+  ability: string,
+): ability is keyof typeof WEATHER_SPEED_ABILITY_EFFECTS {
+  return ability in WEATHER_SPEED_ABILITY_EFFECTS;
 }
