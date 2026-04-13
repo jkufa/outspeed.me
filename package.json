@@ -3,12 +3,13 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "test": "bun run --parallel --filter '!e2e' test",
-    "lint": "bun run --parallel --filter '*' lint",
-    "format": "bun run --parallel --filter '*' format",
-    "typecheck": "bun run --parallel --filter '*' typecheck",
-    "build": "bun run --parallel --filter '*' build",
-    "dev": "bun run  --elide-lines 0 --parallel --filter '*' dev"
+    "test": "bun run --filter '@outspeedme/ingestor' test",
+    "lint": "bun run --filter '@outspeedme/ingestor' lint",
+    "fmt": "bun run --filter '@outspeedme/ingestor' fmt",
+    "format": "bun run fmt",
+    "typecheck": "bun run --filter '@outspeedme/ingestor' typecheck",
+    "build": "bun run --filter '@outspeedme/ingestor' build",
+    "dev": "bun run --elide-lines 0 --filter '@outspeedme/ingestor' dev"
   },
   "devDependencies": {
     "@types/bun": "latest"
