@@ -51,7 +51,9 @@ describe("calculateSpeedTier", () => {
       ],
     });
   });
+});
 
+describe("applyAbilityModifier", () => {
   it("rejects unsupported abilities", () => {
     expect(() => applyAbilityModifier(100, "run-away")).toThrow(
       "Unsupported speed ability: run-away",

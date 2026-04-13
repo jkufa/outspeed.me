@@ -22,7 +22,7 @@ export const DOUBLE_SPEED_ABILITIES: ReadonlySet<string> = new Set(
 export const STAGE_SPEED_ABILITIES: ReadonlySet<string> = new Set(["speed-boost"]);
 export const COMBINATION_RULES: CombinationRule[] = [
   {
-    name: "skip speed boosts with negative nature",
+    name: "skip any speed modifier with negative nature",
     shouldInclude: ({ ability, item, nature }) =>
       nature !== "negative" || (ability === null && item === null),
   },

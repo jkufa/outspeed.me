@@ -14,10 +14,16 @@ export async function ingestPokedex(
 ): Promise<NormalizedPokemon[]> {
   const rows = parsePokemonCsv(csvText);
   const fetchPokemon = options.fetchPokemon ?? createPokeApiClient().fetchPokemon;
-  const pokemonBySlug = await fetchPokemonBySlug(rows.map(toPokeApiSlug), fetchPokemon);
+  const slugs = rows.map(toPokeApiSlug);
+  const pokemonBySlug = await fetchPokemonBySlug(slugs, fetchPokemon);
 
   return rows.map((row, index) => {
-    const slug = toPokeApiSlug(row);
+    const slug = slugs[index];
+
+    if (!slug) {
+      throw new Error(`Missing slug for "${row.name}"`);
+    }
+
     const pokemon = pokemonBySlug.get(slug);
 
     if (!pokemon) {

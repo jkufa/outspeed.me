@@ -28,7 +28,11 @@ export function parsePokemonCsv(csvText: string): CsvPokemonRow[] {
       const pokeApiName =
         pokeApiNameIndex === -1 ? undefined : normalizeOptionalCell(columns[pokeApiNameIndex]);
 
-      if (!Number.isInteger(pokedexNumber)) {
+      if (
+        !columns[pokedexNumberIndex]?.trim() ||
+        !Number.isInteger(pokedexNumber) ||
+        pokedexNumber <= 0
+      ) {
         throw new Error(`Invalid pokedex_number on CSV row ${index + 2}`);
       }
 
