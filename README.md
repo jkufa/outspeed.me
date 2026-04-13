@@ -1,15 +1,27 @@
 # outspeed.me
 
-To install dependencies:
+Minimal webapp and data pipeline for Pokemon Champions speed tiers.
+
+## Workspace
+
+- `@outspeedme/ingestor`: builds normalized Pokemon data and speed tier outputs.
+- `data/`: local source and generated data files. These files are not part of the package source contract.
+
+## Commands
 
 ```bash
 bun install
+bun test
+bun fmt
+bun lint
+bun typecheck
 ```
 
-To run:
+Ingestor-specific commands:
 
 ```bash
-bun run index.ts
+bun run --filter '@outspeedme/ingestor' ingest
+bun run --filter '@outspeedme/ingestor' build-speed-tiers
 ```
 
-This project was created using `bun init` in bun v1.3.8. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for pipeline shape and generated speed tier contracts.
