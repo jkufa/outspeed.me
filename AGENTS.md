@@ -2,7 +2,7 @@
 
 ## Task Completion & Requirements
 
-- All of `bun format`, `bun lint`, and `bun typecheck` must pass before considering tasks completed.
+- All of `bun fmt`, `bun lint`, and `bun typecheck` must pass before considering tasks completed.
 
 ## Project Snapshot
 
@@ -19,3 +19,8 @@ Long term maintainability is a core priority. If you add new functionality, firs
 ## Package Roles
 
 TODO: Add package roles.
+
+## Reference Repos
+
+- PokeAPI: <https://github.com/PokeAPI/pokeapi>
+- PokeAPI docs: <https://pokeapi.co/docs/v2>
