@@ -2,7 +2,7 @@
 
 ## Task Completion & Requirements
 
-- All of `bun fmt`, `bun lint`, and `bun typecheck` must pass before considering tasks completed.
+- All of `bun fmt`, `bun lint`, and `bun typecheck` must pass before considering tasks completed unless the task is a documentation change.
 
 ## Project Snapshot
 
