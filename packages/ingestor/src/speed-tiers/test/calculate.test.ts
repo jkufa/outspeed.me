@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   applyAbilityModifier,
   buildSpeedTierCombinations,
+  calculateSpeed,
   calculateSpeedTier,
   calculateUnmodifiedSpeed,
   getBaseSpeed,
@@ -22,6 +23,33 @@ describe("calculateSpeedTier", () => {
     expect(calculateSpeedTier(100, null, "choice-scarf")).toBe(150);
     expect(calculateSpeedTier(100, "chlorophyll", null)).toBe(200);
     expect(calculateSpeedTier(101, "speed-boost", null)).toBe(151);
+  });
+
+  it("returns effect metadata and ordered calculation steps", () => {
+    expect(calculateSpeed(145, "chlorophyll", "choice-scarf")).toEqual({
+      rawSpeed: 145,
+      finalSpeed: 435,
+      effects: [
+        {
+          kind: "ability",
+          source: "chlorophyll",
+          label: "Chlorophyll",
+          multiplier: 2,
+          condition: "sun",
+        },
+        {
+          kind: "item",
+          source: "choice-scarf",
+          label: "Choice Scarf",
+          multiplier: 1.5,
+        },
+      ],
+      steps: [
+        { label: "base", speed: 145 },
+        { label: "Chlorophyll", multiplier: 2, speed: 290 },
+        { label: "Choice Scarf", multiplier: 1.5, speed: 435 },
+      ],
+    });
   });
 
   it("rejects unsupported abilities", () => {
@@ -91,6 +119,30 @@ describe("buildSpeedTierCombinations", () => {
       ability: "chlorophyll",
       nature: "positive",
       item: "choice-scarf",
+      spread: {
+        nature: "positive",
+        evs: 252,
+        ivs: 31,
+        level: 50,
+        rawSpeed: 145,
+      },
+      effects: [
+        {
+          kind: "ability",
+          source: "chlorophyll",
+          label: "Chlorophyll",
+          multiplier: 2,
+          condition: "sun",
+        },
+        {
+          kind: "item",
+          source: "choice-scarf",
+          label: "Choice Scarf",
+          multiplier: 1.5,
+        },
+      ],
+      rawSpeed: 145,
+      finalSpeed: 435,
       tier: 435,
     });
   });

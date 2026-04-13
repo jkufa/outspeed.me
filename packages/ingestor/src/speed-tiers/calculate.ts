@@ -8,12 +8,15 @@ import {
   SPEED_EVS,
   STAGE_SPEED_ABILITIES,
 } from "./rules";
+import { buildSpeedEffects } from "./effects";
 import type {
   CombinationContext,
   HeldItem,
   Nature,
   PokedexPokemon,
+  SpeedCalculation,
   SpeedEv,
+  SpeedSpread,
   SpeedTierCombination,
 } from "./types";
 
@@ -21,7 +24,7 @@ export function buildSpeedTierCombinations(pokedex: PokedexPokemon[]): SpeedTier
   return pokedex.flatMap((pokemon) =>
     SPEED_EVS.flatMap((evs) =>
       NATURES.flatMap((nature) => {
-        const unmodifiedSpeed = calculateUnmodifiedSpeed(getBaseSpeed(pokemon), evs, nature);
+        const rawSpeed = calculateUnmodifiedSpeed(getBaseSpeed(pokemon), evs, nature);
         const abilities = [null, ...getSpeedAbilityNames(pokemon)];
 
         return HELD_ITEMS.flatMap((item) =>
@@ -32,6 +35,9 @@ export function buildSpeedTierCombinations(pokedex: PokedexPokemon[]): SpeedTier
               return [];
             }
 
+            const calculation = calculateSpeed(rawSpeed, ability, item);
+            const spread = buildSpeedSpread(nature, evs, rawSpeed);
+
             return {
               id: pokemon.id,
               pokedex_no: pokemon.pokedexNumber,
@@ -40,7 +46,11 @@ export function buildSpeedTierCombinations(pokedex: PokedexPokemon[]): SpeedTier
               ability,
               nature,
               item,
-              tier: calculateSpeedTier(unmodifiedSpeed, ability, item),
+              spread,
+              effects: calculation.effects,
+              rawSpeed: calculation.rawSpeed,
+              finalSpeed: calculation.finalSpeed,
+              tier: calculation.finalSpeed,
             };
           }),
         );
@@ -68,13 +78,47 @@ export function calculateSpeedTier(
   ability: string | null,
   item: HeldItem | null,
 ) {
-  let speed = applyAbilityModifier(unmodifiedSpeed, ability);
+  return calculateSpeed(unmodifiedSpeed, ability, item).finalSpeed;
+}
 
-  if (item === "choice-scarf") {
-    speed = Math.floor(speed * 1.5);
+export function calculateSpeed(
+  rawSpeed: number,
+  ability: string | null,
+  item: HeldItem | null,
+): SpeedCalculation {
+  const effects = buildSpeedEffects(ability, item);
+  const steps: SpeedCalculation["steps"] = [{ label: "base", speed: rawSpeed }];
+  let speed = rawSpeed;
+
+  for (const effect of effects) {
+    if (effect.multiplier === undefined) {
+      continue;
+    }
+
+    speed = Math.floor(speed * effect.multiplier);
+    steps.push({
+      label: effect.label,
+      multiplier: effect.multiplier,
+      speed,
+    });
   }
 
-  return speed;
+  return {
+    rawSpeed,
+    finalSpeed: speed,
+    effects,
+    steps,
+  };
+}
+
+export function buildSpeedSpread(nature: Nature, evs: SpeedEv, rawSpeed: number): SpeedSpread {
+  return {
+    nature,
+    evs,
+    ivs: IV,
+    level: LEVEL,
+    rawSpeed,
+  };
 }
 
 export function calculateUnmodifiedSpeed(baseSpeed: number, evs: SpeedEv, nature: Nature) {

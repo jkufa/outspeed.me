@@ -18,7 +18,9 @@ export type {
 export { buildSpeedTierOutputs } from "./speed-tiers/build";
 export {
   applyAbilityModifier,
+  buildSpeedSpread,
   buildSpeedTierCombinations,
+  calculateSpeed,
   calculateSpeedTier,
   calculateUnmodifiedSpeed,
   getBaseSpeed,
@@ -26,6 +28,12 @@ export {
   getSpeedAbilityNames,
   shouldIncludeCombination,
 } from "./speed-tiers/calculate";
+export {
+  buildAbilityEffect,
+  buildItemEffect,
+  buildSpeedEffects,
+  toDisplayLabel,
+} from "./speed-tiers/effects";
 export { groupBySpeedTier, speedTiersToCsv } from "./speed-tiers/output";
 export {
   COMBINATION_RULES,
@@ -43,7 +51,12 @@ export type {
   HeldItem,
   Nature,
   PokedexPokemon,
+  SpeedCalculation,
+  SpeedCalculationStep,
   SpeedEv,
+  SpeedEffect,
+  SpeedEffectKind,
+  SpeedSpread,
   SpeedTier,
   SpeedTierCombination,
   SpeedTierPokemon,

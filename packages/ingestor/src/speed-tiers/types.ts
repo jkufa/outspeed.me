@@ -1,6 +1,7 @@
 export type HeldItem = "choice-scarf";
 export type Nature = "neutral" | "positive" | "negative";
 export type SpeedEv = 0 | 252;
+export type SpeedEffectKind = "ability" | "item" | "field" | "weather" | "terrain" | "stage";
 
 export type PokedexPokemon = {
   id: number;
@@ -13,6 +14,36 @@ export type PokedexPokemon = {
   stats: Record<string, number>;
 };
 
+export type SpeedSpread = {
+  nature: Nature;
+  evs: SpeedEv;
+  ivs: number;
+  level: number;
+  rawSpeed: number;
+};
+
+export type SpeedEffect = {
+  kind: SpeedEffectKind;
+  source: string;
+  label: string;
+  multiplier?: number;
+  stage?: number;
+  condition?: string;
+};
+
+export type SpeedCalculationStep = {
+  label: string;
+  speed: number;
+  multiplier?: number;
+};
+
+export type SpeedCalculation = {
+  rawSpeed: number;
+  finalSpeed: number;
+  effects: SpeedEffect[];
+  steps: SpeedCalculationStep[];
+};
+
 export type SpeedTierPokemon = {
   id: number;
   pokedex_no: number;
@@ -21,6 +52,10 @@ export type SpeedTierPokemon = {
   ability: string | null;
   nature: Nature;
   item: HeldItem | null;
+  spread: SpeedSpread;
+  effects: SpeedEffect[];
+  rawSpeed: number;
+  finalSpeed: number;
 };
 
 export type SpeedTier = {
