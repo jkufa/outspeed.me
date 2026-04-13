@@ -15,9 +15,54 @@ Data pipeline for Outspeed. This package turns source Pokemon data into normaliz
 ## Outputs
 
 - `champions_pokedex.json`: normalized Pokemon records with local ids, display names, PokeAPI slugs, abilities, and stats.
-- `speed_tier_combinations.json`: flat list of every generated Pokemon speed setup. Each entry includes Pokemon identity, EVs, nature, ability, item, and calculated `tier`.
-- `speed_tiers.json`: grouped view of those same combinations by final speed tier, sorted from fastest to slowest. This shape is better for UI display.
-- `speed_tiers.csv`: CSV version of `speed_tiers.json` for spreadsheet-style review.
+- `speed_tier_combinations.json`: flat list of every generated Pokemon speed setup. Each entry includes Pokemon identity, spread, typed speed effects, final speed, and `speed`.
+- `speed_tiers.json`: grouped view of those same combinations by final speed, sorted from fastest to slowest. This is the primary UI contract.
+- `speed_tiers.csv`: compact review sheet with `speed`, Pokemon identity, formatted spread, and formatted effects.
+
+## Speed Tier Contract
+
+The UI should render speed tiers from grouped JSON:
+
+```ts
+type SpeedTier = {
+  speed: number;
+  pokemon: SpeedTierPokemon[];
+};
+
+type SpeedTierPokemon = {
+  id: number;
+  pokedexNo: number;
+  name: string;
+  spread: {
+    nature: "neutral" | "positive" | "negative";
+    evs: 0 | 252;
+    ivs: number;
+    level: number;
+    rawSpeed: number;
+  };
+  effects: SpeedEffect[];
+  finalSpeed: number;
+};
+```
+
+`effects` are typed so the frontend does not need to infer that `chlorophyll` means `2x` speed in sun or that `choice-scarf` is an item.
+
+```ts
+type SpeedEffect = {
+  kind: "ability" | "item" | "field" | "weather" | "terrain" | "stage";
+  source: string;
+  label: string;
+  multiplier?: number;
+  stage?: number;
+  condition?: string;
+};
+```
+
+Recommended table columns:
+
+```text
+Speed | Pokemon | Spread | Effects
+```
 
 ## Commands
 
@@ -27,3 +72,5 @@ bun run build-speed-tiers
 ```
 
 Both commands accept positional path overrides, but default to repo-level files in `data/`.
+
+See `docs/ARCHITECTURE.md` at the repo root for module responsibilities and pipeline flow.
