@@ -6,11 +6,17 @@
 
 ## Project Snapshot
 
-TODO: Add project snapshot.
+outspeed.me is a minimal webapp for displaying speed tier calculations and providing tools related to speed for Pokemon Champions.
+
+This repository is a VERY EARLY WIP. Proposing sweeping changes that improve long-term maintainability is encouraged.
 
 ## Core Priorities
 
-TODO: Add core priorities.
+1. Performance first.
+2. Reliability first.
+3. Deterministic dataset generation.
+
+If a tradeoff is required, choose correctness and robustness over short-term convenience.
 
 ## Maintainability
 
@@ -18,9 +24,9 @@ Long term maintainability is a core priority. If you add new functionality, firs
 
 ## Package Roles
 
-TODO: Add package roles.
+- `@outspeedme/ingestor`: Data pipeline. This package turns source Pokemon data into normalized files the webapp can consume.
 
-## Reference Repos
+## Reference Repos & Docs
 
 - PokeAPI: <https://github.com/PokeAPI/pokeapi>
 - PokeAPI docs: <https://pokeapi.co/docs/v2>
