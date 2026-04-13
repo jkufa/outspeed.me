@@ -25,6 +25,7 @@ Long term maintainability is a core priority. If you add new functionality, firs
 ## Package Roles
 
 - `@outspeedme/ingestor`: Data pipeline. This package turns source Pokemon data into normalized files the webapp can consume.
+- `@outspeedme/webapp`: Webapp. This package contains the SvelteKit app that displays the speed tier calculations and provides tools related to speed for Pokemon Champions.
 
 ## Reference Repos & Docs
 
