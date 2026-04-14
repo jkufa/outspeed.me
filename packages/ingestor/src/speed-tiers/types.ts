@@ -45,6 +45,7 @@ export type SpeedCalculation = {
 };
 
 export type SpeedTierPokemon = {
+  combinationId: string;
   id: number;
   pokedexNo: number;
   name: string;
@@ -63,6 +64,7 @@ export type SpeedTierCombination = SpeedTierPokemon & {
 };
 
 export type CombinationContext = {
+  pokemon: PokedexPokemon;
   evs: SpeedEv;
   nature: Nature;
   ability: string | null;

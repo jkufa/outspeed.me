@@ -1,12 +1,11 @@
 import {
   COMBINATION_RULES,
-  DOUBLE_SPEED_ABILITIES,
   HELD_ITEMS,
   IV,
   LEVEL,
   NATURES,
   SPEED_EVS,
-  STAGE_SPEED_ABILITIES,
+  isSpeedAbility,
 } from "./rules";
 import { buildAbilityEffect, buildSpeedEffects } from "./effects";
 import type {
@@ -29,7 +28,7 @@ export function buildSpeedTierCombinations(pokedex: PokedexPokemon[]): SpeedTier
 
         return HELD_ITEMS.flatMap((item) =>
           abilities.flatMap((ability) => {
-            const context = { evs, nature, ability, item };
+            const context = { pokemon, evs, nature, ability, item };
 
             if (!shouldIncludeCombination(context)) {
               return [];
@@ -39,6 +38,7 @@ export function buildSpeedTierCombinations(pokedex: PokedexPokemon[]): SpeedTier
             const spread = buildSpeedSpread(nature, evs, rawSpeed);
 
             return {
+              combinationId: buildSpeedTierCombinationId(context),
               id: pokemon.id,
               pokedexNo: pokemon.pokedexNumber,
               name: pokemon.name,
@@ -52,6 +52,22 @@ export function buildSpeedTierCombinations(pokedex: PokedexPokemon[]): SpeedTier
       }),
     ),
   );
+}
+
+export function buildSpeedTierCombinationId({
+  ability,
+  evs,
+  item,
+  nature,
+  pokemon,
+}: CombinationContext) {
+  return [
+    `pokemon:${pokemon.id}`,
+    `nature:${nature}`,
+    `evs:${evs}`,
+    `ability:${ability ?? "none"}`,
+    `item:${item ?? "none"}`,
+  ].join("|");
 }
 
 export function shouldIncludeCombination(context: CombinationContext) {
@@ -124,12 +140,7 @@ export function calculateUnmodifiedSpeed(baseSpeed: number, evs: SpeedEv, nature
 }
 
 export function getSpeedAbilityNames(pokemon: PokedexPokemon) {
-  return pokemon.abilities
-    .map((ability) => ability.name)
-    .filter(
-      (abilityName) =>
-        DOUBLE_SPEED_ABILITIES.has(abilityName) || STAGE_SPEED_ABILITIES.has(abilityName),
-    );
+  return pokemon.abilities.map((ability) => ability.name).filter(isSpeedAbility);
 }
 
 export function applyAbilityModifier(speed: number, ability: string | null) {

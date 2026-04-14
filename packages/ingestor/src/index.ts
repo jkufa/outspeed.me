@@ -50,7 +50,10 @@ export {
   LEVEL,
   NATURES,
   SPEED_EVS,
+  SPEED_ABILITIES,
   STAGE_SPEED_ABILITIES,
+  isMegaPokemon,
+  isSpeedAbility,
 } from "./speed-tiers/rules";
 export type {
   CombinationContext,

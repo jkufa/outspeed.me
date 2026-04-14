@@ -3,6 +3,7 @@
 ## Task Completion & Requirements
 
 - All of `bun fmt`, `bun lint`, and `bun typecheck` must pass before considering tasks completed unless the task is a documentation change.
+- Do not run `bun test`, run `bun run test` instead. Running `bun test` will use Bun's built-in test runner, which is not what we want. We want to use Vitest.
 
 ## Project Snapshot
 
@@ -25,6 +26,7 @@ Long term maintainability is a core priority. If you add new functionality, firs
 ## Package Roles
 
 - `@outspeedme/ingestor`: Data pipeline. This package turns source Pokemon data into normalized files the webapp can consume.
+- `@outspeedme/webapp`: Webapp. This package contains the SvelteKit app that displays the speed tier calculations and provides tools related to speed for Pokemon Champions.
 
 ## Reference Repos & Docs
 

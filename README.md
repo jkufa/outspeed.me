@@ -23,5 +23,3 @@ Ingestor-specific commands:
 bun run --filter '@outspeedme/ingestor' ingest
 bun run --filter '@outspeedme/ingestor' build-speed-tiers
 ```
-
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for pipeline shape and generated speed tier contracts.
