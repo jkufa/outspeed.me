@@ -1,4 +1,4 @@
-import speedTiers from "$lib/generated/speed_tiers.json";
+import speedTiers from "../../../static/assets/speed_tiers.json";
 import { querySpeedTiers } from "$lib/speed-tiers";
 import type { SpeedTier, SpeedTierQuery, SpeedTierQueryResult } from "$lib/speed-tiers";
 

@@ -8,7 +8,6 @@ export async function load() {
 
   return {
     fullDataUrl: "/assets/speed_tiers.json",
-    returnedRows: result.returnedRows,
     tiers: result.tiers,
     totalRows: result.totalRows,
   };

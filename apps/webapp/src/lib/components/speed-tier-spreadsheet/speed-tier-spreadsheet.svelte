@@ -1,7 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { Button, buttonVariants } from "$lib/components/ui/button";
-  import { Card, CardContent, CardHeader, CardTitle } from "$lib/components/ui/card";
+  import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+  } from "$lib/components/ui/card";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
   import { Input } from "$lib/components/ui/input";
   import * as Select from "$lib/components/ui/select";
@@ -19,18 +24,17 @@
 
   let {
     fullDataUrl,
-    returnedRows,
     tiers,
     totalRows,
   }: {
     fullDataUrl: string;
-    returnedRows: number;
     tiers: SpeedTier[];
     totalRows: number;
   } = $props();
 
-  const initialTiers = () => tiers;
-  let sourceTiers = $state(initialTiers());
+  // Snapshot the SSR row slice; the full dataset replaces it after hydration.
+  // svelte-ignore state_referenced_locally
+  let sourceTiers = $state([...tiers]);
   let filters = $state<SpeedTierFilters>({ ...defaultSpeedTierFilters });
   let searchInput = $state(defaultSpeedTierFilters.search);
   let filtersReady = $state(false);
@@ -43,7 +47,7 @@
   );
   const rowsLabel = $derived(
     dataLoadState === "loading"
-      ? `${returnedRows} of ${totalRows} rows. Loading full table...`
+      ? `${visibleRows} of ${totalRows} rows. Loading full table...`
       : dataLoadState === "error"
         ? `${visibleRows} rows. Full table failed to load.`
         : `${visibleRows} rows`,
@@ -97,7 +101,9 @@
 
   function toggleBoost(boost: BoostFilter, checked: boolean) {
     if (!checked) {
-      filters.boosts = filters.boosts.filter((selectedBoost) => selectedBoost !== boost);
+      filters.boosts = filters.boosts.filter(
+        (selectedBoost) => selectedBoost !== boost,
+      );
       return;
     }
 
@@ -107,7 +113,9 @@
     }
 
     filters.boosts = [
-      ...filters.boosts.filter((selectedBoost) => selectedBoost !== "none" && selectedBoost !== boost),
+      ...filters.boosts.filter(
+        (selectedBoost) => selectedBoost !== "none" && selectedBoost !== boost,
+      ),
       boost,
     ];
   }
@@ -162,7 +170,10 @@
             <DropdownMenu.Trigger
               disabled={!filtersReady}
               aria-label={`Boosts: ${boostsLabel(filters.boosts)}`}
-              class={cn(buttonVariants({ variant: "outline" }), "w-full justify-between")}
+              class={cn(
+                buttonVariants({ variant: "outline" }),
+                "w-full justify-between",
+              )}
             >
               {boostsLabel(filters.boosts)}
             </DropdownMenu.Trigger>
@@ -176,21 +187,24 @@
               </DropdownMenu.CheckboxItem>
               <DropdownMenu.CheckboxItem
                 checked={filters.boosts.includes("none")}
-                onCheckedChange={(checked: boolean) => toggleBoost("none", checked)}
+                onCheckedChange={(checked: boolean) =>
+                  toggleBoost("none", checked)}
                 closeOnSelect={false}
               >
                 None
               </DropdownMenu.CheckboxItem>
               <DropdownMenu.CheckboxItem
                 checked={filters.boosts.includes("ability")}
-                onCheckedChange={(checked: boolean) => toggleBoost("ability", checked)}
+                onCheckedChange={(checked: boolean) =>
+                  toggleBoost("ability", checked)}
                 closeOnSelect={false}
               >
                 Abilities
               </DropdownMenu.CheckboxItem>
               <DropdownMenu.CheckboxItem
                 checked={filters.boosts.includes("item")}
-                onCheckedChange={(checked: boolean) => toggleBoost("item", checked)}
+                onCheckedChange={(checked: boolean) =>
+                  toggleBoost("item", checked)}
                 closeOnSelect={false}
               >
                 Items
@@ -283,9 +297,7 @@
       </div>
 
       <div class="flex flex-wrap items-center gap-2">
-        <span class="ml-auto text-sm text-muted-foreground"
-          >{rowsLabel}</span
-        >
+        <span class="ml-auto text-sm text-muted-foreground">{rowsLabel}</span>
       </div>
     </CardContent>
   </Card>

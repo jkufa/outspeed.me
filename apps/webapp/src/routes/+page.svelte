@@ -6,7 +6,6 @@
 
 <SpeedTierSpreadsheet
   fullDataUrl={data.fullDataUrl}
-  returnedRows={data.returnedRows}
   tiers={data.tiers}
   totalRows={data.totalRows}
 />
