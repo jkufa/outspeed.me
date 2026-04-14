@@ -4,4 +4,8 @@
 	let { data } = $props();
 </script>
 
-<SpeedTierSpreadsheet tiers={data.tiers} />
+<SpeedTierSpreadsheet
+  fullDataUrl={data.fullDataUrl}
+  tiers={data.tiers}
+  totalRows={data.totalRows}
+/>

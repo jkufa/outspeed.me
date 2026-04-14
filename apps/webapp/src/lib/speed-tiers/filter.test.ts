@@ -64,9 +64,9 @@ const tiers: SpeedTier[] = [
 
 describe("filterSpeedTiers", () => {
   it("keeps matching setup rows and omits empty groups", () => {
-    expect(filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, search: "drill" })).toStrictEqual([
-      tiers[0],
-    ]);
+    expect(
+      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: [], search: "drill" }),
+    ).toStrictEqual([tiers[0]]);
   });
 
   it("preserves group order from input", () => {
@@ -75,10 +75,10 @@ describe("filterSpeedTiers", () => {
     ).toStrictEqual([308, 250, 222]);
   });
 
-  it("shows all boost states by default", () => {
+  it("shows unboosted rows by default", () => {
     expect(
       filterSpeedTiers(tiers, defaultSpeedTierFilters).map((tier) => tier.speed),
-    ).toStrictEqual([308, 250, 222]);
+    ).toStrictEqual([222]);
   });
 
   it("filters unboosted rows with the none boost option", () => {

@@ -11,6 +11,7 @@ Data pipeline for Outspeed. This package turns source Pokemon data into normaliz
   - `data/speed_tiers.json`
   - `data/speed_tiers.csv`
   - `data/speed_tier_combinations.json`
+  - `apps/webapp/static/assets/speed_tiers.json`
 
 ## Outputs
 
@@ -18,6 +19,10 @@ Data pipeline for Outspeed. This package turns source Pokemon data into normaliz
 - `speed_tier_combinations.json`: flat list of every generated Pokemon speed setup. Each entry includes Pokemon identity, spread, typed speed effects, final speed, and `speed`.
 - `speed_tiers.json`: grouped view of those same combinations by final speed, sorted from fastest to slowest. This is the primary UI contract.
 - `speed_tiers.csv`: compact review sheet with `speed`, Pokemon identity, formatted spread, and formatted effects.
+
+The webapp imports `apps/webapp/static/assets/speed_tiers.json` for the
+server-rendered initial table and fetches that same public file after hydration
+for full filtering.
 
 ## Speed Tier Contract
 
