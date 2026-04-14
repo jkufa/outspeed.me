@@ -10,8 +10,8 @@ export {
   statPointsToEvs,
 } from "./format";
 export type {
+  BoostFilter,
   EffectChip,
-  FilterMode,
   Nature,
   NatureFilter,
   SpeedEffect,

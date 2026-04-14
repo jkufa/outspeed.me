@@ -10,6 +10,18 @@ import {
 } from "../calculate";
 import type { PokedexPokemon } from "../types";
 
+function pokemon(overrides: Partial<PokedexPokemon> = {}): PokedexPokemon {
+  return {
+    id: 1,
+    slug: "venusaur",
+    pokedexNumber: 3,
+    name: "Venusaur",
+    abilities: [],
+    stats: { speed: 80 },
+    ...overrides,
+  };
+}
+
 describe("calculateUnmodifiedSpeed", () => {
   it("calculates level 50 speed for each nature", () => {
     expect(calculateUnmodifiedSpeed(100, 0, "neutral")).toBe(120);
@@ -80,6 +92,7 @@ describe("shouldIncludeCombination", () => {
   it("excludes redundant negative-nature boosted combinations", () => {
     expect(
       shouldIncludeCombination({
+        pokemon: pokemon(),
         evs: 252,
         nature: "negative",
         ability: "chlorophyll",
@@ -91,9 +104,34 @@ describe("shouldIncludeCombination", () => {
   it("excludes neutral nature scarf with no speed EVs", () => {
     expect(
       shouldIncludeCombination({
+        pokemon: pokemon(),
         evs: 0,
         nature: "neutral",
         ability: null,
+        item: "choice-scarf",
+      }),
+    ).toBe(false);
+  });
+
+  it("excludes held items for mega Pokemon", () => {
+    expect(
+      shouldIncludeCombination({
+        pokemon: pokemon({ slug: "venusaur-mega", name: "Mega Venusaur" }),
+        evs: 252,
+        nature: "positive",
+        ability: null,
+        item: "choice-scarf",
+      }),
+    ).toBe(false);
+  });
+
+  it("excludes choice scarf when paired with a speed ability", () => {
+    expect(
+      shouldIncludeCombination({
+        pokemon: pokemon(),
+        evs: 252,
+        nature: "positive",
+        ability: "chlorophyll",
         item: "choice-scarf",
       }),
     ).toBe(false);
@@ -102,16 +140,11 @@ describe("shouldIncludeCombination", () => {
 
 describe("buildSpeedTierCombinations", () => {
   it("builds combinations for normal and speed abilities", () => {
-    const pokemon: PokedexPokemon = {
-      id: 1,
-      slug: "venusaur",
-      pokedexNumber: 3,
-      name: "Venusaur",
+    const testPokemon = pokemon({
       abilities: [{ name: "overgrow" }, { name: "chlorophyll" }],
-      stats: { speed: 80 },
-    };
+    });
 
-    const combinations = buildSpeedTierCombinations([pokemon]);
+    const combinations = buildSpeedTierCombinations([testPokemon]);
 
     expect(combinations).toContainEqual({
       id: 1,
@@ -132,15 +165,21 @@ describe("buildSpeedTierCombinations", () => {
           multiplier: 2,
           condition: "sun",
         },
-        {
-          kind: "item",
-          source: "choice-scarf",
-          label: "Choice Scarf",
-          multiplier: 1.5,
-        },
       ],
-      finalSpeed: 435,
-      speed: 435,
+      finalSpeed: 290,
+      speed: 290,
     });
+  });
+
+  it("does not build held item combinations for mega Pokemon", () => {
+    const combinations = buildSpeedTierCombinations([
+      pokemon({ slug: "venusaur-mega", name: "Mega Venusaur" }),
+    ]);
+
+    expect(
+      combinations.every((combination) =>
+        combination.effects.every((effect) => effect.source !== "choice-scarf"),
+      ),
+    ).toBe(true);
   });
 });

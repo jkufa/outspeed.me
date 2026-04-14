@@ -33,16 +33,14 @@ export type SpeedTier = {
   pokemon: SpeedTierPokemon[];
 };
 
-export type FilterMode = "any" | "baseline" | "boosted";
+export type BoostFilter = "none" | "ability" | "item";
 export type WeatherFilter = "any" | "sun" | "rain" | "sand" | "snow";
 export type NatureFilter = "any" | Nature;
 export type StatPointFilter = "any" | 0 | 32;
 
 export type SpeedTierFilters = {
   search: string;
-  mode: FilterMode;
-  abilityOnly: boolean;
-  itemOnly: boolean;
+  boosts: BoostFilter[];
   weather: WeatherFilter;
   nature: NatureFilter;
   statPoints: StatPointFilter;
@@ -51,5 +49,5 @@ export type SpeedTierFilters = {
 export type EffectChip = {
   key: string;
   label: string;
-  kind: SpeedEffectKind | "multiplier" | "condition" | "baseline";
+  kind: SpeedEffectKind | "multiplier" | "condition";
 };

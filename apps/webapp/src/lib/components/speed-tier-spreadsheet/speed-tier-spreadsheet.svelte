@@ -1,11 +1,13 @@
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button";
+  import { Button, buttonVariants } from "$lib/components/ui/button";
+  import { Card, CardContent, CardHeader, CardTitle } from "$lib/components/ui/card";
+  import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
   import { Input } from "$lib/components/ui/input";
-  import { Separator } from "$lib/components/ui/separator";
   import * as Select from "$lib/components/ui/select";
+  import { cn } from "$lib/utils";
   import { defaultSpeedTierFilters, filterSpeedTiers } from "$lib/speed-tiers";
   import type {
-    FilterMode,
+    BoostFilter,
     NatureFilter,
     SpeedTier,
     SpeedTierFilters,
@@ -34,18 +36,6 @@
     }, 300);
   }
 
-  function resetFilters() {
-    clearTimeout(searchDebounceTimer);
-    searchInput = defaultSpeedTierFilters.search;
-    filters = { ...defaultSpeedTierFilters };
-  }
-
-  function modeLabel(mode: FilterMode) {
-    if (mode === "baseline") return "Baseline";
-    if (mode === "boosted") return "Boosted";
-    return "Any";
-  }
-
   function weatherLabel(weather: WeatherFilter) {
     if (weather === "any") return "Any";
     return weather[0].toUpperCase() + weather.slice(1);
@@ -66,6 +56,37 @@
   function updateStatPoints(value: string) {
     filters.statPoints = value === "any" ? "any" : (Number(value) as 0 | 32);
   }
+
+  function boostsLabel(boosts: BoostFilter[]) {
+    if (boosts.length === 0) return "All";
+    if (boosts.includes("none")) return "None";
+    if (boosts.length === 2) return "Abilities, Items";
+    if (boosts.includes("ability")) return "Abilities";
+    return "Items";
+  }
+
+  function selectAllBoosts(checked: boolean) {
+    if (checked) {
+      filters.boosts = [];
+    }
+  }
+
+  function toggleBoost(boost: BoostFilter, checked: boolean) {
+    if (!checked) {
+      filters.boosts = filters.boosts.filter((selectedBoost) => selectedBoost !== boost);
+      return;
+    }
+
+    if (boost === "none") {
+      filters.boosts = ["none"];
+      return;
+    }
+
+    filters.boosts = [
+      ...filters.boosts.filter((selectedBoost) => selectedBoost !== "none" && selectedBoost !== boost),
+      boost,
+    ];
+  }
 </script>
 
 <main class="mx-auto flex w-full max-w-7xl flex-col gap-5 p-4 md:p-6">
@@ -76,135 +97,142 @@
     </p>
   </header>
 
-  <section
-    class="grid gap-3 rounded-lg border border-border p-3"
-    aria-label="Speed tier filters"
-  >
-    <div
-      class="grid gap-3 md:grid-cols-[minmax(14rem,1fr)_repeat(4,minmax(8rem,auto))]"
-    >
-      <label class="grid gap-2 text-sm">
-        <span class="text-muted-foreground">Search Pokemon</span>
-        <Input
-          value={searchInput}
-          placeholder="Excadrill"
-          oninput={updateSearch}
-        />
-      </label>
+  <Card size="sm" aria-label="Speed tier filters">
+    <CardHeader class="sr-only">
+      <CardTitle>Speed tier filters</CardTitle>
+    </CardHeader>
+    <CardContent class="grid gap-3">
+      <div
+        class="grid gap-3 md:grid-cols-[minmax(14rem,1fr)_repeat(4,minmax(8rem,auto))]"
+      >
+        <label class="grid gap-2 text-sm">
+          <span class="text-muted-foreground">Search Pokemon</span>
+          <Input
+            value={searchInput}
+            placeholder="Excadrill"
+            oninput={updateSearch}
+          />
+        </label>
 
-      <label class="grid gap-2 text-sm">
-        <span class="text-muted-foreground">Mode</span>
-        <Select.Root
-          type="single"
-          value={filters.mode}
-          onValueChange={(value: string) =>
-            (filters.mode = value as FilterMode)}
-        >
-          <Select.Trigger class="w-full">
-            <span data-slot="select-value">{modeLabel(filters.mode)}</span>
-          </Select.Trigger>
-          <Select.Content>
-            <Select.Group>
-              <Select.Item value="any" label="Any" />
-              <Select.Item value="baseline" label="Baseline" />
-              <Select.Item value="boosted" label="Boosted" />
-            </Select.Group>
-          </Select.Content>
-        </Select.Root>
-      </label>
-
-      <label class="grid gap-2 text-sm">
-        <span class="text-muted-foreground">Weather</span>
-        <Select.Root
-          type="single"
-          value={filters.weather}
-          onValueChange={(value: string) =>
-            (filters.weather = value as WeatherFilter)}
-        >
-          <Select.Trigger class="w-full">
-            <span data-slot="select-value">{weatherLabel(filters.weather)}</span
+        <div class="grid gap-2 text-sm">
+          <span class="text-muted-foreground">Boosts</span>
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger
+              class={cn(buttonVariants({ variant: "outline" }), "w-full justify-between")}
             >
-          </Select.Trigger>
-          <Select.Content>
-            <Select.Group>
-              <Select.Item value="any" label="Any" />
-              <Select.Item value="sun" label="Sun" />
-              <Select.Item value="rain" label="Rain" />
-              <Select.Item value="sand" label="Sand" />
-              <Select.Item value="snow" label="Snow" />
-            </Select.Group>
-          </Select.Content>
-        </Select.Root>
-      </label>
+              {boostsLabel(filters.boosts)}
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content>
+              <DropdownMenu.CheckboxItem
+                checked={filters.boosts.length === 0}
+                onCheckedChange={selectAllBoosts}
+                closeOnSelect={false}
+              >
+                All
+              </DropdownMenu.CheckboxItem>
+              <DropdownMenu.CheckboxItem
+                checked={filters.boosts.includes("none")}
+                onCheckedChange={(checked: boolean) => toggleBoost("none", checked)}
+                closeOnSelect={false}
+              >
+                None
+              </DropdownMenu.CheckboxItem>
+              <DropdownMenu.CheckboxItem
+                checked={filters.boosts.includes("ability")}
+                onCheckedChange={(checked: boolean) => toggleBoost("ability", checked)}
+                closeOnSelect={false}
+              >
+                Abilities
+              </DropdownMenu.CheckboxItem>
+              <DropdownMenu.CheckboxItem
+                checked={filters.boosts.includes("item")}
+                onCheckedChange={(checked: boolean) => toggleBoost("item", checked)}
+                closeOnSelect={false}
+              >
+                Items
+              </DropdownMenu.CheckboxItem>
+            </DropdownMenu.Content>
+          </DropdownMenu.Root>
+        </div>
 
-      <label class="grid gap-2 text-sm">
-        <span class="text-muted-foreground">Spread</span>
-        <Select.Root
-          type="single"
-          value={filters.nature}
-          onValueChange={(value: string) =>
-            (filters.nature = value as NatureFilter)}
+        <label class="grid gap-2 text-sm">
+          <span class="text-muted-foreground">Weather</span>
+          <Select.Root
+            type="single"
+            value={filters.weather}
+            onValueChange={(value: string) =>
+              (filters.weather = value as WeatherFilter)}
+          >
+            <Select.Trigger class="w-full">
+              <span data-slot="select-value"
+                >{weatherLabel(filters.weather)}</span
+              >
+            </Select.Trigger>
+            <Select.Content>
+              <Select.Group>
+                <Select.Item value="any" label="Any" />
+                <Select.Item value="sun" label="Sun" />
+                <Select.Item value="rain" label="Rain" />
+                <Select.Item value="sand" label="Sand" />
+                <Select.Item value="snow" label="Snow" />
+              </Select.Group>
+            </Select.Content>
+          </Select.Root>
+        </label>
+
+        <label class="grid gap-2 text-sm">
+          <span class="text-muted-foreground">Spread</span>
+          <Select.Root
+            type="single"
+            value={filters.nature}
+            onValueChange={(value: string) =>
+              (filters.nature = value as NatureFilter)}
+          >
+            <Select.Trigger class="w-full">
+              <span data-slot="select-value">{natureLabel(filters.nature)}</span
+              >
+            </Select.Trigger>
+            <Select.Content>
+              <Select.Group>
+                <Select.Item value="any" label="Any" />
+                <Select.Item value="positive" label="+Spe" />
+                <Select.Item value="neutral" label="neutral" />
+                <Select.Item value="negative" label="-Spe" />
+              </Select.Group>
+            </Select.Content>
+          </Select.Root>
+        </label>
+
+        <label class="grid gap-2 text-sm">
+          <span class="text-muted-foreground">SP</span>
+          <Select.Root
+            type="single"
+            value={String(filters.statPoints)}
+            onValueChange={updateStatPoints}
+          >
+            <Select.Trigger class="w-full">
+              <span data-slot="select-value"
+                >{statPointsLabel(filters.statPoints)}</span
+              >
+            </Select.Trigger>
+            <Select.Content>
+              <Select.Group>
+                <Select.Item value="any" label="Any" />
+                <Select.Item value="32" label="32 SP" />
+                <Select.Item value="0" label="0 SP" />
+              </Select.Group>
+            </Select.Content>
+          </Select.Root>
+        </label>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="ml-auto text-sm text-muted-foreground"
+          >{visibleRows} rows</span
         >
-          <Select.Trigger class="w-full">
-            <span data-slot="select-value">{natureLabel(filters.nature)}</span>
-          </Select.Trigger>
-          <Select.Content>
-            <Select.Group>
-              <Select.Item value="any" label="Any" />
-              <Select.Item value="positive" label="+Spe" />
-              <Select.Item value="neutral" label="neutral" />
-              <Select.Item value="negative" label="-Spe" />
-            </Select.Group>
-          </Select.Content>
-        </Select.Root>
-      </label>
-
-      <label class="grid gap-2 text-sm">
-        <span class="text-muted-foreground">SP</span>
-        <Select.Root
-          type="single"
-          value={String(filters.statPoints)}
-          onValueChange={updateStatPoints}
-        >
-          <Select.Trigger class="w-full">
-            <span data-slot="select-value"
-              >{statPointsLabel(filters.statPoints)}</span
-            >
-          </Select.Trigger>
-          <Select.Content>
-            <Select.Group>
-              <Select.Item value="any" label="Any" />
-              <Select.Item value="32" label="32 SP" />
-              <Select.Item value="0" label="0 SP" />
-            </Select.Group>
-          </Select.Content>
-        </Select.Root>
-      </label>
-    </div>
-
-    <div class="flex flex-wrap items-center gap-2">
-      <Button
-        variant={filters.abilityOnly ? "secondary" : "outline"}
-        size="sm"
-        aria-pressed={filters.abilityOnly}
-        onclick={() => (filters.abilityOnly = !filters.abilityOnly)}
-      >
-        Ability effects
-      </Button>
-      <Button
-        variant={filters.itemOnly ? "secondary" : "outline"}
-        size="sm"
-        aria-pressed={filters.itemOnly}
-        onclick={() => (filters.itemOnly = !filters.itemOnly)}
-      >
-        Item effects
-      </Button>
-      <Button variant="ghost" size="sm" onclick={resetFilters}>Reset</Button>
-      <span class="ml-auto text-sm text-muted-foreground"
-        >{visibleRows} rows</span
-      >
-    </div>
-  </section>
+      </div>
+    </CardContent>
+  </Card>
 
   <SpeedTierTable tiers={filteredTiers} />
 </main>

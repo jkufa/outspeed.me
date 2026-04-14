@@ -25,6 +25,26 @@ const tiers: SpeedTier[] = [
     ],
   },
   {
+    speed: 250,
+    pokemon: [
+      {
+        id: 3,
+        pokedexNo: 25,
+        name: "Pikachu",
+        spread: { nature: "positive", evs: 252, ivs: 31, level: 50, rawSpeed: 167 },
+        effects: [
+          {
+            kind: "item",
+            source: "choice-scarf",
+            label: "Choice Scarf",
+            multiplier: 1.5,
+          },
+        ],
+        finalSpeed: 250,
+      },
+    ],
+  },
+  {
     speed: 222,
     pokemon: [
       {
@@ -48,29 +68,43 @@ describe("filterSpeedTiers", () => {
 
   it("preserves group order from input", () => {
     expect(
-      filterSpeedTiers(tiers, defaultSpeedTierFilters).map((tier) => tier.speed),
-    ).toStrictEqual([308, 222]);
+      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: [] }).map((tier) => tier.speed),
+    ).toStrictEqual([308, 250, 222]);
   });
 
-  it("filters baseline and boosted modes", () => {
+  it("shows all boost states by default", () => {
     expect(
-      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, mode: "baseline" }).map(
+      filterSpeedTiers(tiers, defaultSpeedTierFilters).map((tier) => tier.speed),
+    ).toStrictEqual([308, 250, 222]);
+  });
+
+  it("filters unboosted rows with the none boost option", () => {
+    expect(
+      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: ["none"] }).map(
         (tier) => tier.speed,
       ),
     ).toStrictEqual([222]);
+  });
 
+  it("filters ability and item boosts with OR semantics", () => {
     expect(
-      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, mode: "boosted" }).map(
+      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: ["ability"] }).map(
         (tier) => tier.speed,
       ),
     ).toStrictEqual([308]);
+
+    expect(
+      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: ["ability", "item"] }).map(
+        (tier) => tier.speed,
+      ),
+    ).toStrictEqual([308, 250]);
   });
 
   it("filters by effect kind, weather, nature, and stat points", () => {
     expect(
       filterSpeedTiers(tiers, {
         ...defaultSpeedTierFilters,
-        abilityOnly: true,
+        boosts: ["ability"],
         weather: "sand",
         nature: "positive",
         statPoints: 32,
@@ -80,8 +114,8 @@ describe("filterSpeedTiers", () => {
     expect(
       filterSpeedTiers(tiers, {
         ...defaultSpeedTierFilters,
-        itemOnly: true,
-      }),
-    ).toStrictEqual([]);
+        boosts: ["item"],
+      }).map((tier) => tier.speed),
+    ).toStrictEqual([250]);
   });
 });

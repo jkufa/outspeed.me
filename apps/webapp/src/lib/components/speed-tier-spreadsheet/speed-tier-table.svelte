@@ -49,7 +49,7 @@
 					<TableHead class="sticky left-0 z-30 bg-background">Speed</TableHead>
 					<TableHead>Pokemon</TableHead>
 					<TableHead>Spread</TableHead>
-					<TableHead>Effects</TableHead>
+					<TableHead>Boosts</TableHead>
 				</TableRow>
 			</TableHeader>
 			<TableBody>

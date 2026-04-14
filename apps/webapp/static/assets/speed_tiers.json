@@ -1,628 +1,5 @@
 [
   {
-    "speed": 552,
-    "pokemon": [
-      {
-        "id": 158,
-        "pokedexNo": 547,
-        "name": "Whimsicott",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 184
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 552
-      }
-    ]
-  },
-  {
-    "speed": 540,
-    "pokemon": [
-      {
-        "id": 222,
-        "pokedexNo": 745,
-        "name": "Lycanroc",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 180
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "sand-rush",
-            "label": "Sand Rush",
-            "multiplier": 2,
-            "condition": "sand"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 540
-      }
-    ]
-  },
-  {
-    "speed": 504,
-    "pokemon": [
-      {
-        "id": 158,
-        "pokedexNo": 547,
-        "name": "Whimsicott",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 168
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 504
-      }
-    ]
-  },
-  {
-    "speed": 492,
-    "pokemon": [
-      {
-        "id": 222,
-        "pokedexNo": 745,
-        "name": "Lycanroc",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 164
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "sand-rush",
-            "label": "Sand Rush",
-            "multiplier": 2,
-            "condition": "sand"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 492
-      }
-    ]
-  },
-  {
-    "speed": 483,
-    "pokemon": [
-      {
-        "id": 129,
-        "pokedexNo": 470,
-        "name": "Leafeon",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 161
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 483
-      }
-    ]
-  },
-  {
-    "speed": 462,
-    "pokemon": [
-      {
-        "id": 153,
-        "pokedexNo": 530,
-        "name": "Excadrill",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 154
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "sand-rush",
-            "label": "Sand Rush",
-            "multiplier": 2,
-            "condition": "sand"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 462
-      }
-    ]
-  },
-  {
-    "speed": 447,
-    "pokemon": [
-      {
-        "id": 158,
-        "pokedexNo": 547,
-        "name": "Whimsicott",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 149
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 447
-      }
-    ]
-  },
-  {
-    "speed": 441,
-    "pokemon": [
-      {
-        "id": 129,
-        "pokedexNo": 470,
-        "name": "Leafeon",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 147
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 441
-      }
-    ]
-  },
-  {
-    "speed": 435,
-    "pokemon": [
-      {
-        "id": 1,
-        "pokedexNo": 3,
-        "name": "Venusaur",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 145
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 435
-      },
-      {
-        "id": 222,
-        "pokedexNo": 745,
-        "name": "Lycanroc",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 145
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "sand-rush",
-            "label": "Sand Rush",
-            "multiplier": 2,
-            "condition": "sand"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 435
-      }
-    ]
-  },
-  {
-    "speed": 429,
-    "pokemon": [
-      {
-        "id": 249,
-        "pokedexNo": 902,
-        "name": "Basculegion",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 143
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "swift-swim",
-            "label": "Swift Swim",
-            "multiplier": 2,
-            "condition": "rain"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 429
-      }
-    ]
-  },
-  {
-    "speed": 420,
-    "pokemon": [
-      {
-        "id": 153,
-        "pokedexNo": 530,
-        "name": "Excadrill",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 140
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "sand-rush",
-            "label": "Sand Rush",
-            "multiplier": 2,
-            "condition": "sand"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 420
-      }
-    ]
-  },
-  {
-    "speed": 417,
-    "pokemon": [
-      {
-        "id": 259,
-        "pokedexNo": 952,
-        "name": "Scovillain",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 139
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 417
-      }
-    ]
-  },
-  {
-    "speed": 402,
-    "pokemon": [
-      {
-        "id": 25,
-        "pokedexNo": 71,
-        "name": "Victreebel",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 134
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 402
-      }
-    ]
-  },
-  {
-    "speed": 396,
-    "pokemon": [
-      {
-        "id": 1,
-        "pokedexNo": 3,
-        "name": "Venusaur",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 132
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 396
-      }
-    ]
-  },
-  {
-    "speed": 390,
-    "pokemon": [
-      {
-        "id": 249,
-        "pokedexNo": 902,
-        "name": "Basculegion",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 130
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "swift-swim",
-            "label": "Swift Swim",
-            "multiplier": 2,
-            "condition": "rain"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 390
-      }
-    ]
-  },
-  {
-    "speed": 387,
-    "pokemon": [
-      {
-        "id": 261,
-        "pokedexNo": 956,
-        "name": "Espathra",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 172
-        },
-        "effects": [
-          {
-            "kind": "stage",
-            "source": "speed-boost",
-            "label": "Speed Boost",
-            "multiplier": 1.5,
-            "stage": 1,
-            "condition": "after 1 turn"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 387
-      }
-    ]
-  },
-  {
-    "speed": 381,
-    "pokemon": [
-      {
-        "id": 259,
-        "pokedexNo": 952,
-        "name": "Scovillain",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 127
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 381
-      }
-    ]
-  },
-  {
-    "speed": 378,
-    "pokemon": [
-      {
-        "id": 129,
-        "pokedexNo": 470,
-        "name": "Leafeon",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 126
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 378
-      }
-    ]
-  },
-  {
     "speed": 368,
     "pokemon": [
       {
@@ -646,73 +23,6 @@
           }
         ],
         "finalSpeed": 368
-      }
-    ]
-  },
-  {
-    "speed": 366,
-    "pokemon": [
-      {
-        "id": 25,
-        "pokedexNo": 71,
-        "name": "Victreebel",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 122
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 366
-      }
-    ]
-  },
-  {
-    "speed": 361,
-    "pokemon": [
-      {
-        "id": 92,
-        "pokedexNo": 319,
-        "name": "Sharpedo",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 161
-        },
-        "effects": [
-          {
-            "kind": "stage",
-            "source": "speed-boost",
-            "label": "Speed Boost",
-            "multiplier": 1.5,
-            "stage": 1,
-            "condition": "after 1 turn"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 361
       }
     ]
   },
@@ -744,73 +54,6 @@
     ]
   },
   {
-    "speed": 354,
-    "pokemon": [
-      {
-        "id": 153,
-        "pokedexNo": 530,
-        "name": "Excadrill",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 118
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "sand-rush",
-            "label": "Sand Rush",
-            "multiplier": 2,
-            "condition": "sand"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 354
-      }
-    ]
-  },
-  {
-    "speed": 352,
-    "pokemon": [
-      {
-        "id": 261,
-        "pokedexNo": 956,
-        "name": "Espathra",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 157
-        },
-        "effects": [
-          {
-            "kind": "stage",
-            "source": "speed-boost",
-            "label": "Speed Boost",
-            "multiplier": 1.5,
-            "stage": 1,
-            "condition": "after 1 turn"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 352
-      }
-    ]
-  },
-  {
     "speed": 336,
     "pokemon": [
       {
@@ -834,171 +77,6 @@
           }
         ],
         "finalSpeed": 336
-      },
-      {
-        "id": 169,
-        "pokedexNo": 614,
-        "name": "Beartic",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 112
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "slush-rush",
-            "label": "Slush Rush",
-            "multiplier": 2,
-            "condition": "snow"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 336
-      },
-      {
-        "id": 169,
-        "pokedexNo": 614,
-        "name": "Beartic",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 112
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "swift-swim",
-            "label": "Swift Swim",
-            "multiplier": 2,
-            "condition": "rain"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 336
-      }
-    ]
-  },
-  {
-    "speed": 333,
-    "pokemon": [
-      {
-        "id": 23,
-        "pokedexNo": 65,
-        "name": "Mega Alakazam",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 222
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 333
-      },
-      {
-        "id": 49,
-        "pokedexNo": 142,
-        "name": "Mega Aerodactyl",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 222
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 333
-      }
-    ]
-  },
-  {
-    "speed": 330,
-    "pokemon": [
-      {
-        "id": 1,
-        "pokedexNo": 3,
-        "name": "Venusaur",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 110
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 330
-      },
-      {
-        "id": 92,
-        "pokedexNo": 319,
-        "name": "Sharpedo",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 147
-        },
-        "effects": [
-          {
-            "kind": "stage",
-            "source": "speed-boost",
-            "label": "Speed Boost",
-            "multiplier": 1.5,
-            "stage": 1,
-            "condition": "after 1 turn"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 330
       }
     ]
   },
@@ -1030,32 +108,6 @@
     ]
   },
   {
-    "speed": 324,
-    "pokemon": [
-      {
-        "id": 9,
-        "pokedexNo": 15,
-        "name": "Mega Beedrill",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 216
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 324
-      }
-    ]
-  },
-  {
     "speed": 322,
     "pokemon": [
       {
@@ -1083,62 +135,8 @@
     ]
   },
   {
-    "speed": 321,
-    "pokemon": [
-      {
-        "id": 249,
-        "pokedexNo": 902,
-        "name": "Basculegion",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 107
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "swift-swim",
-            "label": "Swift Swim",
-            "multiplier": 2,
-            "condition": "rain"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 321
-      }
-    ]
-  },
-  {
     "speed": 319,
     "pokemon": [
-      {
-        "id": 181,
-        "pokedexNo": 658,
-        "name": "Mega Greninja",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 213
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 319
-      },
       {
         "id": 246,
         "pokedexNo": 887,
@@ -1159,39 +157,6 @@
           }
         ],
         "finalSpeed": 319
-      }
-    ]
-  },
-  {
-    "speed": 312,
-    "pokemon": [
-      {
-        "id": 259,
-        "pokedexNo": 952,
-        "name": "Scovillain",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 104
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 312
       }
     ]
   },
@@ -1223,234 +188,8 @@
     ]
   },
   {
-    "speed": 307,
-    "pokemon": [
-      {
-        "id": 91,
-        "pokedexNo": 310,
-        "name": "Mega Manectric",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 205
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 307
-      },
-      {
-        "id": 117,
-        "pokedexNo": 428,
-        "name": "Mega Lopunny",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 205
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 307
-      },
-      {
-        "id": 261,
-        "pokedexNo": 956,
-        "name": "Espathra",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 137
-        },
-        "effects": [
-          {
-            "kind": "stage",
-            "source": "speed-boost",
-            "label": "Speed Boost",
-            "multiplier": 1.5,
-            "stage": 1,
-            "condition": "after 1 turn"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 307
-      }
-    ]
-  },
-  {
-    "speed": 306,
-    "pokemon": [
-      {
-        "id": 169,
-        "pokedexNo": 614,
-        "name": "Beartic",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 102
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "slush-rush",
-            "label": "Slush Rush",
-            "multiplier": 2,
-            "condition": "snow"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 306
-      },
-      {
-        "id": 169,
-        "pokedexNo": 614,
-        "name": "Beartic",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 102
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "swift-swim",
-            "label": "Swift Swim",
-            "multiplier": 2,
-            "condition": "rain"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 306
-      },
-      {
-        "id": 179,
-        "pokedexNo": 655,
-        "name": "Mega Delphox",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 204
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 306
-      }
-    ]
-  },
-  {
-    "speed": 303,
-    "pokemon": [
-      {
-        "id": 23,
-        "pokedexNo": 65,
-        "name": "Mega Alakazam",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 202
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 303
-      },
-      {
-        "id": 49,
-        "pokedexNo": 142,
-        "name": "Mega Aerodactyl",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 202
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 303
-      }
-    ]
-  },
-  {
     "speed": 300,
     "pokemon": [
-      {
-        "id": 31,
-        "pokedexNo": 94,
-        "name": "Mega Gengar",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 200
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 300
-      },
       {
         "id": 46,
         "pokedexNo": 135,
@@ -1523,65 +262,6 @@
     ]
   },
   {
-    "speed": 297,
-    "pokemon": [
-      {
-        "id": 25,
-        "pokedexNo": 71,
-        "name": "Victreebel",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 99
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "chlorophyll",
-            "label": "Chlorophyll",
-            "multiplier": 2,
-            "condition": "sun"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 297
-      }
-    ]
-  },
-  {
-    "speed": 295,
-    "pokemon": [
-      {
-        "id": 9,
-        "pokedexNo": 15,
-        "name": "Mega Beedrill",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 197
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 295
-      }
-    ]
-  },
-  {
     "speed": 294,
     "pokemon": [
       {
@@ -1643,27 +323,6 @@
         "name": "Weavile",
         "spread": {
           "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 194
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 291
-      },
-      {
-        "id": 181,
-        "pokedexNo": 658,
-        "name": "Mega Greninja",
-        "spread": {
-          "nature": "neutral",
           "evs": 252,
           "ivs": 31,
           "level": 50,
@@ -1748,32 +407,6 @@
           }
         ],
         "finalSpeed": 290
-      }
-    ]
-  },
-  {
-    "speed": 289,
-    "pokemon": [
-      {
-        "id": 192,
-        "pokedexNo": 678,
-        "name": "Mega Meowstic",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 193
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 289
       }
     ]
   },
@@ -1873,109 +506,12 @@
     ]
   },
   {
-    "speed": 285,
-    "pokemon": [
-      {
-        "id": 11,
-        "pokedexNo": 18,
-        "name": "Mega Pidgeot",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 190
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 285
-      }
-    ]
-  },
-  {
     "speed": 283,
     "pokemon": [
       {
         "id": 22,
         "pokedexNo": 65,
         "name": "Alakazam",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 189
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 283
-      },
-      {
-        "id": 35,
-        "pokedexNo": 121,
-        "name": "Mega Starmie",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 189
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 283
-      },
-      {
-        "id": 92,
-        "pokedexNo": 319,
-        "name": "Sharpedo",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 126
-        },
-        "effects": [
-          {
-            "kind": "stage",
-            "source": "speed-boost",
-            "label": "Speed Boost",
-            "multiplier": 1.5,
-            "stage": 1,
-            "condition": "after 1 turn"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 283
-      },
-      {
-        "id": 136,
-        "pokedexNo": 478,
-        "name": "Mega Froslass",
         "spread": {
           "nature": "positive",
           "evs": 252,
@@ -2020,90 +556,6 @@
     "speed": 280,
     "pokemon": [
       {
-        "id": 23,
-        "pokedexNo": 65,
-        "name": "Mega Alakazam",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 187
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 280
-      },
-      {
-        "id": 49,
-        "pokedexNo": 142,
-        "name": "Mega Aerodactyl",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 187
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 280
-      },
-      {
-        "id": 91,
-        "pokedexNo": 310,
-        "name": "Mega Manectric",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 187
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 280
-      },
-      {
-        "id": 117,
-        "pokedexNo": 428,
-        "name": "Mega Lopunny",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 187
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 280
-      },
-      {
         "id": 153,
         "pokedexNo": 530,
         "name": "Excadrill",
@@ -2145,53 +597,6 @@
           }
         ],
         "finalSpeed": 280
-      },
-      {
-        "id": 202,
-        "pokedexNo": 701,
-        "name": "Mega Hawlucha",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 187
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 280
-      }
-    ]
-  },
-  {
-    "speed": 279,
-    "pokemon": [
-      {
-        "id": 179,
-        "pokedexNo": 655,
-        "name": "Mega Delphox",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 186
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 279
       }
     ]
   },
@@ -2297,75 +702,12 @@
           }
         ],
         "finalSpeed": 274
-      },
-      {
-        "id": 78,
-        "pokedexNo": 229,
-        "name": "Mega Houndoom",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 183
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 274
-      },
-      {
-        "id": 106,
-        "pokedexNo": 359,
-        "name": "Mega Absol",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 183
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 274
       }
     ]
   },
   {
     "speed": 273,
     "pokemon": [
-      {
-        "id": 31,
-        "pokedexNo": 94,
-        "name": "Mega Gengar",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 182
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 273
-      },
       {
         "id": 46,
         "pokedexNo": 135,
@@ -2441,27 +783,6 @@
     "speed": 271,
     "pokemon": [
       {
-        "id": 9,
-        "pokedexNo": 15,
-        "name": "Mega Beedrill",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 181
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 271
-      },
-      {
         "id": 143,
         "pokedexNo": 497,
         "name": "Serperior",
@@ -2487,27 +808,6 @@
   {
     "speed": 270,
     "pokemon": [
-      {
-        "id": 122,
-        "pokedexNo": 448,
-        "name": "Mega Lucario",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 180
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 270
-      },
       {
         "id": 222,
         "pokedexNo": 745,
@@ -2688,48 +988,6 @@
         "finalSpeed": 267
       },
       {
-        "id": 76,
-        "pokedexNo": 227,
-        "name": "Mega Skarmory",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 178
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 267
-      },
-      {
-        "id": 134,
-        "pokedexNo": 475,
-        "name": "Mega Gallade",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 178
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 267
-      },
-      {
         "id": 135,
         "pokedexNo": 478,
         "name": "Froslass",
@@ -2757,27 +1015,6 @@
         "spread": {
           "nature": "positive",
           "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 178
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 267
-      },
-      {
-        "id": 181,
-        "pokedexNo": 658,
-        "name": "Mega Greninja",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
           "ivs": 31,
           "level": 50,
           "rawSpeed": 178
@@ -2972,27 +1209,6 @@
         "finalSpeed": 264
       },
       {
-        "id": 192,
-        "pokedexNo": 678,
-        "name": "Mega Meowstic",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 176
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 264
-      },
-      {
         "id": 222,
         "pokedexNo": 745,
         "name": "Lycanroc",
@@ -3120,27 +1336,6 @@
     "speed": 259,
     "pokemon": [
       {
-        "id": 11,
-        "pokedexNo": 18,
-        "name": "Mega Pidgeot",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 173
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 259
-      },
-      {
         "id": 149,
         "pokedexNo": 510,
         "name": "Liepard",
@@ -3188,72 +1383,9 @@
         "finalSpeed": 258
       },
       {
-        "id": 35,
-        "pokedexNo": 121,
-        "name": "Mega Starmie",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 172
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 258
-      },
-      {
-        "id": 37,
-        "pokedexNo": 127,
-        "name": "Mega Pinsir",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 172
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 258
-      },
-      {
         "id": 90,
         "pokedexNo": 310,
         "name": "Manectric",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 172
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 258
-      },
-      {
-        "id": 93,
-        "pokedexNo": 319,
-        "name": "Mega Sharpedo",
         "spread": {
           "nature": "positive",
           "evs": 252,
@@ -3277,27 +1409,6 @@
         "name": "Lopunny",
         "spread": {
           "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 172
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 258
-      },
-      {
-        "id": 136,
-        "pokedexNo": 478,
-        "name": "Mega Froslass",
-        "spread": {
-          "nature": "neutral",
           "evs": 252,
           "ivs": 31,
           "level": 50,
@@ -3452,69 +1563,6 @@
     "speed": 255,
     "pokemon": [
       {
-        "id": 91,
-        "pokedexNo": 310,
-        "name": "Mega Manectric",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 170
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 255
-      },
-      {
-        "id": 117,
-        "pokedexNo": 428,
-        "name": "Mega Lopunny",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 170
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 255
-      },
-      {
-        "id": 154,
-        "pokedexNo": 530,
-        "name": "Mega Excadrill",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 170
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 255
-      },
-      {
         "id": 166,
         "pokedexNo": 587,
         "name": "Emolga",
@@ -3539,27 +1587,6 @@
         "id": 201,
         "pokedexNo": 701,
         "name": "Hawlucha",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 170
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 255
-      },
-      {
-        "id": 202,
-        "pokedexNo": 701,
-        "name": "Mega Hawlucha",
         "spread": {
           "nature": "neutral",
           "evs": 252,
@@ -3613,48 +1640,6 @@
         "id": 119,
         "pokedexNo": 445,
         "name": "Garchomp",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 169
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 253
-      },
-      {
-        "id": 179,
-        "pokedexNo": 655,
-        "name": "Mega Delphox",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 169
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 253
-      },
-      {
-        "id": 187,
-        "pokedexNo": 670,
-        "name": "Mega Floette",
         "spread": {
           "nature": "positive",
           "evs": 252,
@@ -3866,27 +1851,6 @@
           }
         ],
         "finalSpeed": 252
-      },
-      {
-        "id": 266,
-        "pokedexNo": 970,
-        "name": "Mega Glimmora",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 168
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 252
       }
     ]
   },
@@ -3915,72 +1879,9 @@
         "finalSpeed": 250
       },
       {
-        "id": 4,
-        "pokedexNo": 6,
-        "name": "Mega Charizard X",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 167
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 250
-      },
-      {
-        "id": 5,
-        "pokedexNo": 6,
-        "name": "Mega Charizard Y",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 167
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 250
-      },
-      {
         "id": 18,
         "pokedexNo": 38,
         "name": "Ninetales",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 167
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 250
-      },
-      {
-        "id": 33,
-        "pokedexNo": 115,
-        "name": "Mega Kangaskhan",
         "spread": {
           "nature": "positive",
           "evs": 252,
@@ -4083,135 +1984,9 @@
         "finalSpeed": 250
       },
       {
-        "id": 52,
-        "pokedexNo": 149,
-        "name": "Mega Dragonite",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 167
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 250
-      },
-      {
         "id": 55,
         "pokedexNo": 157,
         "name": "Typhlosion",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 167
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 250
-      },
-      {
-        "id": 78,
-        "pokedexNo": 229,
-        "name": "Mega Houndoom",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 167
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 250
-      },
-      {
-        "id": 83,
-        "pokedexNo": 282,
-        "name": "Mega Gardevoir",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 167
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 250
-      },
-      {
-        "id": 89,
-        "pokedexNo": 308,
-        "name": "Mega Medicham",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 167
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 250
-      },
-      {
-        "id": 106,
-        "pokedexNo": 359,
-        "name": "Mega Absol",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 167
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 250
-      },
-      {
-        "id": 108,
-        "pokedexNo": 362,
-        "name": "Mega Glalie",
         "spread": {
           "nature": "positive",
           "evs": 252,
@@ -4303,27 +2078,6 @@
     "speed": 247,
     "pokemon": [
       {
-        "id": 31,
-        "pokedexNo": 94,
-        "name": "Mega Gengar",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 165
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 247
-      },
-      {
         "id": 46,
         "pokedexNo": 135,
         "name": "Jolteon",
@@ -4412,27 +2166,6 @@
   {
     "speed": 246,
     "pokemon": [
-      {
-        "id": 122,
-        "pokedexNo": 448,
-        "name": "Mega Lucario",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 164
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 246
-      },
       {
         "id": 222,
         "pokedexNo": 745,
@@ -4616,48 +2349,6 @@
         "id": 64,
         "pokedexNo": 196,
         "name": "Espeon",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 162
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 243
-      },
-      {
-        "id": 76,
-        "pokedexNo": 227,
-        "name": "Mega Skarmory",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 162
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 243
-      },
-      {
-        "id": 134,
-        "pokedexNo": 475,
-        "name": "Mega Gallade",
         "spread": {
           "nature": "neutral",
           "evs": 252,
@@ -5055,27 +2746,6 @@
     "speed": 237,
     "pokemon": [
       {
-        "id": 120,
-        "pokedexNo": 445,
-        "name": "Mega Garchomp",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 158
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 237
-      },
-      {
         "id": 149,
         "pokedexNo": 510,
         "name": "Liepard",
@@ -5137,27 +2807,6 @@
           }
         ],
         "finalSpeed": 237
-      },
-      {
-        "id": 192,
-        "pokedexNo": 678,
-        "name": "Mega Meowstic",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 158
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 237
       }
     ]
   },
@@ -5192,51 +2841,9 @@
     "speed": 235,
     "pokemon": [
       {
-        "id": 37,
-        "pokedexNo": 127,
-        "name": "Mega Pinsir",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 157
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 235
-      },
-      {
         "id": 90,
         "pokedexNo": 310,
         "name": "Manectric",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 157
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 235
-      },
-      {
-        "id": 93,
-        "pokedexNo": 319,
-        "name": "Mega Sharpedo",
         "spread": {
           "nature": "neutral",
           "evs": 252,
@@ -5514,27 +3121,6 @@
         "finalSpeed": 234
       },
       {
-        "id": 168,
-        "pokedexNo": 609,
-        "name": "Mega Chandelure",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 156
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 234
-      },
-      {
         "id": 178,
         "pokedexNo": 655,
         "name": "Delphox",
@@ -5602,48 +3188,6 @@
   {
     "speed": 232,
     "pokemon": [
-      {
-        "id": 11,
-        "pokedexNo": 18,
-        "name": "Mega Pidgeot",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 155
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 232
-      },
-      {
-        "id": 154,
-        "pokedexNo": 530,
-        "name": "Mega Excadrill",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 155
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 232
-      },
       {
         "id": 166,
         "pokedexNo": 587,
@@ -5713,27 +3257,6 @@
         "finalSpeed": 231
       },
       {
-        "id": 35,
-        "pokedexNo": 121,
-        "name": "Mega Starmie",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 154
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 231
-      },
-      {
         "id": 119,
         "pokedexNo": 445,
         "name": "Garchomp",
@@ -5755,109 +3278,11 @@
         "finalSpeed": 231
       },
       {
-        "id": 136,
-        "pokedexNo": 478,
-        "name": "Mega Froslass",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 154
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 231
-      },
-      {
         "id": 153,
         "pokedexNo": 530,
         "name": "Excadrill",
         "spread": {
           "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 154
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 231
-      },
-      {
-        "id": 169,
-        "pokedexNo": 614,
-        "name": "Beartic",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 77
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "slush-rush",
-            "label": "Slush Rush",
-            "multiplier": 2,
-            "condition": "snow"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 231
-      },
-      {
-        "id": 169,
-        "pokedexNo": 614,
-        "name": "Beartic",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 77
-        },
-        "effects": [
-          {
-            "kind": "ability",
-            "source": "swift-swim",
-            "label": "Swift Swim",
-            "multiplier": 2,
-            "condition": "rain"
-          },
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 231
-      },
-      {
-        "id": 187,
-        "pokedexNo": 670,
-        "name": "Mega Floette",
-        "spread": {
-          "nature": "neutral",
           "evs": 252,
           "ivs": 31,
           "level": 50,
@@ -6051,27 +3476,6 @@
           }
         ],
         "finalSpeed": 229
-      },
-      {
-        "id": 266,
-        "pokedexNo": 970,
-        "name": "Mega Glimmora",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 153
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 229
       }
     ]
   },
@@ -6100,72 +3504,9 @@
         "finalSpeed": 228
       },
       {
-        "id": 4,
-        "pokedexNo": 6,
-        "name": "Mega Charizard X",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 152
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 228
-      },
-      {
-        "id": 5,
-        "pokedexNo": 6,
-        "name": "Mega Charizard Y",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 152
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 228
-      },
-      {
         "id": 18,
         "pokedexNo": 38,
         "name": "Ninetales",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 152
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 228
-      },
-      {
-        "id": 33,
-        "pokedexNo": 115,
-        "name": "Mega Kangaskhan",
         "spread": {
           "nature": "neutral",
           "evs": 252,
@@ -6247,93 +3588,9 @@
         "finalSpeed": 228
       },
       {
-        "id": 52,
-        "pokedexNo": 149,
-        "name": "Mega Dragonite",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 152
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 228
-      },
-      {
         "id": 55,
         "pokedexNo": 157,
         "name": "Typhlosion",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 152
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 228
-      },
-      {
-        "id": 83,
-        "pokedexNo": 282,
-        "name": "Mega Gardevoir",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 152
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 228
-      },
-      {
-        "id": 89,
-        "pokedexNo": 308,
-        "name": "Mega Medicham",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 152
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 228
-      },
-      {
-        "id": 108,
-        "pokedexNo": 362,
-        "name": "Mega Glalie",
         "spread": {
           "nature": "neutral",
           "evs": 252,
@@ -6507,27 +3764,6 @@
         "id": 201,
         "pokedexNo": 701,
         "name": "Hawlucha",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 151
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 226
-      },
-      {
-        "id": 202,
-        "pokedexNo": 701,
-        "name": "Mega Hawlucha",
         "spread": {
           "nature": "positive",
           "evs": 0,
@@ -6995,48 +4231,6 @@
         "finalSpeed": 222
       },
       {
-        "id": 78,
-        "pokedexNo": 229,
-        "name": "Mega Houndoom",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 148
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 222
-      },
-      {
-        "id": 106,
-        "pokedexNo": 359,
-        "name": "Mega Absol",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 148
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 222
-      },
-      {
         "id": 232,
         "pokedexNo": 778,
         "name": "Mimikyu",
@@ -7281,27 +4475,6 @@
         "finalSpeed": 219
       },
       {
-        "id": 43,
-        "pokedexNo": 130,
-        "name": "Mega Gyarados",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 146
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 219
-      },
-      {
         "id": 99,
         "pokedexNo": 350,
         "name": "Milotic",
@@ -7391,27 +4564,6 @@
         "finalSpeed": 217
       },
       {
-        "id": 2,
-        "pokedexNo": 3,
-        "name": "Mega Venusaur",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 145
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 217
-      },
-      {
         "id": 12,
         "pokedexNo": 24,
         "name": "Arbok",
@@ -7457,27 +4609,6 @@
         "id": 53,
         "pokedexNo": 154,
         "name": "Meganium",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 145
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 217
-      },
-      {
-        "id": 54,
-        "pokedexNo": 154,
-        "name": "Mega Meganium",
         "spread": {
           "nature": "positive",
           "evs": 252,
@@ -7559,54 +4690,12 @@
         "finalSpeed": 217
       },
       {
-        "id": 98,
-        "pokedexNo": 334,
-        "name": "Mega Altaria",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 145
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 217
-      },
-      {
         "id": 107,
         "pokedexNo": 362,
         "name": "Glalie",
         "spread": {
           "nature": "positive",
           "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 145
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 217
-      },
-      {
-        "id": 122,
-        "pokedexNo": 448,
-        "name": "Mega Lucario",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
           "ivs": 31,
           "level": 50,
           "rawSpeed": 145
@@ -7767,27 +4856,6 @@
         "finalSpeed": 216
       },
       {
-        "id": 120,
-        "pokedexNo": 445,
-        "name": "Mega Garchomp",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 144
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 216
-      },
-      {
         "id": 153,
         "pokedexNo": 530,
         "name": "Excadrill",
@@ -7920,27 +4988,6 @@
         "finalSpeed": 214
       },
       {
-        "id": 7,
-        "pokedexNo": 9,
-        "name": "Mega Blastoise",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 143
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 214
-      },
-      {
         "id": 14,
         "pokedexNo": 26,
         "name": "Raichu",
@@ -8046,72 +5093,9 @@
         "finalSpeed": 214
       },
       {
-        "id": 58,
-        "pokedexNo": 160,
-        "name": "Mega Feraligatr",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 143
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 214
-      },
-      {
         "id": 64,
         "pokedexNo": 196,
         "name": "Espeon",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 143
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 214
-      },
-      {
-        "id": 76,
-        "pokedexNo": 227,
-        "name": "Mega Skarmory",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 143
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 214
-      },
-      {
-        "id": 134,
-        "pokedexNo": 475,
-        "name": "Mega Gallade",
         "spread": {
           "nature": "positive",
           "evs": 0,
@@ -8388,27 +5372,6 @@
         "finalSpeed": 213
       },
       {
-        "id": 168,
-        "pokedexNo": 609,
-        "name": "Mega Chandelure",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 142
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 213
-      },
-      {
         "id": 181,
         "pokedexNo": 658,
         "name": "Mega Greninja",
@@ -8599,93 +5562,9 @@
         "finalSpeed": 208
       },
       {
-        "id": 72,
-        "pokedexNo": 212,
-        "name": "Mega Scizor",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 139
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 208
-      },
-      {
-        "id": 74,
-        "pokedexNo": 214,
-        "name": "Mega Heracross",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 139
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 208
-      },
-      {
-        "id": 102,
-        "pokedexNo": 354,
-        "name": "Mega Banette",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 139
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 208
-      },
-      {
         "id": 105,
         "pokedexNo": 359,
         "name": "Absol",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 139
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 208
-      },
-      {
-        "id": 145,
-        "pokedexNo": 500,
-        "name": "Mega Emboar",
         "spread": {
           "nature": "positive",
           "evs": 252,
@@ -8826,27 +5705,6 @@
             "label": "Chlorophyll",
             "multiplier": 2,
             "condition": "sun"
-          }
-        ],
-        "finalSpeed": 208
-      },
-      {
-        "id": 260,
-        "pokedexNo": 952,
-        "name": "Mega Scovillain",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 139
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
           }
         ],
         "finalSpeed": 208
@@ -9030,27 +5888,6 @@
         "finalSpeed": 205
       },
       {
-        "id": 37,
-        "pokedexNo": 127,
-        "name": "Mega Pinsir",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 137
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 205
-      },
-      {
         "id": 73,
         "pokedexNo": 214,
         "name": "Heracross",
@@ -9104,27 +5941,6 @@
           "rawSpeed": 205
         },
         "effects": [],
-        "finalSpeed": 205
-      },
-      {
-        "id": 93,
-        "pokedexNo": 319,
-        "name": "Mega Sharpedo",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 137
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
         "finalSpeed": 205
       },
       {
@@ -9576,48 +6392,6 @@
         "finalSpeed": 202
       },
       {
-        "id": 80,
-        "pokedexNo": 248,
-        "name": "Mega Tyranitar",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 135
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 202
-      },
-      {
-        "id": 154,
-        "pokedexNo": 530,
-        "name": "Mega Excadrill",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 135
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 202
-      },
-      {
         "id": 166,
         "pokedexNo": 587,
         "name": "Emolga",
@@ -9686,51 +6460,9 @@
     "speed": 201,
     "pokemon": [
       {
-        "id": 17,
-        "pokedexNo": 36,
-        "name": "Mega Clefable",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 134
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 201
-      },
-      {
         "id": 25,
         "pokedexNo": 71,
         "name": "Victreebel",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 134
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 201
-      },
-      {
-        "id": 26,
-        "pokedexNo": 71,
-        "name": "Mega Victreebel",
         "spread": {
           "nature": "positive",
           "evs": 252,
@@ -9860,27 +6592,6 @@
         "spread": {
           "nature": "positive",
           "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 134
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 201
-      },
-      {
-        "id": 187,
-        "pokedexNo": 670,
-        "name": "Mega Floette",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
           "ivs": 31,
           "level": 50,
           "rawSpeed": 134
@@ -10159,27 +6870,6 @@
         "finalSpeed": 199
       },
       {
-        "id": 43,
-        "pokedexNo": 130,
-        "name": "Mega Gyarados",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 133
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 199
-      },
-      {
         "id": 99,
         "pokedexNo": 350,
         "name": "Milotic",
@@ -10304,27 +6994,6 @@
           }
         ],
         "finalSpeed": 199
-      },
-      {
-        "id": 266,
-        "pokedexNo": 970,
-        "name": "Mega Glimmora",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 133
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 199
       }
     ]
   },
@@ -10353,72 +7022,9 @@
         "finalSpeed": 198
       },
       {
-        "id": 2,
-        "pokedexNo": 3,
-        "name": "Mega Venusaur",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 132
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 198
-      },
-      {
         "id": 3,
         "pokedexNo": 6,
         "name": "Charizard",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 132
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 198
-      },
-      {
-        "id": 4,
-        "pokedexNo": 6,
-        "name": "Mega Charizard X",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 132
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 198
-      },
-      {
-        "id": 5,
-        "pokedexNo": 6,
-        "name": "Mega Charizard Y",
         "spread": {
           "nature": "positive",
           "evs": 0,
@@ -10496,27 +7102,6 @@
             "label": "Chlorophyll",
             "multiplier": 2,
             "condition": "sun"
-          }
-        ],
-        "finalSpeed": 198
-      },
-      {
-        "id": 33,
-        "pokedexNo": 115,
-        "name": "Mega Kangaskhan",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 132
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
           }
         ],
         "finalSpeed": 198
@@ -10606,51 +7191,9 @@
         "finalSpeed": 198
       },
       {
-        "id": 52,
-        "pokedexNo": 149,
-        "name": "Mega Dragonite",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 132
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 198
-      },
-      {
         "id": 53,
         "pokedexNo": 154,
         "name": "Meganium",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 132
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 198
-      },
-      {
-        "id": 54,
-        "pokedexNo": 154,
-        "name": "Mega Meganium",
         "spread": {
           "nature": "neutral",
           "evs": 252,
@@ -10711,54 +7254,12 @@
         "finalSpeed": 198
       },
       {
-        "id": 83,
-        "pokedexNo": 282,
-        "name": "Mega Gardevoir",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 132
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 198
-      },
-      {
         "id": 88,
         "pokedexNo": 308,
         "name": "Medicham",
         "spread": {
           "nature": "neutral",
           "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 132
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 198
-      },
-      {
-        "id": 89,
-        "pokedexNo": 308,
-        "name": "Mega Medicham",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
           "ivs": 31,
           "level": 50,
           "rawSpeed": 132
@@ -10795,54 +7296,12 @@
         "finalSpeed": 198
       },
       {
-        "id": 98,
-        "pokedexNo": 334,
-        "name": "Mega Altaria",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 132
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 198
-      },
-      {
         "id": 107,
         "pokedexNo": 362,
         "name": "Glalie",
         "spread": {
           "nature": "neutral",
           "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 132
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 198
-      },
-      {
-        "id": 108,
-        "pokedexNo": 362,
-        "name": "Mega Glalie",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
           "ivs": 31,
           "level": 50,
           "rawSpeed": 132
@@ -11098,51 +7557,9 @@
         "finalSpeed": 195
       },
       {
-        "id": 7,
-        "pokedexNo": 9,
-        "name": "Mega Blastoise",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 130
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 195
-      },
-      {
         "id": 57,
         "pokedexNo": 160,
         "name": "Feraligatr",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 130
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 195
-      },
-      {
-        "id": 58,
-        "pokedexNo": 160,
-        "name": "Mega Feraligatr",
         "spread": {
           "nature": "neutral",
           "evs": 252,
@@ -11540,27 +7957,6 @@
         "finalSpeed": 192
       },
       {
-        "id": 104,
-        "pokedexNo": 358,
-        "name": "Mega Chimecho",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 128
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 192
-      },
-      {
         "id": 130,
         "pokedexNo": 471,
         "name": "Glaceon",
@@ -11753,93 +8149,9 @@
         "finalSpeed": 190
       },
       {
-        "id": 72,
-        "pokedexNo": 212,
-        "name": "Mega Scizor",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 127
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 190
-      },
-      {
-        "id": 74,
-        "pokedexNo": 214,
-        "name": "Mega Heracross",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 127
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 190
-      },
-      {
-        "id": 102,
-        "pokedexNo": 354,
-        "name": "Mega Banette",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 127
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 190
-      },
-      {
         "id": 105,
         "pokedexNo": 359,
         "name": "Absol",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 127
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 190
-      },
-      {
-        "id": 145,
-        "pokedexNo": 500,
-        "name": "Mega Emboar",
         "spread": {
           "nature": "neutral",
           "evs": 252,
@@ -12043,27 +8355,6 @@
             "label": "Chlorophyll",
             "multiplier": 2,
             "condition": "sun"
-          }
-        ],
-        "finalSpeed": 190
-      },
-      {
-        "id": 260,
-        "pokedexNo": 952,
-        "name": "Mega Scovillain",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 127
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
           }
         ],
         "finalSpeed": 190
@@ -12539,54 +8830,12 @@
         "finalSpeed": 184
       },
       {
-        "id": 80,
-        "pokedexNo": 248,
-        "name": "Mega Tyranitar",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 123
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 184
-      },
-      {
         "id": 111,
         "pokedexNo": 395,
         "name": "Empoleon",
         "spread": {
           "nature": "positive",
           "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 123
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 184
-      },
-      {
-        "id": 120,
-        "pokedexNo": 445,
-        "name": "Mega Garchomp",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
           "ivs": 31,
           "level": 50,
           "rawSpeed": 123
@@ -12915,51 +9164,9 @@
     "speed": 183,
     "pokemon": [
       {
-        "id": 17,
-        "pokedexNo": 36,
-        "name": "Mega Clefable",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 122
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 183
-      },
-      {
         "id": 25,
         "pokedexNo": 71,
         "name": "Victreebel",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 122
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 183
-      },
-      {
-        "id": 26,
-        "pokedexNo": 71,
-        "name": "Mega Victreebel",
         "spread": {
           "nature": "neutral",
           "evs": 252,
@@ -13503,27 +9710,6 @@
           "rawSpeed": 181
         },
         "effects": [],
-        "finalSpeed": 181
-      },
-      {
-        "id": 168,
-        "pokedexNo": 609,
-        "name": "Mega Chandelure",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 121
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
         "finalSpeed": 181
       },
       {
@@ -14265,27 +10451,6 @@
         "finalSpeed": 175
       },
       {
-        "id": 104,
-        "pokedexNo": 358,
-        "name": "Mega Chimecho",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 117
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 175
-      },
-      {
         "id": 130,
         "pokedexNo": 471,
         "name": "Glaceon",
@@ -14331,27 +10496,6 @@
         "id": 172,
         "pokedexNo": 623,
         "name": "Golurk",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 117
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 175
-      },
-      {
-        "id": 173,
-        "pokedexNo": 623,
-        "name": "Mega Golurk",
         "spread": {
           "nature": "positive",
           "evs": 252,
@@ -15457,27 +11601,6 @@
         "finalSpeed": 168
       },
       {
-        "id": 87,
-        "pokedexNo": 306,
-        "name": "Mega Aggron",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 112
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 168
-      },
-      {
         "id": 91,
         "pokedexNo": 310,
         "name": "Mega Manectric",
@@ -15593,27 +11716,6 @@
         "id": 155,
         "pokedexNo": 531,
         "name": "Audino",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 112
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 168
-      },
-      {
-        "id": 156,
-        "pokedexNo": 531,
-        "name": "Mega Audino",
         "spread": {
           "nature": "positive",
           "evs": 252,
@@ -16223,27 +12325,6 @@
         "finalSpeed": 166
       },
       {
-        "id": 43,
-        "pokedexNo": 130,
-        "name": "Mega Gyarados",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 111
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 166
-      },
-      {
         "id": 99,
         "pokedexNo": 350,
         "name": "Milotic",
@@ -16308,27 +12389,6 @@
         "id": 1,
         "pokedexNo": 3,
         "name": "Venusaur",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 110
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 165
-      },
-      {
-        "id": 2,
-        "pokedexNo": 3,
-        "name": "Mega Venusaur",
         "spread": {
           "nature": "positive",
           "evs": 0,
@@ -16487,27 +12547,6 @@
         "finalSpeed": 165
       },
       {
-        "id": 54,
-        "pokedexNo": 154,
-        "name": "Mega Meganium",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 110
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 165
-      },
-      {
         "id": 82,
         "pokedexNo": 282,
         "name": "Gardevoir",
@@ -16553,27 +12592,6 @@
         "id": 97,
         "pokedexNo": 334,
         "name": "Altaria",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 110
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 165
-      },
-      {
-        "id": 98,
-        "pokedexNo": 334,
-        "name": "Mega Altaria",
         "spread": {
           "nature": "positive",
           "evs": 0,
@@ -17331,27 +13349,6 @@
         "finalSpeed": 160
       },
       {
-        "id": 7,
-        "pokedexNo": 9,
-        "name": "Mega Blastoise",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 107
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 160
-      },
-      {
         "id": 24,
         "pokedexNo": 68,
         "name": "Machamp",
@@ -17376,27 +13373,6 @@
         "id": 57,
         "pokedexNo": 160,
         "name": "Feraligatr",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 107
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 160
-      },
-      {
-        "id": 58,
-        "pokedexNo": 160,
-        "name": "Mega Feraligatr",
         "spread": {
           "nature": "positive",
           "evs": 0,
@@ -17453,27 +13429,6 @@
         "id": 172,
         "pokedexNo": 623,
         "name": "Golurk",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 107
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 160
-      },
-      {
-        "id": 173,
-        "pokedexNo": 623,
-        "name": "Mega Golurk",
         "spread": {
           "nature": "neutral",
           "evs": 252,
@@ -17580,27 +13535,6 @@
   {
     "speed": 159,
     "pokemon": [
-      {
-        "id": 61,
-        "pokedexNo": 181,
-        "name": "Mega Ampharos",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 106
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 159
-      },
       {
         "id": 127,
         "pokedexNo": 461,
@@ -17892,27 +13826,6 @@
         "finalSpeed": 157
       },
       {
-        "id": 177,
-        "pokedexNo": 652,
-        "name": "Mega Chesnaught",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 105
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 157
-      },
-      {
         "id": 214,
         "pokedexNo": 715,
         "name": "Noivern",
@@ -18072,69 +13985,6 @@
         "finalSpeed": 156
       },
       {
-        "id": 72,
-        "pokedexNo": 212,
-        "name": "Mega Scizor",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 104
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 156
-      },
-      {
-        "id": 74,
-        "pokedexNo": 214,
-        "name": "Mega Heracross",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 104
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 156
-      },
-      {
-        "id": 102,
-        "pokedexNo": 354,
-        "name": "Mega Banette",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 104
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 156
-      },
-      {
         "id": 105,
         "pokedexNo": 359,
         "name": "Absol",
@@ -18181,27 +14031,6 @@
           "rawSpeed": 156
         },
         "effects": [],
-        "finalSpeed": 156
-      },
-      {
-        "id": 145,
-        "pokedexNo": 500,
-        "name": "Mega Emboar",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 104
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
         "finalSpeed": 156
       },
       {
@@ -18404,27 +14233,6 @@
         "id": 259,
         "pokedexNo": 952,
         "name": "Scovillain",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 104
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 156
-      },
-      {
-        "id": 260,
-        "pokedexNo": 952,
-        "name": "Mega Scovillain",
         "spread": {
           "nature": "positive",
           "evs": 0,
@@ -18908,27 +14716,6 @@
         "finalSpeed": 153
       },
       {
-        "id": 87,
-        "pokedexNo": 306,
-        "name": "Mega Aggron",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 102
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 153
-      },
-      {
         "id": 150,
         "pokedexNo": 512,
         "name": "Simisage",
@@ -18974,27 +14761,6 @@
         "id": 155,
         "pokedexNo": 531,
         "name": "Audino",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 102
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 153
-      },
-      {
-        "id": 156,
-        "pokedexNo": 531,
-        "name": "Mega Audino",
         "spread": {
           "nature": "neutral",
           "evs": 252,
@@ -19735,27 +15501,6 @@
         "finalSpeed": 150
       },
       {
-        "id": 80,
-        "pokedexNo": 248,
-        "name": "Mega Tyranitar",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 100
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 150
-      },
-      {
         "id": 106,
         "pokedexNo": 359,
         "name": "Mega Absol",
@@ -20004,51 +15749,9 @@
         "finalSpeed": 148
       },
       {
-        "id": 17,
-        "pokedexNo": 36,
-        "name": "Mega Clefable",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 99
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 148
-      },
-      {
         "id": 25,
         "pokedexNo": 71,
         "name": "Victreebel",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 99
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 148
-      },
-      {
-        "id": 26,
-        "pokedexNo": 71,
-        "name": "Mega Victreebel",
         "spread": {
           "nature": "positive",
           "evs": 0,
@@ -20768,27 +16471,6 @@
         "finalSpeed": 145
       },
       {
-        "id": 61,
-        "pokedexNo": 181,
-        "name": "Mega Ampharos",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 97
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 145
-      },
-      {
         "id": 64,
         "pokedexNo": 196,
         "name": "Espeon",
@@ -21221,27 +16903,6 @@
         "finalSpeed": 144
       },
       {
-        "id": 177,
-        "pokedexNo": 652,
-        "name": "Mega Chesnaught",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 96
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 144
-      },
-      {
         "id": 186,
         "pokedexNo": 670,
         "name": "Floette",
@@ -21287,27 +16948,6 @@
         "id": 233,
         "pokedexNo": 780,
         "name": "Drampa",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 96
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 144
-      },
-      {
-        "id": 234,
-        "pokedexNo": 780,
-        "name": "Mega Drampa",
         "spread": {
           "nature": "positive",
           "evs": 252,
@@ -22459,27 +18099,6 @@
         "finalSpeed": 139
       },
       {
-        "id": 104,
-        "pokedexNo": 358,
-        "name": "Mega Chimecho",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 93
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 139
-      },
-      {
         "id": 105,
         "pokedexNo": 359,
         "name": "Absol",
@@ -22631,27 +18250,6 @@
           "rawSpeed": 139
         },
         "effects": [],
-        "finalSpeed": 139
-      },
-      {
-        "id": 221,
-        "pokedexNo": 740,
-        "name": "Mega Crabominable",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 93
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
         "finalSpeed": 139
       },
       {
@@ -23732,27 +19330,6 @@
         "finalSpeed": 135
       },
       {
-        "id": 28,
-        "pokedexNo": 80,
-        "name": "Mega Slowbro",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 90
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 135
-      },
-      {
         "id": 29,
         "pokedexNo": 80,
         "name": "Slowbro",
@@ -23914,27 +19491,6 @@
         "finalSpeed": 135
       },
       {
-        "id": 70,
-        "pokedexNo": 208,
-        "name": "Mega Steelix",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 90
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 135
-      },
-      {
         "id": 78,
         "pokedexNo": 229,
         "name": "Mega Houndoom",
@@ -23980,27 +19536,6 @@
         "id": 115,
         "pokedexNo": 411,
         "name": "Bastiodon",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 90
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 135
-      },
-      {
-        "id": 126,
-        "pokedexNo": 460,
-        "name": "Mega Abomasnow",
         "spread": {
           "nature": "positive",
           "evs": 252,
@@ -25511,27 +21046,6 @@
         "finalSpeed": 132
       },
       {
-        "id": 234,
-        "pokedexNo": 780,
-        "name": "Mega Drampa",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 88
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 132
-      },
-      {
         "id": 263,
         "pokedexNo": 964,
         "name": "Palafin",
@@ -26684,27 +22198,6 @@
         "finalSpeed": 127
       },
       {
-        "id": 221,
-        "pokedexNo": 740,
-        "name": "Mega Crabominable",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 85
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 127
-      },
-      {
         "id": 232,
         "pokedexNo": 778,
         "name": "Mimikyu",
@@ -27411,27 +22904,6 @@
         "finalSpeed": 123
       },
       {
-        "id": 28,
-        "pokedexNo": 80,
-        "name": "Mega Slowbro",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 82
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 123
-      },
-      {
         "id": 29,
         "pokedexNo": 80,
         "name": "Slowbro",
@@ -27572,27 +23044,6 @@
         "finalSpeed": 123
       },
       {
-        "id": 70,
-        "pokedexNo": 208,
-        "name": "Mega Steelix",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 82
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 123
-      },
-      {
         "id": 73,
         "pokedexNo": 214,
         "name": "Heracross",
@@ -27698,27 +23149,6 @@
         "finalSpeed": 123
       },
       {
-        "id": 126,
-        "pokedexNo": 460,
-        "name": "Mega Abomasnow",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 82
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 123
-      },
-      {
         "id": 147,
         "pokedexNo": 503,
         "name": "Samurott",
@@ -27820,27 +23250,6 @@
         "id": 172,
         "pokedexNo": 623,
         "name": "Golurk",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 82
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 123
-      },
-      {
-        "id": 173,
-        "pokedexNo": 623,
-        "name": "Mega Golurk",
         "spread": {
           "nature": "positive",
           "evs": 0,
@@ -29228,27 +24637,6 @@
         "finalSpeed": 118
       },
       {
-        "id": 85,
-        "pokedexNo": 302,
-        "name": "Mega Sableye",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 79
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 118
-      },
-      {
         "id": 88,
         "pokedexNo": 308,
         "name": "Medicham",
@@ -29260,27 +24648,6 @@
           "rawSpeed": 118
         },
         "effects": [],
-        "finalSpeed": 118
-      },
-      {
-        "id": 95,
-        "pokedexNo": 323,
-        "name": "Mega Camerupt",
-        "spread": {
-          "nature": "positive",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 79
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
         "finalSpeed": 118
       },
       {
@@ -30356,27 +25723,6 @@
         "finalSpeed": 115
       },
       {
-        "id": 87,
-        "pokedexNo": 306,
-        "name": "Mega Aggron",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 77
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 115
-      },
-      {
         "id": 92,
         "pokedexNo": 319,
         "name": "Sharpedo",
@@ -30464,27 +25810,6 @@
         "id": 155,
         "pokedexNo": 531,
         "name": "Audino",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 77
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 115
-      },
-      {
-        "id": 156,
-        "pokedexNo": 531,
-        "name": "Mega Audino",
         "spread": {
           "nature": "positive",
           "evs": 0,
@@ -32316,27 +27641,6 @@
         "finalSpeed": 108
       },
       {
-        "id": 85,
-        "pokedexNo": 302,
-        "name": "Mega Sableye",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 72
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 108
-      },
-      {
         "id": 89,
         "pokedexNo": 308,
         "name": "Mega Medicham",
@@ -32348,27 +27652,6 @@
           "rawSpeed": 108
         },
         "effects": [],
-        "finalSpeed": 108
-      },
-      {
-        "id": 95,
-        "pokedexNo": 323,
-        "name": "Mega Camerupt",
-        "spread": {
-          "nature": "neutral",
-          "evs": 252,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 72
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
         "finalSpeed": 108
       },
       {
@@ -32778,27 +28061,6 @@
           "rawSpeed": 106
         },
         "effects": [],
-        "finalSpeed": 106
-      },
-      {
-        "id": 61,
-        "pokedexNo": 181,
-        "name": "Mega Ampharos",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 71
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
         "finalSpeed": 106
       },
       {
@@ -33224,27 +28486,6 @@
           "rawSpeed": 105
         },
         "effects": [],
-        "finalSpeed": 105
-      },
-      {
-        "id": 177,
-        "pokedexNo": 652,
-        "name": "Mega Chesnaught",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 70
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
         "finalSpeed": 105
       },
       {
@@ -36447,27 +31688,6 @@
         "finalSpeed": 91
       },
       {
-        "id": 234,
-        "pokedexNo": 780,
-        "name": "Mega Drampa",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 61
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 91
-      },
-      {
         "id": 239,
         "pokedexNo": 844,
         "name": "Sandaconda",
@@ -37706,27 +32926,6 @@
         "finalSpeed": 87
       },
       {
-        "id": 221,
-        "pokedexNo": 740,
-        "name": "Mega Crabominable",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 58
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 87
-      },
-      {
         "id": 225,
         "pokedexNo": 748,
         "name": "Toxapex",
@@ -38477,27 +33676,6 @@
         "pokedexNo": 80,
         "name": "Mega Slowbro",
         "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 55
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 82
-      },
-      {
-        "id": 28,
-        "pokedexNo": 80,
-        "name": "Mega Slowbro",
-        "spread": {
           "nature": "neutral",
           "evs": 252,
           "ivs": 31,
@@ -38729,27 +33907,6 @@
         "pokedexNo": 208,
         "name": "Mega Steelix",
         "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 55
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 82
-      },
-      {
-        "id": 70,
-        "pokedexNo": 208,
-        "name": "Mega Steelix",
-        "spread": {
           "nature": "neutral",
           "evs": 252,
           "ivs": 31,
@@ -38806,27 +33963,6 @@
           "rawSpeed": 82
         },
         "effects": [],
-        "finalSpeed": 82
-      },
-      {
-        "id": 126,
-        "pokedexNo": 460,
-        "name": "Mega Abomasnow",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 55
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
         "finalSpeed": 82
       },
       {
@@ -41269,27 +36405,6 @@
         "finalSpeed": 66
       },
       {
-        "id": 85,
-        "pokedexNo": 302,
-        "name": "Mega Sableye",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 44
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
-        "finalSpeed": 66
-      },
-      {
         "id": 94,
         "pokedexNo": 323,
         "name": "Camerupt",
@@ -41301,27 +36416,6 @@
           "rawSpeed": 66
         },
         "effects": [],
-        "finalSpeed": 66
-      },
-      {
-        "id": 95,
-        "pokedexNo": 323,
-        "name": "Mega Camerupt",
-        "spread": {
-          "nature": "positive",
-          "evs": 0,
-          "ivs": 31,
-          "level": 50,
-          "rawSpeed": 44
-        },
-        "effects": [
-          {
-            "kind": "item",
-            "source": "choice-scarf",
-            "label": "Choice Scarf",
-            "multiplier": 1.5
-          }
-        ],
         "finalSpeed": 66
       },
       {

@@ -20,7 +20,20 @@ export const DOUBLE_SPEED_ABILITIES: ReadonlySet<string> = new Set(
   Object.keys(WEATHER_SPEED_ABILITY_EFFECTS),
 );
 export const STAGE_SPEED_ABILITIES: ReadonlySet<string> = new Set(["speed-boost"]);
+export const SPEED_ABILITIES: ReadonlySet<string> = new Set([
+  ...DOUBLE_SPEED_ABILITIES,
+  ...STAGE_SPEED_ABILITIES,
+]);
 export const COMBINATION_RULES: CombinationRule[] = [
+  {
+    name: "skip held items for mega Pokemon",
+    shouldInclude: ({ item, pokemon }) => item === null || !isMegaPokemon(pokemon),
+  },
+  {
+    name: "skip choice scarf with speed abilities",
+    shouldInclude: ({ ability, item }) =>
+      item !== "choice-scarf" || ability === null || !isSpeedAbility(ability),
+  },
   {
     name: "skip any speed modifier with negative nature",
     shouldInclude: ({ ability, item, nature }) =>
@@ -31,3 +44,11 @@ export const COMBINATION_RULES: CombinationRule[] = [
     shouldInclude: ({ evs, item, nature }) => nature !== "neutral" || evs !== 0 || item === null,
   },
 ];
+
+export function isMegaPokemon(pokemon: { name: string; slug: string }) {
+  return /(?:^|-)mega(?:-|$)/.test(pokemon.slug) || pokemon.name.startsWith("Mega ");
+}
+
+export function isSpeedAbility(ability: string) {
+  return SPEED_ABILITIES.has(ability);
+}

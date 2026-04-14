@@ -63,6 +63,7 @@ export type SpeedTierCombination = SpeedTierPokemon & {
 };
 
 export type CombinationContext = {
+  pokemon: PokedexPokemon;
   evs: SpeedEv;
   nature: Nature;
   ability: string | null;

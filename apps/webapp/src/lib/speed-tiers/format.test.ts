@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   effectToChips,
+  effectsToChips,
   evsToStatPoints,
   formatMultiplier,
   formatSpread,
@@ -42,7 +43,11 @@ describe("speed tier formatting", () => {
     expect(formatMultiplier(1.5)).toBe("1.5x");
   });
 
-  it("keeps multiplier, label, condition, and stage chip order", () => {
+  it("renders no chips for unboosted rows", () => {
+    expect(effectsToChips([])).toStrictEqual([]);
+  });
+
+  it("combines multiplier effects into one provenance chip", () => {
     expect(
       effectToChips({
         kind: "ability",
@@ -54,24 +59,37 @@ describe("speed tier formatting", () => {
       }),
     ).toStrictEqual([
       {
-        key: "speed-boost-multiplier-1.5",
-        label: "1.5x",
+        key: "speed-boost-multiplier-1.5-Speed Boost",
+        label: "1.5x Speed Boost",
         kind: "multiplier",
       },
+    ]);
+  });
+
+  it("keeps stage and condition chips for non-multiplier effects", () => {
+    expect(
+      effectToChips({
+        kind: "stage",
+        source: "tailwind",
+        label: "Tailwind",
+        stage: 1,
+        condition: "active",
+      }),
+    ).toStrictEqual([
       {
-        key: "speed-boost-label-Speed Boost",
-        label: "Speed Boost",
-        kind: "ability",
+        key: "tailwind-label-Tailwind",
+        label: "Tailwind",
+        kind: "stage",
       },
       {
-        key: "speed-boost-condition-after 1 turn",
-        label: "after 1 turn",
-        kind: "condition",
-      },
-      {
-        key: "speed-boost-stage-1",
+        key: "tailwind-stage-1",
         label: "+1",
         kind: "stage",
+      },
+      {
+        key: "tailwind-condition-active",
+        label: "active",
+        kind: "condition",
       },
     ]);
   });

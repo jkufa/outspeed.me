@@ -40,11 +40,13 @@ export function effectToChips(effect: SpeedEffect): EffectChip[] {
   const chips: EffectChip[] = [];
 
   if (effect.multiplier !== undefined) {
-    chips.push({
-      key: `${effect.source}-multiplier-${effect.multiplier}`,
-      label: formatMultiplier(effect.multiplier),
-      kind: "multiplier",
-    });
+    return [
+      {
+        key: `${effect.source}-multiplier-${effect.multiplier}-${effect.label}`,
+        label: `${formatMultiplier(effect.multiplier)} ${effect.label}`,
+        kind: "multiplier",
+      },
+    ];
   }
 
   chips.push({
@@ -52,14 +54,6 @@ export function effectToChips(effect: SpeedEffect): EffectChip[] {
     label: effect.label,
     kind: effect.kind,
   });
-
-  if (effect.condition !== undefined) {
-    chips.push({
-      key: `${effect.source}-condition-${effect.condition}`,
-      label: effect.condition,
-      kind: "condition",
-    });
-  }
 
   if (effect.stage !== undefined) {
     chips.push({
@@ -69,12 +63,20 @@ export function effectToChips(effect: SpeedEffect): EffectChip[] {
     });
   }
 
+  if (effect.condition !== undefined) {
+    chips.push({
+      key: `${effect.source}-condition-${effect.condition}`,
+      label: effect.condition,
+      kind: "condition",
+    });
+  }
+
   return chips;
 }
 
 export function effectsToChips(effects: SpeedEffect[]): EffectChip[] {
   if (effects.length === 0) {
-    return [{ key: "baseline", label: "baseline", kind: "baseline" }];
+    return [];
   }
 
   return effects.flatMap(effectToChips);

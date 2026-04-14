@@ -3,9 +3,7 @@ import type { SpeedTier, SpeedTierFilters, SpeedTierPokemon } from "./types";
 
 export const defaultSpeedTierFilters: SpeedTierFilters = {
   search: "",
-  mode: "any",
-  abilityOnly: false,
-  itemOnly: false,
+  boosts: [],
   weather: "any",
   nature: "any",
   statPoints: "any",
@@ -27,19 +25,7 @@ function matchesFilters(pokemon: SpeedTierPokemon, filters: SpeedTierFilters, se
     return false;
   }
 
-  if (filters.mode === "baseline" && pokemon.effects.length > 0) {
-    return false;
-  }
-
-  if (filters.mode === "boosted" && pokemon.effects.length === 0) {
-    return false;
-  }
-
-  if (filters.abilityOnly && !pokemon.effects.some((effect) => effect.kind === "ability")) {
-    return false;
-  }
-
-  if (filters.itemOnly && !pokemon.effects.some((effect) => effect.kind === "item")) {
+  if (!matchesBoostFilter(pokemon, filters.boosts)) {
     return false;
   }
 
@@ -59,4 +45,20 @@ function matchesFilters(pokemon: SpeedTierPokemon, filters: SpeedTierFilters, se
   }
 
   return true;
+}
+
+function matchesBoostFilter(pokemon: SpeedTierPokemon, boosts: SpeedTierFilters["boosts"]) {
+  if (boosts.length === 0) {
+    return true;
+  }
+
+  if (boosts.includes("none")) {
+    return pokemon.effects.length === 0;
+  }
+
+  return boosts.some((boost) =>
+    boost === "ability"
+      ? pokemon.effects.some((effect) => effect.kind === "ability")
+      : pokemon.effects.some((effect) => effect.kind === "item"),
+  );
 }
