@@ -3,6 +3,7 @@
 ## Task Completion & Requirements
 
 - All of `bun fmt`, `bun lint`, and `bun typecheck` must pass before considering tasks completed unless the task is a documentation change.
+- Do not run `bun test`, run `bun run test` instead. Running `bun test` will use Bun's built-in test runner, which is not what we want. We want to use Vitest.
 
 ## Project Snapshot
 
