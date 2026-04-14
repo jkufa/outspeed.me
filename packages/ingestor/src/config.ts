@@ -11,6 +11,8 @@ export const ingestorConfig = {
     championsPokedexCsv: resolve(repoRoot, "data/champions_pokedex.csv"),
     championsPokedexJson: resolve(repoRoot, "data/champions_pokedex.json"),
     speedTiersJson: resolve(repoRoot, "data/speed_tiers.json"),
+    webappSpeedTiersJson: resolve(repoRoot, "apps/webapp/src/lib/generated/speed_tiers.json"),
+    webappPublicSpeedTiersJson: resolve(repoRoot, "apps/webapp/static/assets/speed_tiers.json"),
     speedTiersCsv: resolve(repoRoot, "data/speed_tiers.csv"),
     speedTierCombinationsJson: resolve(repoRoot, "data/speed_tier_combinations.json"),
   },
@@ -26,11 +28,22 @@ export function resolveIngestPaths(args: string[]) {
 }
 
 export function resolveSpeedTierPaths(args: string[]) {
-  const [inputArg, outputJsonArg, outputCsvArg, outputCombinationsArg] = args;
+  const [
+    inputArg,
+    outputJsonArg,
+    outputCsvArg,
+    outputCombinationsArg,
+    webappOutputJsonArg,
+    webappPublicOutputJsonArg,
+  ] = args;
 
   return {
     inputPath: resolve(inputArg ?? ingestorConfig.paths.championsPokedexJson),
     outputJsonPath: resolve(outputJsonArg ?? ingestorConfig.paths.speedTiersJson),
+    webappPublicOutputJsonPath: resolve(
+      webappPublicOutputJsonArg ?? ingestorConfig.paths.webappPublicSpeedTiersJson,
+    ),
+    webappOutputJsonPath: resolve(webappOutputJsonArg ?? ingestorConfig.paths.webappSpeedTiersJson),
     outputCsvPath: resolve(outputCsvArg ?? ingestorConfig.paths.speedTiersCsv),
     outputCombinationsPath: resolve(
       outputCombinationsArg ?? ingestorConfig.paths.speedTierCombinationsJson,

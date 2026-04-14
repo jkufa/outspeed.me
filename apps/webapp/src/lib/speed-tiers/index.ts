@@ -9,6 +9,14 @@ export {
   formatSpread,
   statPointsToEvs,
 } from "./format";
+export {
+  countSpeedTierRows,
+  defaultSpeedTierQuery,
+  initialSpeedTierRowLimit,
+  limitSpeedTierRows,
+  querySpeedTiers,
+} from "./query";
+export type { SpeedTierQuery, SpeedTierQueryResult } from "./query";
 export type {
   BoostFilter,
   EffectChip,

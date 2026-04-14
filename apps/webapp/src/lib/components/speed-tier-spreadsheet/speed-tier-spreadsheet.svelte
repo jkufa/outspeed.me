@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { Button, buttonVariants } from "$lib/components/ui/button";
   import { Card, CardContent, CardHeader, CardTitle } from "$lib/components/ui/card";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
@@ -16,15 +17,36 @@
   } from "$lib/speed-tiers";
   import SpeedTierTable from "./speed-tier-table.svelte";
 
-  let { tiers }: { tiers: SpeedTier[] } = $props();
+  let {
+    fullDataUrl,
+    returnedRows,
+    tiers,
+    totalRows,
+  }: {
+    fullDataUrl: string;
+    returnedRows: number;
+    tiers: SpeedTier[];
+    totalRows: number;
+  } = $props();
 
+  const initialTiers = () => tiers;
+  let sourceTiers = $state(initialTiers());
   let filters = $state<SpeedTierFilters>({ ...defaultSpeedTierFilters });
   let searchInput = $state(defaultSpeedTierFilters.search);
+  let filtersReady = $state(false);
+  let dataLoadState = $state<"loading" | "ready" | "error">("loading");
   let searchDebounceTimer: ReturnType<typeof setTimeout> | undefined =
     undefined;
-  const filteredTiers = $derived(filterSpeedTiers(tiers, filters));
+  const filteredTiers = $derived(filterSpeedTiers(sourceTiers, filters));
   const visibleRows = $derived(
     filteredTiers.reduce((total, tier) => total + tier.pokemon.length, 0),
+  );
+  const rowsLabel = $derived(
+    dataLoadState === "loading"
+      ? `${returnedRows} of ${totalRows} rows. Loading full table...`
+      : dataLoadState === "error"
+        ? `${visibleRows} rows. Full table failed to load.`
+        : `${visibleRows} rows`,
   );
 
   function updateSearch(event: Event) {
@@ -89,6 +111,23 @@
       boost,
     ];
   }
+
+  onMount(async () => {
+    try {
+      const response = await fetch(fullDataUrl);
+
+      if (!response.ok) {
+        throw new Error(`Failed to load speed tiers: ${response.status}`);
+      }
+
+      sourceTiers = (await response.json()) as SpeedTier[];
+      dataLoadState = "ready";
+    } catch {
+      dataLoadState = "error";
+    } finally {
+      filtersReady = true;
+    }
+  });
 </script>
 
 <main class="mx-auto flex w-full max-w-7xl flex-col gap-5 p-4 md:p-6">
@@ -112,6 +151,7 @@
           <Input
             value={searchInput}
             placeholder="Excadrill"
+            disabled={!filtersReady}
             oninput={updateSearch}
           />
         </label>
@@ -120,6 +160,8 @@
           <span class="text-muted-foreground">Boosts</span>
           <DropdownMenu.Root>
             <DropdownMenu.Trigger
+              disabled={!filtersReady}
+              aria-label={`Boosts: ${boostsLabel(filters.boosts)}`}
               class={cn(buttonVariants({ variant: "outline" }), "w-full justify-between")}
             >
               {boostsLabel(filters.boosts)}
@@ -165,7 +207,11 @@
             onValueChange={(value: string) =>
               (filters.weather = value as WeatherFilter)}
           >
-            <Select.Trigger class="w-full">
+            <Select.Trigger
+              class="w-full"
+              disabled={!filtersReady}
+              aria-label={`Weather: ${weatherLabel(filters.weather)}`}
+            >
               <span data-slot="select-value"
                 >{weatherLabel(filters.weather)}</span
               >
@@ -190,7 +236,11 @@
             onValueChange={(value: string) =>
               (filters.nature = value as NatureFilter)}
           >
-            <Select.Trigger class="w-full">
+            <Select.Trigger
+              class="w-full"
+              disabled={!filtersReady}
+              aria-label={`Spread: ${natureLabel(filters.nature)}`}
+            >
               <span data-slot="select-value">{natureLabel(filters.nature)}</span
               >
             </Select.Trigger>
@@ -212,7 +262,11 @@
             value={String(filters.statPoints)}
             onValueChange={updateStatPoints}
           >
-            <Select.Trigger class="w-full">
+            <Select.Trigger
+              class="w-full"
+              disabled={!filtersReady}
+              aria-label={`SP: ${statPointsLabel(filters.statPoints)}`}
+            >
               <span data-slot="select-value"
                 >{statPointsLabel(filters.statPoints)}</span
               >
@@ -230,7 +284,7 @@
 
       <div class="flex flex-wrap items-center gap-2">
         <span class="ml-auto text-sm text-muted-foreground"
-          >{visibleRows} rows</span
+          >{rowsLabel}</span
         >
       </div>
     </CardContent>

@@ -3,7 +3,7 @@ import type { SpeedTier, SpeedTierFilters, SpeedTierPokemon } from "./types";
 
 export const defaultSpeedTierFilters: SpeedTierFilters = {
   search: "",
-  boosts: [],
+  boosts: ["none"],
   weather: "any",
   nature: "any",
   statPoints: "any",
