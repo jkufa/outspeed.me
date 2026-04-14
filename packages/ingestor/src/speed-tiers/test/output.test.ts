@@ -18,6 +18,7 @@ function speedTierPokemon(overrides: Partial<SpeedTierPokemon> = {}): SpeedTierP
   };
 
   return {
+    combinationId: "pokemon:1|nature:neutral|evs:0|ability:none|item:none",
     id: 1,
     pokedexNo: 25,
     name: "Pikachu",

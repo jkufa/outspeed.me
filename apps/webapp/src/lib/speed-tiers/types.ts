@@ -20,6 +20,7 @@ export type SpeedEffect = {
 };
 
 export type SpeedTierPokemon = {
+  combinationId: string;
   id: number;
   pokedexNo: number;
   name: string;

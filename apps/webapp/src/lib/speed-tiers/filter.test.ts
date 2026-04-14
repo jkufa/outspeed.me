@@ -7,6 +7,7 @@ const tiers: SpeedTier[] = [
     speed: 308,
     pokemon: [
       {
+        combinationId: "pokemon:1|nature:positive|evs:252|ability:sand-rush|item:none",
         id: 1,
         pokedexNo: 530,
         name: "Excadrill",
@@ -28,6 +29,7 @@ const tiers: SpeedTier[] = [
     speed: 250,
     pokemon: [
       {
+        combinationId: "pokemon:3|nature:positive|evs:252|ability:none|item:choice-scarf",
         id: 3,
         pokedexNo: 25,
         name: "Pikachu",
@@ -48,6 +50,7 @@ const tiers: SpeedTier[] = [
     speed: 222,
     pokemon: [
       {
+        combinationId: "pokemon:2|nature:neutral|evs:0|ability:none|item:none",
         id: 2,
         pokedexNo: 142,
         name: "Aerodactyl",

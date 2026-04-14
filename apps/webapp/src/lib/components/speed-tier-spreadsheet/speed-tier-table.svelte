@@ -20,10 +20,6 @@
 
 	let expandedKeys = $state(new Set<string>());
 
-	function rowKey(speed: number, pokemonId: number, index: number) {
-		return `${speed}-${pokemonId}-${index}`;
-	}
-
 	function toggleRow(key: string) {
 		const nextKeys = new Set(expandedKeys);
 
@@ -54,14 +50,15 @@
 			</TableHeader>
 			<TableBody>
 				{#each tiers as tier (tier.speed)}
-					{#each tier.pokemon as pokemon, index (rowKey(tier.speed, pokemon.id, index))}
+					{#each tier.pokemon as pokemon, index (pokemon.combinationId)}
+						{@const rowKey = pokemon.combinationId}
 						<PokemonSetupRow
 							{pokemon}
-							rowKey={rowKey(tier.speed, pokemon.id, index)}
+							{rowKey}
 							showSpeed={index === 0}
 							speed={tier.speed}
 							rowspan={tier.pokemon.length}
-							expanded={expandedKeys.has(rowKey(tier.speed, pokemon.id, index))}
+							expanded={expandedKeys.has(rowKey)}
 							onToggle={toggleRow}
 						/>
 					{/each}
@@ -75,8 +72,8 @@
 			<section class="rounded-lg border border-border">
 				<div class="border-b border-border p-3 text-lg font-semibold tabular-nums">{tier.speed}</div>
 				<div class="divide-y divide-border">
-					{#each tier.pokemon as pokemon, index (rowKey(tier.speed, pokemon.id, index))}
-						{@const mobileRowKey = rowKey(tier.speed, pokemon.id, index)}
+					{#each tier.pokemon as pokemon (pokemon.combinationId)}
+						{@const mobileRowKey = pokemon.combinationId}
 						{@const mobileDetailId = `speed-tier-details-mobile-${mobileRowKey}`}
 						<div class="grid gap-2 p-3">
 							<div class="flex items-center justify-between gap-3">

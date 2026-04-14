@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   applyAbilityModifier,
+  buildSpeedTierCombinationId,
   buildSpeedTierCombinations,
   calculateSpeed,
   calculateSpeedTier,
@@ -138,6 +139,20 @@ describe("shouldIncludeCombination", () => {
   });
 });
 
+describe("buildSpeedTierCombinationId", () => {
+  it("builds a stable key from the Pokemon setup", () => {
+    expect(
+      buildSpeedTierCombinationId({
+        pokemon: pokemon({ id: 42 }),
+        evs: 252,
+        nature: "positive",
+        ability: "chlorophyll",
+        item: null,
+      }),
+    ).toBe("pokemon:42|nature:positive|evs:252|ability:chlorophyll|item:none");
+  });
+});
+
 describe("buildSpeedTierCombinations", () => {
   it("builds combinations for normal and speed abilities", () => {
     const testPokemon = pokemon({
@@ -147,6 +162,7 @@ describe("buildSpeedTierCombinations", () => {
     const combinations = buildSpeedTierCombinations([testPokemon]);
 
     expect(combinations).toContainEqual({
+      combinationId: "pokemon:1|nature:positive|evs:252|ability:chlorophyll|item:none",
       id: 1,
       pokedexNo: 3,
       name: "Venusaur",

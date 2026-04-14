@@ -38,6 +38,7 @@ export function buildSpeedTierCombinations(pokedex: PokedexPokemon[]): SpeedTier
             const spread = buildSpeedSpread(nature, evs, rawSpeed);
 
             return {
+              combinationId: buildSpeedTierCombinationId(context),
               id: pokemon.id,
               pokedexNo: pokemon.pokedexNumber,
               name: pokemon.name,
@@ -51,6 +52,22 @@ export function buildSpeedTierCombinations(pokedex: PokedexPokemon[]): SpeedTier
       }),
     ),
   );
+}
+
+export function buildSpeedTierCombinationId({
+  ability,
+  evs,
+  item,
+  nature,
+  pokemon,
+}: CombinationContext) {
+  return [
+    `pokemon:${pokemon.id}`,
+    `nature:${nature}`,
+    `evs:${evs}`,
+    `ability:${ability ?? "none"}`,
+    `item:${item ?? "none"}`,
+  ].join("|");
 }
 
 export function shouldIncludeCombination(context: CombinationContext) {

@@ -37,7 +37,7 @@
   }
 
   function weatherLabel(weather: WeatherFilter) {
-    if (weather === "any") return "Any";
+    if (weather === "any") return "All";
     return weather[0].toUpperCase() + weather.slice(1);
   }
 
@@ -45,11 +45,11 @@
     if (nature === "positive") return "+Spe";
     if (nature === "negative") return "-Spe";
     if (nature === "neutral") return "neutral";
-    return "Any";
+    return "All";
   }
 
   function statPointsLabel(statPoints: StatPointFilter) {
-    if (statPoints === "any") return "Any";
+    if (statPoints === "any") return "All";
     return `${statPoints} SP`;
   }
 
@@ -60,15 +60,17 @@
   function boostsLabel(boosts: BoostFilter[]) {
     if (boosts.length === 0) return "All";
     if (boosts.includes("none")) return "None";
-    if (boosts.length === 2) return "Abilities, Items";
-    if (boosts.includes("ability")) return "Abilities";
-    return "Items";
+    const parts: string[] = [];
+    if (boosts.includes("ability")) parts.push("Abilities");
+    if (boosts.includes("item")) parts.push("Items");
+    return parts.length > 0 ? parts.join(", ") : "All";
   }
 
   function selectAllBoosts(checked: boolean) {
     if (checked) {
       filters.boosts = [];
     }
+    // All cannot be deselected directly; choose a narrower option first.
   }
 
   function toggleBoost(boost: BoostFilter, checked: boolean) {
@@ -170,7 +172,7 @@
             </Select.Trigger>
             <Select.Content>
               <Select.Group>
-                <Select.Item value="any" label="Any" />
+                <Select.Item value="any" label="All" />
                 <Select.Item value="sun" label="Sun" />
                 <Select.Item value="rain" label="Rain" />
                 <Select.Item value="sand" label="Sand" />
@@ -194,7 +196,7 @@
             </Select.Trigger>
             <Select.Content>
               <Select.Group>
-                <Select.Item value="any" label="Any" />
+                <Select.Item value="any" label="All" />
                 <Select.Item value="positive" label="+Spe" />
                 <Select.Item value="neutral" label="neutral" />
                 <Select.Item value="negative" label="-Spe" />
@@ -217,7 +219,7 @@
             </Select.Trigger>
             <Select.Content>
               <Select.Group>
-                <Select.Item value="any" label="Any" />
+                <Select.Item value="any" label="All" />
                 <Select.Item value="32" label="32 SP" />
                 <Select.Item value="0" label="0 SP" />
               </Select.Group>
