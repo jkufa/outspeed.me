@@ -4,13 +4,12 @@
     formatEffectFormula,
     formatNature,
   } from "$lib/speed-tiers";
-  import type { SpeedTierPokemon } from "$lib/speed-tiers";
+  import type { SpeedTierDisplayPokemon } from "$lib/speed-tiers";
 
-  let { id, pokemon }: { id: string; pokemon: SpeedTierPokemon } = $props();
+  let { id, pokemon }: { id: string; pokemon: SpeedTierDisplayPokemon } = $props();
 
   const conditions = $derived(
-    pokemon.effects
-      .map((effect) => effect.condition)
+    [...new Set(pokemon.sourceEffects.map((effect) => effect.condition))]
       .filter((condition) => condition !== undefined)
       .join(", "),
   );

@@ -16,6 +16,9 @@ export type {
   PokeApiStat,
 } from "./pokedex/types";
 export { buildSpeedTierOutputs } from "./speed-tiers/build";
+export { extractSprites } from "./sprites/extract";
+export { sourceFilenameToSlug } from "./sprites/filename-to-slug";
+export { uploadSprites } from "./sprites/upload";
 export {
   applyAbilityModifier,
   buildSpeedSpread,
@@ -71,3 +74,9 @@ export type {
   SpeedTierCombination,
   SpeedTierPokemon,
 } from "./speed-tiers/types";
+export type {
+  PokemonSprite,
+  SpriteBlobManifestEntry,
+  SpriteMappingError,
+  SpriteSourceManifestEntry,
+} from "./sprites/types";

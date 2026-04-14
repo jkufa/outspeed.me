@@ -44,11 +44,19 @@ export type SpeedCalculation = {
   steps: SpeedCalculationStep[];
 };
 
+export type PokemonSprite = {
+  filename: string;
+  path: string;
+  sourceUrl: string;
+};
+
 export type SpeedTierPokemon = {
   combinationId: string;
   id: number;
+  slug: string;
   pokedexNo: number;
   name: string;
+  sprite: PokemonSprite | null;
   spread: SpeedSpread;
   effects: SpeedEffect[];
   finalSpeed: number;

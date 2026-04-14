@@ -19,11 +19,19 @@ export type SpeedEffect = {
   condition?: string;
 };
 
+export type PokemonSprite = {
+  filename: string;
+  path: string;
+  sourceUrl: string;
+};
+
 export type SpeedTierPokemon = {
   combinationId: string;
   id: number;
+  slug: string;
   pokedexNo: number;
   name: string;
+  sprite: PokemonSprite | null;
   spread: SpeedSpread;
   effects: SpeedEffect[];
   finalSpeed: number;
@@ -32,6 +40,25 @@ export type SpeedTierPokemon = {
 export type SpeedTier = {
   speed: number;
   pokemon: SpeedTierPokemon[];
+};
+
+export type SpeedTierDisplayMember = {
+  id: number;
+  slug: string;
+  pokedexNo: number;
+  name: string;
+  sprite: PokemonSprite | null;
+};
+
+export type SpeedTierDisplayPokemon = Omit<SpeedTierPokemon, "effects"> & {
+  members: SpeedTierDisplayMember[];
+  effects: SpeedEffect[];
+  sourceEffects: SpeedEffect[];
+};
+
+export type SpeedTierDisplayTier = {
+  speed: number;
+  pokemon: SpeedTierDisplayPokemon[];
 };
 
 export type BoostFilter = "none" | "ability" | "item";

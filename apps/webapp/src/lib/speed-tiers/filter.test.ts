@@ -9,8 +9,10 @@ const tiers: SpeedTier[] = [
       {
         combinationId: "pokemon:1|nature:positive|evs:252|ability:sand-rush|item:none",
         id: 1,
+        slug: "excadrill",
         pokedexNo: 530,
         name: "Excadrill",
+        sprite: null,
         spread: { nature: "positive", evs: 252, ivs: 31, level: 50, rawSpeed: 154 },
         effects: [
           {
@@ -31,8 +33,10 @@ const tiers: SpeedTier[] = [
       {
         combinationId: "pokemon:3|nature:positive|evs:252|ability:none|item:choice-scarf",
         id: 3,
+        slug: "pikachu",
         pokedexNo: 25,
         name: "Pikachu",
+        sprite: null,
         spread: { nature: "positive", evs: 252, ivs: 31, level: 50, rawSpeed: 167 },
         effects: [
           {
@@ -52,8 +56,10 @@ const tiers: SpeedTier[] = [
       {
         combinationId: "pokemon:2|nature:neutral|evs:0|ability:none|item:none",
         id: 2,
+        slug: "aerodactyl",
         pokedexNo: 142,
         name: "Aerodactyl",
+        sprite: null,
         spread: { nature: "neutral", evs: 0, ivs: 31, level: 50, rawSpeed: 222 },
         effects: [],
         finalSpeed: 222,
@@ -66,7 +72,34 @@ describe("filterSpeedTiers", () => {
   it("keeps matching setup rows and omits empty groups", () => {
     expect(
       filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: [], search: "drill" }),
-    ).toStrictEqual([tiers[0]]);
+    ).toStrictEqual([
+      {
+        speed: tiers[0].speed,
+        pokemon: [
+          {
+            ...tiers[0].pokemon[0],
+            effects: [
+              {
+                kind: "ability",
+                source: "sand-rush",
+                label: "Sand Rush",
+                multiplier: 2,
+              },
+            ],
+            members: [
+              {
+                id: 1,
+                slug: "excadrill",
+                pokedexNo: 530,
+                name: "Excadrill",
+                sprite: null,
+              },
+            ],
+            sourceEffects: tiers[0].pokemon[0].effects,
+          },
+        ],
+      },
+    ]);
   });
 
   it("preserves group order from input", () => {
@@ -120,5 +153,13 @@ describe("filterSpeedTiers", () => {
         boosts: ["item"],
       }).map((tier) => tier.speed),
     ).toStrictEqual([250]);
+  });
+
+  it("matches search against slug", () => {
+    expect(
+      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: [], search: "aero" }).map(
+        (tier) => tier.speed,
+      ),
+    ).toStrictEqual([222]);
   });
 });

@@ -1,3 +1,4 @@
+export { groupSpeedTierRows } from "./display";
 export { defaultSpeedTierFilters, filterSpeedTiers } from "./filter";
 export {
   effectToChips,
@@ -22,11 +23,15 @@ export type {
   EffectChip,
   Nature,
   NatureFilter,
+  PokemonSprite,
   SpeedEffect,
   SpeedEffectKind,
   SpeedEv,
   SpeedSpread,
   SpeedTier,
+  SpeedTierDisplayMember,
+  SpeedTierDisplayPokemon,
+  SpeedTierDisplayTier,
   SpeedTierFilters,
   SpeedTierPokemon,
   StatPointFilter,

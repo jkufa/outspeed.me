@@ -11,12 +11,13 @@
 		TableRow,
 	} from "$lib/components/ui/table";
 	import { formatSpread } from "$lib/speed-tiers";
-	import type { SpeedTier } from "$lib/speed-tiers";
+	import type { SpeedTierDisplayTier } from "$lib/speed-tiers";
 	import EffectChips from "./effect-chips.svelte";
+	import PokemonSprite from "./pokemon-sprite.svelte";
 	import PokemonSetupRow from "./pokemon-setup-row.svelte";
 	import SetupDetails from "./setup-details.svelte";
 
-	let { tiers }: { tiers: SpeedTier[] } = $props();
+	let { tiers }: { tiers: SpeedTierDisplayTier[] } = $props();
 
 	let expandedKeys = $state(new Set<string>());
 
@@ -77,7 +78,14 @@
 						{@const mobileDetailId = `speed-tier-details-mobile-${mobileRowKey}`}
 						<div class="grid gap-2 p-3">
 							<div class="flex items-center justify-between gap-3">
-								<div class="font-medium">{pokemon.name}</div>
+								<div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-medium">
+									{#each pokemon.members as member (member.slug)}
+										<span class="inline-flex items-center gap-1.5">
+											<PokemonSprite sprite={member.sprite} />
+											<span>{member.name}</span>
+										</span>
+									{/each}
+								</div>
 								<Button
 									variant="ghost"
 									size="xs"

@@ -1,5 +1,5 @@
 import { defaultSpeedTierFilters, filterSpeedTiers } from "./filter";
-import type { SpeedTier, SpeedTierFilters } from "./types";
+import type { SpeedTier, SpeedTierDisplayTier, SpeedTierFilters } from "./types";
 
 export const initialSpeedTierRowLimit = 100;
 
@@ -8,7 +8,7 @@ export type SpeedTierQuery = SpeedTierFilters & {
 };
 
 export type SpeedTierQueryResult = {
-  tiers: SpeedTier[];
+  tiers: SpeedTierDisplayTier[];
   totalRows: number;
   returnedRows: number;
 };
@@ -34,12 +34,15 @@ export function querySpeedTiers(tiers: SpeedTier[], query: SpeedTierQuery): Spee
   };
 }
 
-export function limitSpeedTierRows(tiers: SpeedTier[], limit: number): SpeedTier[] {
+export function limitSpeedTierRows(
+  tiers: SpeedTierDisplayTier[],
+  limit: number,
+): SpeedTierDisplayTier[] {
   if (limit <= 0) {
     return [];
   }
 
-  const limitedTiers: SpeedTier[] = [];
+  const limitedTiers: SpeedTierDisplayTier[] = [];
   let remainingRows = limit;
 
   for (const tier of tiers) {
@@ -55,6 +58,6 @@ export function limitSpeedTierRows(tiers: SpeedTier[], limit: number): SpeedTier
   return limitedTiers;
 }
 
-export function countSpeedTierRows(tiers: SpeedTier[]) {
+export function countSpeedTierRows(tiers: SpeedTierDisplayTier[]) {
   return tiers.reduce((totalRows, tier) => totalRows + tier.pokemon.length, 0);
 }
