@@ -27,13 +27,14 @@ export function groupBySpeedTier(combinations: SpeedTierCombination[]): SpeedTie
 }
 
 export function speedTiersToCsv(tiers: SpeedTier[]) {
-  const rows = [["speed", "id", "pokedex_no", "name", "spread", "effects"]];
+  const rows = [["speed", "id", "slug", "pokedex_no", "name", "spread", "effects"]];
 
   for (const tier of tiers) {
     for (const pokemon of tier.pokemon) {
       rows.push([
         String(tier.speed),
         String(pokemon.id),
+        pokemon.slug,
         String(pokemon.pokedexNo),
         pokemon.name,
         formatSpread(pokemon.spread),

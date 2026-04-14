@@ -20,8 +20,10 @@ function speedTierPokemon(overrides: Partial<SpeedTierPokemon> = {}): SpeedTierP
   return {
     combinationId: "pokemon:1|nature:neutral|evs:0|ability:none|item:none",
     id: 1,
+    slug: "pikachu",
     pokedexNo: 25,
     name: "Pikachu",
+    sprite: null,
     spread,
     effects: [],
     finalSpeed: overrides.finalSpeed ?? spread.rawSpeed,
@@ -113,7 +115,7 @@ describe("speedTiersToCsv", () => {
         },
       ]),
     ).toBe(
-      'speed,id,pokedex_no,name,spread,effects\n100,1,122,"Mr. Mime, Jr.",neutral 0 EVs,2x Chlorophyll (sun)\n',
+      'speed,id,slug,pokedex_no,name,spread,effects\n100,1,pikachu,122,"Mr. Mime, Jr.",neutral 0 EVs,2x Chlorophyll (sun)\n',
     );
   });
 });

@@ -1,5 +1,6 @@
+import { groupSpeedTierRows } from "./display";
 import { statPointsToEvs } from "./format";
-import type { SpeedTier, SpeedTierFilters, SpeedTierPokemon } from "./types";
+import type { SpeedTier, SpeedTierDisplayTier, SpeedTierFilters, SpeedTierPokemon } from "./types";
 
 export const defaultSpeedTierFilters: SpeedTierFilters = {
   search: "",
@@ -9,19 +10,28 @@ export const defaultSpeedTierFilters: SpeedTierFilters = {
   statPoints: "any",
 };
 
-export function filterSpeedTiers(tiers: SpeedTier[], filters: SpeedTierFilters): SpeedTier[] {
+export function filterSpeedTiers(
+  tiers: SpeedTier[],
+  filters: SpeedTierFilters,
+): SpeedTierDisplayTier[] {
   const search = filters.search.trim().toLocaleLowerCase();
 
-  return tiers
+  const filteredTiers = tiers
     .map((tier) => ({
       speed: tier.speed,
       pokemon: tier.pokemon.filter((pokemon) => matchesFilters(pokemon, filters, search)),
     }))
     .filter((tier) => tier.pokemon.length > 0);
+
+  return groupSpeedTierRows(filteredTiers);
 }
 
 function matchesFilters(pokemon: SpeedTierPokemon, filters: SpeedTierFilters, search: string) {
-  if (search !== "" && !pokemon.name.toLocaleLowerCase().includes(search)) {
+  if (
+    search !== "" &&
+    !pokemon.name.toLocaleLowerCase().includes(search) &&
+    !pokemon.slug?.toLocaleLowerCase().includes(search)
+  ) {
     return false;
   }
 

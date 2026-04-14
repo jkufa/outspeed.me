@@ -16,6 +16,7 @@
     BoostFilter,
     NatureFilter,
     SpeedTier,
+    SpeedTierDisplayTier,
     SpeedTierFilters,
     StatPointFilter,
     WeatherFilter,
@@ -28,20 +29,32 @@
     totalRows,
   }: {
     fullDataUrl: string;
-    tiers: SpeedTier[];
+    tiers: SpeedTierDisplayTier[];
     totalRows: number;
   } = $props();
 
   // Snapshot the SSR row slice; the full dataset replaces it after hydration.
   // svelte-ignore state_referenced_locally
-  let sourceTiers = $state([...tiers]);
+  let initialTiers = $state([...tiers]);
+  let sourceTiers = $state<SpeedTier[] | null>(null);
   let filters = $state<SpeedTierFilters>({ ...defaultSpeedTierFilters });
   let searchInput = $state(defaultSpeedTierFilters.search);
   let filtersReady = $state(false);
   let dataLoadState = $state<"loading" | "ready" | "error">("loading");
   let searchDebounceTimer: ReturnType<typeof setTimeout> | undefined =
     undefined;
-  const filteredTiers = $derived(filterSpeedTiers(sourceTiers, filters));
+  const activeFilters = $derived({
+    search: filters.search,
+    boosts: filters.boosts,
+    weather: filters.weather,
+    nature: filters.nature,
+    statPoints: filters.statPoints,
+  });
+  const filteredTiers = $derived(
+    sourceTiers === null
+      ? initialTiers
+      : filterSpeedTiers(sourceTiers, activeFilters),
+  );
   const visibleRows = $derived(
     filteredTiers.reduce((total, tier) => total + tier.pokemon.length, 0),
   );
@@ -58,7 +71,7 @@
     clearTimeout(searchDebounceTimer);
 
     searchDebounceTimer = setTimeout(() => {
-      filters.search = searchInput;
+      filters = { ...filters, search: searchInput };
     }, 300);
   }
 
@@ -80,7 +93,10 @@
   }
 
   function updateStatPoints(value: string) {
-    filters.statPoints = value === "any" ? "any" : (Number(value) as 0 | 32);
+    filters = {
+      ...filters,
+      statPoints: value === "any" ? "any" : (Number(value) as 0 | 32),
+    };
   }
 
   function boostsLabel(boosts: BoostFilter[]) {
@@ -94,30 +110,34 @@
 
   function selectAllBoosts(checked: boolean) {
     if (checked) {
-      filters.boosts = [];
+      filters = { ...filters, boosts: [] };
     }
     // All cannot be deselected directly; choose a narrower option first.
   }
 
   function toggleBoost(boost: BoostFilter, checked: boolean) {
     if (!checked) {
-      filters.boosts = filters.boosts.filter(
-        (selectedBoost) => selectedBoost !== boost,
-      );
+      filters = {
+        ...filters,
+        boosts: filters.boosts.filter((selectedBoost) => selectedBoost !== boost),
+      };
       return;
     }
 
     if (boost === "none") {
-      filters.boosts = ["none"];
+      filters = { ...filters, boosts: ["none"] };
       return;
     }
 
-    filters.boosts = [
-      ...filters.boosts.filter(
-        (selectedBoost) => selectedBoost !== "none" && selectedBoost !== boost,
-      ),
-      boost,
-    ];
+    filters = {
+      ...filters,
+      boosts: [
+        ...filters.boosts.filter(
+          (selectedBoost) => selectedBoost !== "none" && selectedBoost !== boost,
+        ),
+        boost,
+      ],
+    };
   }
 
   onMount(async () => {
@@ -219,7 +239,7 @@
             type="single"
             value={filters.weather}
             onValueChange={(value: string) =>
-              (filters.weather = value as WeatherFilter)}
+              (filters = { ...filters, weather: value as WeatherFilter })}
           >
             <Select.Trigger
               class="w-full"
@@ -248,7 +268,7 @@
             type="single"
             value={filters.nature}
             onValueChange={(value: string) =>
-              (filters.nature = value as NatureFilter)}
+              (filters = { ...filters, nature: value as NatureFilter })}
           >
             <Select.Trigger
               class="w-full"

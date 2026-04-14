@@ -2,8 +2,9 @@
 	import { Button } from "$lib/components/ui/button";
 	import { TableCell, TableRow } from "$lib/components/ui/table";
 	import { formatSpread } from "$lib/speed-tiers";
-	import type { SpeedTierPokemon } from "$lib/speed-tiers";
+	import type { SpeedTierDisplayPokemon } from "$lib/speed-tiers";
 	import EffectChips from "./effect-chips.svelte";
+	import PokemonSprite from "./pokemon-sprite.svelte";
 	import SetupDetails from "./setup-details.svelte";
 
 	let {
@@ -15,7 +16,7 @@
 		expanded,
 		onToggle,
 	}: {
-		pokemon: SpeedTierPokemon;
+		pokemon: SpeedTierDisplayPokemon;
 		rowKey: string;
 		showSpeed: boolean;
 		speed: number;
@@ -36,7 +37,14 @@
 
 	<TableCell class="min-w-44 align-top whitespace-normal">
 		<div class="flex flex-col gap-2">
-			<div class="font-medium">{pokemon.name}</div>
+			<div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-medium">
+				{#each pokemon.members as member (member.slug)}
+					<span class="inline-flex items-center gap-1.5">
+						<PokemonSprite sprite={member.sprite} />
+						<span>{member.name}</span>
+					</span>
+				{/each}
+			</div>
 			<Button
 				variant="ghost"
 				size="xs"

@@ -12,6 +12,8 @@ Data pipeline for Outspeed. This package turns source Pokemon data into normaliz
   - `data/speed_tiers.csv`
   - `data/speed_tier_combinations.json`
   - `apps/webapp/static/assets/speed_tiers.json`
+- Extract and upload optional Pokemon Champions menu sprites without committing
+  image binaries.
 
 ## Outputs
 
@@ -19,6 +21,12 @@ Data pipeline for Outspeed. This package turns source Pokemon data into normaliz
 - `speed_tier_combinations.json`: flat list of every generated Pokemon speed setup. Each entry includes Pokemon identity, spread, typed speed effects, final speed, and `speed`.
 - `speed_tiers.json`: grouped view of those same combinations by final speed, sorted from fastest to slowest. This is the primary UI contract.
 - `speed_tiers.csv`: compact review sheet with `speed`, Pokemon identity, formatted spread, and formatted effects.
+- `sprites/manifest.json`: local sprite manifest. Filenames are normalized to
+  internal Pokemon slugs, while source Bulbagarden filenames and URLs are kept
+  as metadata.
+- `sprites/blob-manifest.json`: Vercel Blob URL mapping consumed by
+  `build-speed-tiers`.
+- `sprite_mapping_errors.json`: deterministic non-fatal missing sprite report.
 
 The webapp imports `apps/webapp/static/assets/speed_tiers.json` for the
 server-rendered initial table and fetches that same public file after hydration
@@ -37,8 +45,14 @@ type SpeedTier = {
 type SpeedTierPokemon = {
   combinationId: string;
   id: number;
+  slug: string;
   pokedexNo: number;
   name: string;
+  sprite: {
+    filename: string;
+    path: string;
+    sourceUrl: string;
+  } | null;
   spread: {
     nature: "neutral" | "positive" | "negative";
     evs: 0 | 252;
@@ -74,8 +88,16 @@ Speed | Pokemon | Spread | Effects
 
 ```bash
 bun run ingest
+bun run extract-sprites
+bun run upload-sprites
 bun run build-speed-tiers
 ```
+
+`upload-sprites` requires `BLOB_READ_WRITE_TOKEN`. It does not overwrite
+existing Blob paths. If `data/sprites/blob-manifest.json` is lost after an
+upload, restore it or run `upload-sprites` with a new version argument, such as
+`v2`. Normal app deploys do not upload sprites; they only consume
+`apps/webapp/static/assets/speed_tiers.json`.
 
 Both commands accept positional path overrides, but default to repo-level files in `data/`.
 
