@@ -40,8 +40,10 @@ export function buildSpeedTierCombinations(pokedex: PokedexPokemon[]): SpeedTier
             return {
               combinationId: buildSpeedTierCombinationId(context),
               id: pokemon.id,
+              slug: pokemon.slug,
               pokedexNo: pokemon.pokedexNumber,
               name: pokemon.name,
+              sprite: null,
               spread,
               effects: calculation.effects,
               finalSpeed: calculation.finalSpeed,

@@ -14,6 +14,10 @@ export const ingestorConfig = {
     webappPublicSpeedTiersJson: resolve(repoRoot, "apps/webapp/static/assets/speed_tiers.json"),
     speedTiersCsv: resolve(repoRoot, "data/speed_tiers.csv"),
     speedTierCombinationsJson: resolve(repoRoot, "data/speed_tier_combinations.json"),
+    spriteManifestJson: resolve(repoRoot, "data/sprites/manifest.json"),
+    spriteBlobManifestJson: resolve(repoRoot, "data/sprites/blob-manifest.json"),
+    spriteMappingErrorsJson: resolve(repoRoot, "data/sprite_mapping_errors.json"),
+    spritesDir: resolve(repoRoot, "data/sprites"),
   },
 } as const;
 
@@ -40,5 +44,29 @@ export function resolveSpeedTierPaths(args: string[]) {
     outputCombinationsPath: resolve(
       outputCombinationsArg ?? ingestorConfig.paths.speedTierCombinationsJson,
     ),
+    spriteBlobManifestPath: ingestorConfig.paths.spriteBlobManifestJson,
+    spriteMappingErrorsPath: ingestorConfig.paths.spriteMappingErrorsJson,
+  };
+}
+
+export function resolveSpriteExtractPaths(args: string[]) {
+  const [pokedexArg, spritesDirArg, manifestArg, mappingErrorsArg] = args;
+
+  return {
+    pokedexPath: resolve(pokedexArg ?? ingestorConfig.paths.championsPokedexJson),
+    spritesDir: resolve(spritesDirArg ?? ingestorConfig.paths.spritesDir),
+    manifestPath: resolve(manifestArg ?? ingestorConfig.paths.spriteManifestJson),
+    mappingErrorsPath: resolve(mappingErrorsArg ?? ingestorConfig.paths.spriteMappingErrorsJson),
+  };
+}
+
+export function resolveSpriteUploadPaths(args: string[]) {
+  const [manifestArg, spritesDirArg, blobManifestArg, versionArg] = args;
+
+  return {
+    manifestPath: resolve(manifestArg ?? ingestorConfig.paths.spriteManifestJson),
+    spritesDir: resolve(spritesDirArg ?? ingestorConfig.paths.spritesDir),
+    blobManifestPath: resolve(blobManifestArg ?? ingestorConfig.paths.spriteBlobManifestJson),
+    version: versionArg ?? "v1",
   };
 }

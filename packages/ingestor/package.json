@@ -4,13 +4,18 @@
   "module": "src/index.ts",
   "scripts": {
     "build-speed-tiers": "bun run src/speed-tiers/cli.ts",
+    "extract-sprites": "bun run src/sprites/cli-extract.ts",
     "ingest": "bun run src/pokedex/cli.ts",
+    "upload-sprites": "bun run src/sprites/cli-upload.ts",
     "fmt": "oxfmt",
     "test": "vitest --passWithNoTests",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "fmt:check": "oxfmt --check",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.3.3"
   },
   "devDependencies": {
     "@types/bun": "latest",

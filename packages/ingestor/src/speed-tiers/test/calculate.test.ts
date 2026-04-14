@@ -164,8 +164,10 @@ describe("buildSpeedTierCombinations", () => {
     expect(combinations).toContainEqual({
       combinationId: "pokemon:1|nature:positive|evs:252|ability:chlorophyll|item:none",
       id: 1,
+      slug: "venusaur",
       pokedexNo: 3,
       name: "Venusaur",
+      sprite: null,
       spread: {
         nature: "positive",
         evs: 252,

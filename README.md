@@ -21,5 +21,10 @@ Ingestor-specific commands:
 
 ```bash
 bun run --filter '@outspeedme/ingestor' ingest
+bun run --filter '@outspeedme/ingestor' extract-sprites
+bun run --filter '@outspeedme/ingestor' upload-sprites
 bun run --filter '@outspeedme/ingestor' build-speed-tiers
 ```
+
+`upload-sprites` requires `BLOB_READ_WRITE_TOKEN`. Sprite PNGs stay generated
+local files and should not be committed.
