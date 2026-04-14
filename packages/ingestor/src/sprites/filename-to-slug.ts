@@ -143,10 +143,6 @@ function findBaseCandidate(candidates: SpritePokemonIdentity[]) {
     return baseCandidates[0];
   }
 
-  if (candidates.length === 1) {
-    return candidates[0];
-  }
-
   return null;
 }
 

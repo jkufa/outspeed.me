@@ -34,11 +34,7 @@ export async function uploadSprites({
     }
 
     const blobPath = `champions-menu-sprites/${version}/${entry.filename}`;
-    const blob = await put(blobPath, bytes, {
-      access: "public",
-      addRandomSuffix: false,
-      allowOverwrite: false,
-    });
+    const blob = await putSprite(blobPath, bytes);
 
     uploadedEntries.push({
       ...entry,
@@ -52,6 +48,21 @@ export async function uploadSprites({
   await Bun.write(blobManifestPath, `${JSON.stringify(uploadedEntries, null, 2)}\n`);
 
   return uploadedEntries;
+}
+
+async function putSprite(blobPath: string, bytes: ArrayBuffer) {
+  try {
+    return await put(blobPath, bytes, {
+      access: "public",
+      addRandomSuffix: false,
+      allowOverwrite: false,
+    });
+  } catch (error) {
+    throw new Error(
+      `Failed to upload ${blobPath}. If this path already exists and data/sprites/blob-manifest.json was lost, restore the manifest or rerun upload-sprites with a new version argument, e.g. "bun run upload-sprites data/sprites/manifest.json data/sprites data/sprites/blob-manifest.json v2".`,
+      { cause: error },
+    );
+  }
 }
 
 async function readExistingBlobManifest(path: string) {

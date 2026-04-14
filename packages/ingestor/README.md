@@ -93,8 +93,11 @@ bun run upload-sprites
 bun run build-speed-tiers
 ```
 
-`upload-sprites` requires `BLOB_READ_WRITE_TOKEN`. Normal app deploys do not
-upload sprites; they only consume `apps/webapp/static/assets/speed_tiers.json`.
+`upload-sprites` requires `BLOB_READ_WRITE_TOKEN`. It does not overwrite
+existing Blob paths. If `data/sprites/blob-manifest.json` is lost after an
+upload, restore it or run `upload-sprites` with a new version argument, such as
+`v2`. Normal app deploys do not upload sprites; they only consume
+`apps/webapp/static/assets/speed_tiers.json`.
 
 Both commands accept positional path overrides, but default to repo-level files in `data/`.
 
