@@ -1,140 +1,210 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button";
-	import { Input } from "$lib/components/ui/input";
-	import { Separator } from "$lib/components/ui/separator";
-	import { defaultSpeedTierFilters, filterSpeedTiers } from "$lib/speed-tiers";
-	import type {
-		FilterMode,
-		NatureFilter,
-		SpeedTier,
-		SpeedTierFilters,
-		StatPointFilter,
-		WeatherFilter,
-	} from "$lib/speed-tiers";
-	import SpeedTierTable from "./speed-tier-table.svelte";
+  import { Button } from "$lib/components/ui/button";
+  import { Input } from "$lib/components/ui/input";
+  import { Separator } from "$lib/components/ui/separator";
+  import * as Select from "$lib/components/ui/select";
+  import { defaultSpeedTierFilters, filterSpeedTiers } from "$lib/speed-tiers";
+  import type {
+    FilterMode,
+    NatureFilter,
+    SpeedTier,
+    SpeedTierFilters,
+    StatPointFilter,
+    WeatherFilter,
+  } from "$lib/speed-tiers";
+  import SpeedTierTable from "./speed-tier-table.svelte";
 
-	let { tiers }: { tiers: SpeedTier[] } = $props();
+  let { tiers }: { tiers: SpeedTier[] } = $props();
 
-	let filters = $state<SpeedTierFilters>({ ...defaultSpeedTierFilters });
-	const filteredTiers = $derived(filterSpeedTiers(tiers, filters));
-	const visibleRows = $derived(filteredTiers.reduce((total, tier) => total + tier.pokemon.length, 0));
+  let filters = $state<SpeedTierFilters>({ ...defaultSpeedTierFilters });
+  let searchInput = $state(defaultSpeedTierFilters.search);
+  let searchDebounceTimer: ReturnType<typeof setTimeout> | undefined =
+    undefined;
+  const filteredTiers = $derived(filterSpeedTiers(tiers, filters));
+  const visibleRows = $derived(
+    filteredTiers.reduce((total, tier) => total + tier.pokemon.length, 0),
+  );
 
-	function updateMode(event: Event) {
-		filters.mode = (event.currentTarget as HTMLSelectElement).value as FilterMode;
-	}
+  function updateSearch(event: Event) {
+    searchInput = (event.currentTarget as HTMLInputElement).value;
+    clearTimeout(searchDebounceTimer);
 
-	function updateWeather(event: Event) {
-		filters.weather = (event.currentTarget as HTMLSelectElement).value as WeatherFilter;
-	}
+    searchDebounceTimer = setTimeout(() => {
+      filters.search = searchInput;
+    }, 300);
+  }
 
-	function updateNature(event: Event) {
-		filters.nature = (event.currentTarget as HTMLSelectElement).value as NatureFilter;
-	}
+  function resetFilters() {
+    clearTimeout(searchDebounceTimer);
+    searchInput = defaultSpeedTierFilters.search;
+    filters = { ...defaultSpeedTierFilters };
+  }
 
-	function updateStatPoints(event: Event) {
-		const value = (event.currentTarget as HTMLSelectElement).value;
-		filters.statPoints = value === "any" ? "any" : (Number(value) as StatPointFilter);
-	}
+  function modeLabel(mode: FilterMode) {
+    if (mode === "baseline") return "Baseline";
+    if (mode === "boosted") return "Boosted";
+    return "Any";
+  }
 
-	function resetFilters() {
-		filters = { ...defaultSpeedTierFilters };
-	}
+  function weatherLabel(weather: WeatherFilter) {
+    if (weather === "any") return "Any";
+    return weather[0].toUpperCase() + weather.slice(1);
+  }
+
+  function natureLabel(nature: NatureFilter) {
+    if (nature === "positive") return "+Spe";
+    if (nature === "negative") return "-Spe";
+    if (nature === "neutral") return "neutral";
+    return "Any";
+  }
+
+  function statPointsLabel(statPoints: StatPointFilter) {
+    if (statPoints === "any") return "Any";
+    return `${statPoints} SP`;
+  }
+
+  function updateStatPoints(value: string) {
+    filters.statPoints = value === "any" ? "any" : (Number(value) as 0 | 32);
+  }
 </script>
 
 <main class="mx-auto flex w-full max-w-7xl flex-col gap-5 p-4 md:p-6">
-	<header class="flex flex-col gap-2">
-		<h1 class="text-2xl font-semibold tracking-tight">Speed tiers</h1>
-		<p class="max-w-3xl text-sm text-muted-foreground">
-			Find Pokemon by reachable speed, spread, and emitted effect conditions.
-		</p>
-	</header>
+  <header class="flex flex-col gap-2">
+    <h1 class="text-2xl font-semibold tracking-tight">Speed tiers</h1>
+    <p class="max-w-3xl text-sm text-muted-foreground">
+      Find Pokemon by reachable speed, spread, and emitted effect conditions.
+    </p>
+  </header>
 
-	<section class="grid gap-3 rounded-lg border border-border p-3" aria-label="Speed tier filters">
-		<div class="grid gap-3 md:grid-cols-[minmax(14rem,1fr)_repeat(4,minmax(8rem,auto))]">
-			<label class="grid gap-1 text-sm">
-				<span class="text-muted-foreground">Search Pokemon</span>
-				<Input bind:value={filters.search} placeholder="Excadrill" />
-			</label>
+  <section
+    class="grid gap-3 rounded-lg border border-border p-3"
+    aria-label="Speed tier filters"
+  >
+    <div
+      class="grid gap-3 md:grid-cols-[minmax(14rem,1fr)_repeat(4,minmax(8rem,auto))]"
+    >
+      <label class="grid gap-2 text-sm">
+        <span class="text-muted-foreground">Search Pokemon</span>
+        <Input
+          value={searchInput}
+          placeholder="Excadrill"
+          oninput={updateSearch}
+        />
+      </label>
 
-			<label class="grid gap-1 text-sm">
-				<span class="text-muted-foreground">Mode</span>
-				<select
-					class="h-9 rounded-4xl border border-input bg-input/30 px-3 text-sm"
-					value={filters.mode}
-					onchange={updateMode}
-				>
-					<option value="any">Any</option>
-					<option value="baseline">Baseline</option>
-					<option value="boosted">Boosted</option>
-				</select>
-			</label>
+      <label class="grid gap-2 text-sm">
+        <span class="text-muted-foreground">Mode</span>
+        <Select.Root
+          type="single"
+          value={filters.mode}
+          onValueChange={(value: string) =>
+            (filters.mode = value as FilterMode)}
+        >
+          <Select.Trigger class="w-full">
+            <span data-slot="select-value">{modeLabel(filters.mode)}</span>
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Group>
+              <Select.Item value="any" label="Any" />
+              <Select.Item value="baseline" label="Baseline" />
+              <Select.Item value="boosted" label="Boosted" />
+            </Select.Group>
+          </Select.Content>
+        </Select.Root>
+      </label>
 
-			<label class="grid gap-1 text-sm">
-				<span class="text-muted-foreground">Weather</span>
-				<select
-					class="h-9 rounded-4xl border border-input bg-input/30 px-3 text-sm"
-					value={filters.weather}
-					onchange={updateWeather}
-				>
-					<option value="any">Any</option>
-					<option value="sun">Sun</option>
-					<option value="rain">Rain</option>
-					<option value="sand">Sand</option>
-					<option value="snow">Snow</option>
-				</select>
-			</label>
+      <label class="grid gap-2 text-sm">
+        <span class="text-muted-foreground">Weather</span>
+        <Select.Root
+          type="single"
+          value={filters.weather}
+          onValueChange={(value: string) =>
+            (filters.weather = value as WeatherFilter)}
+        >
+          <Select.Trigger class="w-full">
+            <span data-slot="select-value">{weatherLabel(filters.weather)}</span
+            >
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Group>
+              <Select.Item value="any" label="Any" />
+              <Select.Item value="sun" label="Sun" />
+              <Select.Item value="rain" label="Rain" />
+              <Select.Item value="sand" label="Sand" />
+              <Select.Item value="snow" label="Snow" />
+            </Select.Group>
+          </Select.Content>
+        </Select.Root>
+      </label>
 
-			<label class="grid gap-1 text-sm">
-				<span class="text-muted-foreground">Spread</span>
-				<select
-					class="h-9 rounded-4xl border border-input bg-input/30 px-3 text-sm"
-					value={filters.nature}
-					onchange={updateNature}
-				>
-					<option value="any">Any</option>
-					<option value="positive">+Spe</option>
-					<option value="neutral">neutral</option>
-					<option value="negative">-Spe</option>
-				</select>
-			</label>
+      <label class="grid gap-2 text-sm">
+        <span class="text-muted-foreground">Spread</span>
+        <Select.Root
+          type="single"
+          value={filters.nature}
+          onValueChange={(value: string) =>
+            (filters.nature = value as NatureFilter)}
+        >
+          <Select.Trigger class="w-full">
+            <span data-slot="select-value">{natureLabel(filters.nature)}</span>
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Group>
+              <Select.Item value="any" label="Any" />
+              <Select.Item value="positive" label="+Spe" />
+              <Select.Item value="neutral" label="neutral" />
+              <Select.Item value="negative" label="-Spe" />
+            </Select.Group>
+          </Select.Content>
+        </Select.Root>
+      </label>
 
-			<label class="grid gap-1 text-sm">
-				<span class="text-muted-foreground">SP</span>
-				<select
-					class="h-9 rounded-4xl border border-input bg-input/30 px-3 text-sm"
-					value={filters.statPoints}
-					onchange={updateStatPoints}
-				>
-					<option value="any">Any</option>
-					<option value="32">32 SP</option>
-					<option value="0">0 SP</option>
-				</select>
-			</label>
-		</div>
+      <label class="grid gap-2 text-sm">
+        <span class="text-muted-foreground">SP</span>
+        <Select.Root
+          type="single"
+          value={String(filters.statPoints)}
+          onValueChange={updateStatPoints}
+        >
+          <Select.Trigger class="w-full">
+            <span data-slot="select-value"
+              >{statPointsLabel(filters.statPoints)}</span
+            >
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Group>
+              <Select.Item value="any" label="Any" />
+              <Select.Item value="32" label="32 SP" />
+              <Select.Item value="0" label="0 SP" />
+            </Select.Group>
+          </Select.Content>
+        </Select.Root>
+      </label>
+    </div>
 
-		<div class="flex flex-wrap items-center gap-2">
-			<Button
-				variant={filters.abilityOnly ? "secondary" : "outline"}
-				size="sm"
-				aria-pressed={filters.abilityOnly}
-				onclick={() => (filters.abilityOnly = !filters.abilityOnly)}
-			>
-				Ability effects
-			</Button>
-			<Button
-				variant={filters.itemOnly ? "secondary" : "outline"}
-				size="sm"
-				aria-pressed={filters.itemOnly}
-				onclick={() => (filters.itemOnly = !filters.itemOnly)}
-			>
-				Item effects
-			</Button>
-			<Button variant="ghost" size="sm" onclick={resetFilters}>Reset</Button>
-			<span class="ml-auto text-sm text-muted-foreground">{visibleRows} rows</span>
-		</div>
-	</section>
+    <div class="flex flex-wrap items-center gap-2">
+      <Button
+        variant={filters.abilityOnly ? "secondary" : "outline"}
+        size="sm"
+        aria-pressed={filters.abilityOnly}
+        onclick={() => (filters.abilityOnly = !filters.abilityOnly)}
+      >
+        Ability effects
+      </Button>
+      <Button
+        variant={filters.itemOnly ? "secondary" : "outline"}
+        size="sm"
+        aria-pressed={filters.itemOnly}
+        onclick={() => (filters.itemOnly = !filters.itemOnly)}
+      >
+        Item effects
+      </Button>
+      <Button variant="ghost" size="sm" onclick={resetFilters}>Reset</Button>
+      <span class="ml-auto text-sm text-muted-foreground"
+        >{visibleRows} rows</span
+      >
+    </div>
+  </section>
 
-	<Separator />
-
-	<SpeedTierTable tiers={filteredTiers} />
+  <SpeedTierTable tiers={filteredTiers} />
 </main>
