@@ -35,7 +35,7 @@
 		</TableCell>
 	{/if}
 
-	<TableCell class="min-w-44 align-top whitespace-normal">
+	<TableCell class="align-top whitespace-normal">
 		<div class="flex flex-col gap-2">
 			<div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-medium">
 				{#each pokemon.members as member (member.slug)}
@@ -62,7 +62,7 @@
 	</TableCell>
 
 	<TableCell class="align-top tabular-nums">{formatSpread(pokemon.spread)}</TableCell>
-	<TableCell class="min-w-72 align-top whitespace-normal">
+	<TableCell class="align-top whitespace-normal">
 		<EffectChips effects={pokemon.effects} />
 	</TableCell>
 </TableRow>
