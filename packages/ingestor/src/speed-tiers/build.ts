@@ -1,10 +1,15 @@
 import { buildSpeedTierCombinations } from "./calculate";
 import { groupBySpeedTier, speedTiersToCsv } from "./output";
-import type { SpriteBlobManifestEntry, SpriteMappingError } from "../sprites/types";
+import type {
+  SpriteBlobManifestEntry,
+  SpriteMappingError,
+  SpriteSourceManifestEntry,
+} from "../sprites/types";
 import type { PokedexPokemon, PokemonSprite, SpeedTierCombination } from "./types";
 
 export type BuildSpeedTierOutputsOptions = {
   spriteBlobManifest?: SpriteBlobManifestEntry[];
+  spriteSourceManifest?: SpriteSourceManifestEntry[];
   spriteMappingErrors?: SpriteMappingError[];
 };
 
@@ -20,6 +25,7 @@ export function buildSpeedTierOutputs(
   const spriteMappingErrors = buildSpriteMappingErrors(
     pokedex,
     spritesBySlug,
+    new Map((options.spriteSourceManifest ?? []).map((entry) => [entry.slug, entry])),
     options.spriteMappingErrors ?? [],
   );
 
@@ -56,6 +62,7 @@ function toPokemonSprite(entry: SpriteBlobManifestEntry | undefined): PokemonSpr
 function buildSpriteMappingErrors(
   pokedex: PokedexPokemon[],
   spritesBySlug: Map<string, SpriteBlobManifestEntry>,
+  sourceSpritesBySlug: Map<string, SpriteSourceManifestEntry>,
   sourceMappingErrors: SpriteMappingError[],
 ): SpriteMappingError[] {
   const sourceMappingErrorBySlug = new Map(
@@ -67,12 +74,23 @@ function buildSpriteMappingErrors(
   return pokedex
     .map((pokemon) => {
       const sprite = spritesBySlug.get(pokemon.slug);
+      const sourceSprite = sourceSpritesBySlug.get(pokemon.slug);
 
       if (sprite === undefined) {
         const sourceMappingError = sourceMappingErrorBySlug.get(pokemon.slug);
 
         if (sourceMappingError !== undefined) {
           return sourceMappingError;
+        }
+
+        if (sourceSprite !== undefined) {
+          return {
+            pokedexNo: pokemon.pokedexNumber,
+            slug: pokemon.slug,
+            name: pokemon.name,
+            expectedFilename: sourceSprite.filename,
+            reason: "missing_blob_url" as const,
+          };
         }
 
         return {

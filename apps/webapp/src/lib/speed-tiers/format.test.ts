@@ -66,6 +66,23 @@ describe("speed tier formatting", () => {
     ]);
   });
 
+  it("renders merged same-multiplier abilities as one slash chip", () => {
+    expect(
+      effectToChips({
+        kind: "ability",
+        source: "slush-rush/swift-swim",
+        label: "Slush Rush/Swift Swim",
+        multiplier: 2,
+      }),
+    ).toStrictEqual([
+      {
+        key: "slush-rush/swift-swim-multiplier-2-Slush Rush/Swift Swim",
+        label: "2x Slush Rush/Swift Swim",
+        kind: "multiplier",
+      },
+    ]);
+  });
+
   it("keeps stage and condition chips for non-multiplier effects", () => {
     expect(
       effectToChips({

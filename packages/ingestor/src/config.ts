@@ -44,6 +44,7 @@ export function resolveSpeedTierPaths(args: string[]) {
     outputCombinationsPath: resolve(
       outputCombinationsArg ?? ingestorConfig.paths.speedTierCombinationsJson,
     ),
+    spriteManifestPath: ingestorConfig.paths.spriteManifestJson,
     spriteBlobManifestPath: ingestorConfig.paths.spriteBlobManifestJson,
     spriteMappingErrorsPath: ingestorConfig.paths.spriteMappingErrorsJson,
   };
