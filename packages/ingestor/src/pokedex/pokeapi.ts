@@ -46,7 +46,7 @@ export function createPokeApiClient(options: PokeApiClientOptions = {}) {
     );
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch ${slug}: 404 Not Found`);
+      throw new Error(`Failed to fetch ${slug}: ${response.status} ${response.statusText}`);
     }
 
     const species = (await response.json()) as PokeApiPokemonSpecies;
