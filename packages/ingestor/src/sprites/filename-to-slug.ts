@@ -9,16 +9,16 @@ const SOURCE_FILENAME_EXCEPTIONS = new Map<string, string>([
   ["Menu_CP_0128-Paldea_Combat.png", "tauros-paldea-combat-breed"],
   ["Menu_CP_0128-Paldea_Blaze.png", "tauros-paldea-blaze-breed"],
   ["Menu_CP_0128-Paldea_Aqua.png", "tauros-paldea-aqua-breed"],
+  ["Menu_CP_0678.png", "meowstic-male"],
+  // Bulbagarden renamed Gourgeist Average/Super to Medium/Jumbo in Legends: Z-A.
+  ["Menu_CP_0711.png", "gourgeist-average"],
+  ["Menu_CP_0711-Jumbo.png", "gourgeist-super"],
   ["Menu_CP_0745.png", "lycanroc-midday"],
   ["Menu_CP_0925.png", "maushold-family-of-four"],
   ["Menu_CP_0925-Three.png", "maushold-family-of-three"],
 ]);
 
-const COSMETIC_SOURCE_FILENAME_PATTERNS = [
-  /^Menu_CP_0666-.+\.png$/,
-  /^Menu_CP_0869-.+\.png$/,
-  /^Menu_CP_0902-Female\.png$/,
-];
+const COSMETIC_SOURCE_FILENAME_PATTERNS = [/^Menu_CP_0666-.+\.png$/, /^Menu_CP_0869-.+\.png$/];
 
 export function sourceFilenameToSlug(
   sourceFilename: string,

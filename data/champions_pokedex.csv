@@ -1,0 +1,272 @@
+pokedex_number,name,form,pokeapi_name
+3,Venusaur,,venusaur
+3,Mega Venusaur,,venusaur-mega
+6,Charizard,,charizard
+6,Mega Charizard X,,charizard-mega-x
+6,Mega Charizard Y,,charizard-mega-y
+9,Blastoise,,blastoise
+9,Mega Blastoise,,blastoise-mega
+15,Beedrill,,beedrill
+15,Mega Beedrill,,beedrill-mega
+18,Pidgeot,,pidgeot
+18,Mega Pidgeot,,pidgeot-mega
+24,Arbok,,arbok
+25,Pikachu,,pikachu
+26,Raichu,,raichu
+26,Raichu,alola,raichu-alola
+36,Clefable,,clefable
+36,Mega Clefable,,clefable-mega
+38,Ninetales,,ninetales
+38,Ninetales,alola,ninetales-alola
+59,Arcanine,,arcanine
+59,Arcanine,hisui,arcanine-hisui
+65,Alakazam,,alakazam
+65,Mega Alakazam,,alakazam-mega
+68,Machamp,,machamp
+71,Victreebel,,victreebel
+71,Mega Victreebel,,victreebel-mega
+80,Slowbro,,slowbro
+80,Mega Slowbro,,slowbro-mega
+80,Slowbro,galar,slowbro-galar
+94,Gengar,,gengar
+94,Mega Gengar,,gengar-mega
+115,Kangaskhan,,kangaskhan
+115,Mega Kangaskhan,,kangaskhan-mega
+121,Starmie,,starmie
+121,Mega Starmie,,starmie-mega
+127,Pinsir,,pinsir
+127,Mega Pinsir,,pinsir-mega
+128,Tauros,,tauros
+128,Tauros,paldea-combat-breed,tauros-paldea-combat-breed
+128,Tauros,paldea-blaze-breed,tauros-paldea-blaze-breed
+128,Tauros,paldea-aqua-breed,tauros-paldea-aqua-breed
+130,Gyarados,,gyarados
+130,Mega Gyarados,,gyarados-mega
+132,Ditto,,ditto
+134,Vaporeon,,vaporeon
+135,Jolteon,,jolteon
+136,Flareon,,flareon
+142,Aerodactyl,,aerodactyl
+142,Mega Aerodactyl,,aerodactyl-mega
+143,Snorlax,,snorlax
+149,Dragonite,,dragonite
+149,Mega Dragonite,,dragonite-mega
+154,Meganium,,meganium
+154,Mega Meganium,,meganium-mega
+157,Typhlosion,,typhlosion
+157,Typhlosion,hisui,typhlosion-hisui
+160,Feraligatr,,feraligatr
+160,Mega Feraligatr,,feraligatr-mega
+168,Ariados,,ariados
+181,Ampharos,,ampharos
+181,Mega Ampharos,,ampharos-mega
+184,Azumarill,,azumarill
+186,Politoed,,politoed
+196,Espeon,,espeon
+197,Umbreon,,umbreon
+199,Slowking,,slowking
+199,Slowking,galar,slowking-galar
+205,Forretress,,forretress
+208,Steelix,,steelix
+208,Mega Steelix,,steelix-mega
+212,Scizor,,scizor
+212,Mega Scizor,,scizor-mega
+214,Heracross,,heracross
+214,Mega Heracross,,heracross-mega
+227,Skarmory,,skarmory
+227,Mega Skarmory,,skarmory-mega
+229,Houndoom,,houndoom
+229,Mega Houndoom,,houndoom-mega
+248,Tyranitar,,tyranitar
+248,Mega Tyranitar,,tyranitar-mega
+279,Pelipper,,pelipper
+282,Gardevoir,,gardevoir
+282,Mega Gardevoir,,gardevoir-mega
+302,Sableye,,sableye
+302,Mega Sableye,,sableye-mega
+306,Aggron,,aggron
+306,Mega Aggron,,aggron-mega
+308,Medicham,,medicham
+308,Mega Medicham,,medicham-mega
+310,Manectric,,manectric
+310,Mega Manectric,,manectric-mega
+319,Sharpedo,,sharpedo
+319,Mega Sharpedo,,sharpedo-mega
+323,Camerupt,,camerupt
+323,Mega Camerupt,,camerupt-mega
+324,Torkoal,,torkoal
+334,Altaria,,altaria
+334,Mega Altaria,,altaria-mega
+350,Milotic,,milotic
+351,Castform,,castform
+354,Banette,,banette
+354,Mega Banette,,banette-mega
+358,Chimecho,,chimecho
+358,Mega Chimecho,,chimecho-mega
+359,Absol,,absol
+359,Mega Absol,,absol-mega
+362,Glalie,,glalie
+362,Mega Glalie,,glalie-mega
+389,Torterra,,torterra
+392,Infernape,,infernape
+395,Empoleon,,empoleon
+405,Luxray,,luxray
+407,Roserade,,roserade
+409,Rampardos,,rampardos
+411,Bastiodon,,bastiodon
+428,Lopunny,,lopunny
+428,Mega Lopunny,,lopunny-mega
+442,Spiritomb,,spiritomb
+445,Garchomp,,garchomp
+445,Mega Garchomp,,garchomp-mega
+448,Lucario,,lucario
+448,Mega Lucario,,lucario-mega
+450,Hippowdon,,hippowdon
+454,Toxicroak,,toxicroak
+460,Abomasnow,,abomasnow
+460,Mega Abomasnow,,abomasnow-mega
+461,Weavile,,weavile
+464,Rhyperior,,rhyperior
+470,Leafeon,,leafeon
+471,Glaceon,,glaceon
+472,Gliscor,,gliscor
+473,Mamoswine,,mamoswine
+475,Gallade,,gallade
+475,Mega Gallade,,gallade-mega
+478,Froslass,,froslass
+478,Mega Froslass,,froslass-mega
+479,Rotom,,rotom
+479,Rotom,heat,rotom-heat
+479,Rotom,wash,rotom-wash
+479,Rotom,frost,rotom-frost
+479,Rotom,fan,rotom-fan
+479,Rotom,mow,rotom-mow
+497,Serperior,,serperior
+500,Emboar,,emboar
+500,Mega Emboar,,emboar-mega
+503,Samurott,,samurott
+503,Samurott,hisui,samurott-hisui
+505,Watchog,,watchog
+510,Liepard,,liepard
+512,Simisage,,simisage
+514,Simisear,,simisear
+516,Simipour,,simipour
+530,Excadrill,,excadrill
+530,Mega Excadrill,,excadrill-mega
+531,Audino,,audino
+531,Mega Audino,,audino-mega
+534,Conkeldurr,,conkeldurr
+547,Whimsicott,,whimsicott
+553,Krookodile,,krookodile
+563,Cofagrigus,,cofagrigus
+569,Garbodor,,garbodor
+571,Zoroark,,zoroark
+571,Zoroark,hisui,zoroark-hisui
+579,Reuniclus,,reuniclus
+584,Vanilluxe,,vanilluxe
+587,Emolga,,emolga
+609,Chandelure,,chandelure
+609,Mega Chandelure,,chandelure-mega
+614,Beartic,,beartic
+618,Stunfisk,,stunfisk
+618,Stunfisk,galar,stunfisk-galar
+623,Golurk,,golurk
+623,Mega Golurk,,golurk-mega
+635,Hydreigon,,hydreigon
+637,Volcarona,,volcarona
+652,Chesnaught,,chesnaught
+652,Mega Chesnaught,,chesnaught-mega
+655,Delphox,,delphox
+655,Mega Delphox,,delphox-mega
+658,Greninja,,greninja
+658,Mega Greninja,,greninja-mega
+660,Diggersby,,diggersby
+663,Talonflame,,talonflame
+666,Vivillon,,vivillon
+670,Floette,eternal,floette-eternal
+670,Mega Floette,,floette-mega
+671,Florges,,florges
+675,Pangoro,,pangoro
+676,Furfrou,,furfrou
+678,Meowstic,male,meowstic-male
+678,Mega Meowstic,,meowstic-mega
+681,Aegislash,shield,aegislash-shield
+683,Aromatisse,,aromatisse
+685,Slurpuff,,slurpuff
+693,Clawitzer,,clawitzer
+695,Heliolisk,,heliolisk
+697,Tyrantrum,,tyrantrum
+699,Aurorus,,aurorus
+700,Sylveon,,sylveon
+701,Hawlucha,,hawlucha
+701,Mega Hawlucha,,hawlucha-mega
+702,Dedenne,,dedenne
+706,Goodra,,goodra
+706,Goodra,hisui,goodra-hisui
+707,Klefki,,klefki
+709,Trevenant,,trevenant
+711,Gourgeist,average,gourgeist-average
+711,Gourgeist,small,gourgeist-small
+711,Gourgeist,large,gourgeist-large
+711,Gourgeist,super,gourgeist-super
+713,Avalugg,,avalugg
+713,Avalugg,hisui,avalugg-hisui
+715,Noivern,,noivern
+724,Decidueye,,decidueye
+724,Decidueye,hisui,decidueye-hisui
+727,Incineroar,,incineroar
+730,Primarina,,primarina
+733,Toucannon,,toucannon
+740,Crabominable,,crabominable
+740,Mega Crabominable,,crabominable-mega
+745,Lycanroc,midday,lycanroc-midday
+745,Lycanroc,midnight,lycanroc-midnight
+745,Lycanroc,dusk,lycanroc-dusk
+748,Toxapex,,toxapex
+750,Mudsdale,,mudsdale
+752,Araquanid,,araquanid
+758,Salazzle,,salazzle
+763,Tsareena,,tsareena
+765,Oranguru,,oranguru
+766,Passimian,,passimian
+778,Mimikyu,disguised,mimikyu-disguised
+780,Drampa,,drampa
+780,Mega Drampa,,drampa-mega
+784,Kommo-o,,kommo-o
+823,Corviknight,,corviknight
+841,Flapple,,flapple
+842,Appletun,,appletun
+844,Sandaconda,,sandaconda
+855,Polteageist,,polteageist
+858,Hatterene,,hatterene
+866,Mr. Rime,,mr-rime
+867,Runerigus,,runerigus
+869,Alcremie,,alcremie
+877,Morpeko,full-belly,morpeko-full-belly
+887,Dragapult,,dragapult
+899,Wyrdeer,,wyrdeer
+900,Kleavor,,kleavor
+902,Basculegion,male,basculegion-male
+902,Basculegion,female,basculegion-female
+903,Sneasler,,sneasler
+908,Meowscarada,,meowscarada
+911,Skeledirge,,skeledirge
+914,Quaquaval,,quaquaval
+925,Maushold,family-of-four,maushold-family-of-four
+934,Garganacl,,garganacl
+936,Armarouge,,armarouge
+937,Ceruledge,,ceruledge
+939,Bellibolt,,bellibolt
+952,Scovillain,,scovillain
+952,Mega Scovillain,,scovillain-mega
+956,Espathra,,espathra
+959,Tinkaton,,tinkaton
+964,Palafin,,palafin-zero
+968,Orthworm,,orthworm
+970,Glimmora,,glimmora
+970,Mega Glimmora,,glimmora-mega
+981,Farigiraf,,farigiraf
+983,Kingambit,,kingambit
+1013,Sinistcha,,sinistcha
+1018,Archaludon,,archaludon
+1019,Hydrapple,,hydrapple

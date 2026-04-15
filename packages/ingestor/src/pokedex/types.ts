@@ -22,10 +22,16 @@ export type PokeApiStat = {
   stat: PokeApiNamedResource;
 };
 
+export type PokeApiType = {
+  slot: number;
+  type: PokeApiNamedResource;
+};
+
 export type PokeApiPokemon = {
   name: string;
   abilities: PokeApiAbility[];
   stats: PokeApiStat[];
+  types: PokeApiType[];
 };
 
 export type PokeApiPokemonVariety = {

@@ -363,6 +363,17 @@
     "blobPath": "champions-menu-sprites/v1/banette-mega.png"
   },
   {
+    "slug": "basculegion-female",
+    "filename": "basculegion-female.png",
+    "sourceFilename": "Menu_CP_0902-Female.png",
+    "title": "File:Menu CP 0902-Female.png",
+    "sourceUrl": "https://archives.bulbagarden.net/media/upload/8/8f/Menu_CP_0902-Female.png",
+    "size": 17364,
+    "sha256": "26de5a0ed9843f7c4313779e40c34116bacbb9991833a3b6820ebed43ffcf838",
+    "blobUrl": "https://dgap4qvlmepfoz1h.public.blob.vercel-storage.com/champions-menu-sprites/v1/basculegion-female.png",
+    "blobPath": "champions-menu-sprites/v1/basculegion-female.png"
+  },
+  {
     "slug": "basculegion-male",
     "filename": "basculegion-male.png",
     "sourceFilename": "Menu_CP_0902.png",
@@ -1254,6 +1265,17 @@
     "blobPath": "champions-menu-sprites/v1/goodra-hisui.png"
   },
   {
+    "slug": "gourgeist-average",
+    "filename": "gourgeist-average.png",
+    "sourceFilename": "Menu_CP_0711.png",
+    "title": "File:Menu CP 0711.png",
+    "sourceUrl": "https://archives.bulbagarden.net/media/upload/1/1b/Menu_CP_0711.png",
+    "size": 11726,
+    "sha256": "7ba1b3b6cf6fe90c440e86b85be610d2217b82b6da3ef15d3f08be570b57817e",
+    "blobUrl": "https://dgap4qvlmepfoz1h.public.blob.vercel-storage.com/champions-menu-sprites/v1/gourgeist-average.png",
+    "blobPath": "champions-menu-sprites/v1/gourgeist-average.png"
+  },
+  {
     "slug": "gourgeist-large",
     "filename": "gourgeist-large.png",
     "sourceFilename": "Menu_CP_0711-Large.png",
@@ -1274,6 +1296,17 @@
     "sha256": "7f977d2a1b4694d669d2d316d08eaa9a873b0d82a25d2d8e09b5920fe2920824",
     "blobUrl": "https://dgap4qvlmepfoz1h.public.blob.vercel-storage.com/champions-menu-sprites/v1/gourgeist-small.png",
     "blobPath": "champions-menu-sprites/v1/gourgeist-small.png"
+  },
+  {
+    "slug": "gourgeist-super",
+    "filename": "gourgeist-super.png",
+    "sourceFilename": "Menu_CP_0711-Jumbo.png",
+    "title": "File:Menu CP 0711-Jumbo.png",
+    "sourceUrl": "https://archives.bulbagarden.net/media/upload/7/72/Menu_CP_0711-Jumbo.png",
+    "size": 13140,
+    "sha256": "fdec076ea5c4a2dd5f06c003ffb5a400504c0713d9b2116f180a51dc7d81817d",
+    "blobUrl": "https://dgap4qvlmepfoz1h.public.blob.vercel-storage.com/champions-menu-sprites/v1/gourgeist-super.png",
+    "blobPath": "champions-menu-sprites/v1/gourgeist-super.png"
   },
   {
     "slug": "greninja",
@@ -1769,6 +1802,17 @@
     "sha256": "f6db8163fc18434b73a28bc4587c417ee18a676300a2c24d29f6580ce3a7ba0c",
     "blobUrl": "https://dgap4qvlmepfoz1h.public.blob.vercel-storage.com/champions-menu-sprites/v1/meowscarada.png",
     "blobPath": "champions-menu-sprites/v1/meowscarada.png"
+  },
+  {
+    "slug": "meowstic-male",
+    "filename": "meowstic-male.png",
+    "sourceFilename": "Menu_CP_0678.png",
+    "title": "File:Menu CP 0678.png",
+    "sourceUrl": "https://archives.bulbagarden.net/media/upload/d/dd/Menu_CP_0678.png",
+    "size": 12502,
+    "sha256": "5484ae874911c5a3dbaeb2b7deb65ca057e9746a38bd67990b488627b4294417",
+    "blobUrl": "https://dgap4qvlmepfoz1h.public.blob.vercel-storage.com/champions-menu-sprites/v1/meowstic-male.png",
+    "blobPath": "champions-menu-sprites/v1/meowstic-male.png"
   },
   {
     "slug": "meowstic-mega",
