@@ -55,10 +55,6 @@ jobs:
       - name: Typecheck
         run: bun typecheck
 
-      - name: Build webapp
-        working-directory: apps/webapp
-        run: bun run build
-
       - name: Install Vercel CLI
         run: npm install --global vercel@50.28.0
 
