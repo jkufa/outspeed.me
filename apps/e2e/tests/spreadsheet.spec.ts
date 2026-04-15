@@ -15,6 +15,23 @@ test("renders grouped speed tiers with simplified boosts", async ({ page }) => {
 	await expect(page.getByText("2x Chlorophyll")).toHaveCount(0);
 });
 
+test("sorts speed tiers by the speed header", async ({ page }) => {
+	await page.goto("/");
+	await page.waitForLoadState("networkidle");
+	await expect(page.getByText("1210 rows")).toBeVisible();
+
+	const speedSort = page.getByRole("button", { name: "Speed sorted descending" });
+	await expect(page.getByText("Mega Alakazam").first()).toBeVisible();
+
+	await speedSort.click();
+	await expect(page.getByRole("button", { name: "Speed sorted ascending" })).toBeVisible();
+	await expect(page.getByText("Mega Sableye").first()).toBeVisible();
+
+	await page.getByRole("button", { name: "Speed sorted ascending" }).click();
+	await expect(page.getByRole("button", { name: "Speed sorted descending" })).toBeVisible();
+	await expect(page.getByText("Mega Alakazam").first()).toBeVisible();
+});
+
 test("debounces Pokemon search before filtering rows", async ({ page }) => {
 	await page.goto("/");
 
