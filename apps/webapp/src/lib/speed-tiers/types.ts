@@ -79,6 +79,8 @@ export type StatPointFilter = "any" | 0 | 32;
 
 export type SpeedTierFilters = {
   search: string;
+  /** Pokedex numbers; empty = no species restriction. */
+  pokemon: number[];
   boosts: BoostFilter[];
   fieldConditions: FieldConditionFilter[];
   nature: NatureFilter;

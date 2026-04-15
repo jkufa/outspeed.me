@@ -7,6 +7,7 @@ const fieldConditionFilterValueSet = new Set<string>(fieldConditionFilterValues)
 
 export const defaultSpeedTierFilters: SpeedTierFilters = {
   search: "",
+  pokemon: [],
   boosts: ["none"],
   fieldConditions: [],
   nature: "any",
@@ -35,6 +36,10 @@ function matchesFilters(pokemon: SpeedTierPokemon, filters: SpeedTierFilters, se
     !pokemon.name.toLocaleLowerCase().includes(search) &&
     !pokemon.slug?.toLocaleLowerCase().includes(search)
   ) {
+    return false;
+  }
+
+  if (filters.pokemon.length > 0 && !filters.pokemon.includes(pokemon.pokedexNo)) {
     return false;
   }
 

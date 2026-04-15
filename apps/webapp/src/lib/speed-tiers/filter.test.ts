@@ -206,4 +206,14 @@ describe("filterSpeedTiers", () => {
       ),
     ).toStrictEqual([222]);
   });
+
+  it("filters to selected species by pokedex number", () => {
+    expect(
+      filterSpeedTiers(tiers, {
+        ...defaultSpeedTierFilters,
+        boosts: [],
+        pokemon: [25, 142],
+      }).map((tier) => tier.speed),
+    ).toStrictEqual([250, 222]);
+  });
 });

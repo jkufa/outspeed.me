@@ -11,16 +11,20 @@
     SpeedTierFilters,
     StatPointFilter,
   } from "$lib/speed-tiers";
-  import FieldConditionFilter from "./field-condition-filter.svelte";
+  import FieldConditionFilter from "./field-condition-filter/field-condition-filter.svelte";
+  import PokemonFilter from "./pokemon-filter/pokemon-filter.svelte";
+  import type { PokemonFilterOption } from "./pokemon-filter/pokemon-filter-options";
 
   let {
     filters = $bindable(),
     filtersReady,
     rowsLabel,
+    pokemonFilterOptions,
   }: {
     filters: SpeedTierFilters;
     filtersReady: boolean;
     rowsLabel: string;
+    pokemonFilterOptions: PokemonFilterOption[];
   } = $props();
 
   let searchInput = $state(filters.search);
@@ -102,7 +106,7 @@
 
 <section aria-label="Speed tier filters" class="grid gap-3">
   <div
-    class="grid gap-3 md:grid-cols-[minmax(6rem,1fr)_repeat(4,minmax(14rem,auto))]"
+    class="grid gap-3 md:grid-cols-[minmax(6rem,1fr)_minmax(14rem,auto)_repeat(4,minmax(14rem,auto))]"
   >
     <label class="grid gap-2 text-sm">
       <span class="text-muted-foreground">Search Pokemon</span>
@@ -114,7 +118,16 @@
       />
     </label>
 
-    <div class="grid gap-2 text-sm">
+    <div class="grid text-sm">
+      <Label class="text-muted-foreground">Pokemon</Label>
+      <PokemonFilter
+        bind:value={filters.pokemon}
+        options={pokemonFilterOptions}
+        disabled={!filtersReady}
+      />
+    </div>
+
+    <div class="grid text-sm">
       <span class="text-muted-foreground">Boosts</span>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger
@@ -161,7 +174,7 @@
       </DropdownMenu.Root>
     </div>
 
-    <div class="grid gap-2 text-sm">
+    <div class="grid text-sm">
       <Label class="text-muted-foreground">Field Condition</Label>
       <FieldConditionFilter
         bind:value={filters.fieldConditions}
@@ -169,7 +182,7 @@
       />
     </div>
 
-    <label class="grid gap-2 text-sm">
+    <label class="grid text-sm">
       <span class="text-muted-foreground">Spread</span>
       <Select.Root
         type="single"
@@ -195,7 +208,7 @@
       </Select.Root>
     </label>
 
-    <label class="grid gap-2 text-sm">
+    <label class="gridfrp text-sm">
       <span class="text-muted-foreground">SP</span>
       <Select.Root
         type="single"

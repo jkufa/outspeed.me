@@ -6,6 +6,7 @@
     SpeedTierDisplayTier,
     SpeedTierFilters,
   } from "$lib/speed-tiers";
+  import { collectPokemonFilterOptions } from "./filters/pokemon-filter/pokemon-filter-options";
   import SpeedTierFiltersPanel from "./filters/speed-tier-filters.svelte";
   import SpeedTierTable from "./speed-tier-table.svelte";
 
@@ -28,11 +29,15 @@
   let dataLoadState = $state<"loading" | "ready" | "error">("loading");
   const activeFilters = $derived({
     search: filters.search,
+    pokemon: filters.pokemon,
     boosts: filters.boosts,
     fieldConditions: filters.fieldConditions,
     nature: filters.nature,
     statPoints: filters.statPoints,
   });
+  const pokemonFilterOptions = $derived(
+    collectPokemonFilterOptions(sourceTiers ?? initialTiers),
+  );
   const filteredTiers = $derived(
     sourceTiers === null
       ? initialTiers
@@ -75,7 +80,12 @@
     </p>
   </header>
 
-  <SpeedTierFiltersPanel bind:filters {filtersReady} {rowsLabel} />
+  <SpeedTierFiltersPanel
+    bind:filters
+    {filtersReady}
+    {rowsLabel}
+    {pokemonFilterOptions}
+  />
 
   <SpeedTierTable tiers={filteredTiers} />
 </main>
