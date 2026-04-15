@@ -18,9 +18,11 @@ export {
   querySpeedTiers,
 } from "./query";
 export type { SpeedTierQuery, SpeedTierQueryResult } from "./query";
+export { fieldConditionFilterValues } from "./types";
 export type {
   BoostFilter,
   EffectChip,
+  FieldConditionFilter,
   Nature,
   NatureFilter,
   PokemonSprite,
@@ -35,5 +37,4 @@ export type {
   SpeedTierFilters,
   SpeedTierPokemon,
   StatPointFilter,
-  WeatherFilter,
 } from "./types";

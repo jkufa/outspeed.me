@@ -62,14 +62,25 @@ export type SpeedTierDisplayTier = {
 };
 
 export type BoostFilter = "none" | "ability" | "item";
-export type WeatherFilter = "any" | "sun" | "rain" | "sand" | "snow";
+export const fieldConditionFilterValues = [
+  "sun",
+  "rain",
+  "sand",
+  "snow",
+  "electric-terrain",
+  "grassy-terrain",
+  "misty-terrain",
+  "psychic-terrain",
+  "tailwind",
+] as const;
+export type FieldConditionFilter = (typeof fieldConditionFilterValues)[number];
 export type NatureFilter = "any" | Nature;
 export type StatPointFilter = "any" | 0 | 32;
 
 export type SpeedTierFilters = {
   search: string;
   boosts: BoostFilter[];
-  weather: WeatherFilter;
+  fieldConditions: FieldConditionFilter[];
   nature: NatureFilter;
   statPoints: StatPointFilter;
 };

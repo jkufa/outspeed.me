@@ -2,6 +2,7 @@
   import { Button, buttonVariants } from "$lib/components/ui/button";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
   import { Input } from "$lib/components/ui/input";
+  import { Label } from "$lib/components/ui/label";
   import * as Select from "$lib/components/ui/select";
   import { cn } from "$lib/utils";
   import type {
@@ -9,8 +10,8 @@
     NatureFilter,
     SpeedTierFilters,
     StatPointFilter,
-    WeatherFilter,
   } from "$lib/speed-tiers";
+  import FieldConditionFilter from "./field-condition-filter.svelte";
 
   let {
     filters = $bindable(),
@@ -33,11 +34,6 @@
     searchDebounceTimer = setTimeout(() => {
       filters = { ...filters, search: searchInput };
     }, 300);
-  }
-
-  function weatherLabel(weather: WeatherFilter) {
-    if (weather === "any") return "All";
-    return weather[0].toUpperCase() + weather.slice(1);
   }
 
   function natureLabel(nature: NatureFilter) {
@@ -79,7 +75,9 @@
     if (!checked) {
       filters = {
         ...filters,
-        boosts: filters.boosts.filter((selectedBoost) => selectedBoost !== boost),
+        boosts: filters.boosts.filter(
+          (selectedBoost) => selectedBoost !== boost,
+        ),
       };
       return;
     }
@@ -93,7 +91,8 @@
       ...filters,
       boosts: [
         ...filters.boosts.filter(
-          (selectedBoost) => selectedBoost !== "none" && selectedBoost !== boost,
+          (selectedBoost) =>
+            selectedBoost !== "none" && selectedBoost !== boost,
         ),
         boost,
       ],
@@ -103,7 +102,7 @@
 
 <section aria-label="Speed tier filters" class="grid gap-3">
   <div
-    class="grid gap-3 md:grid-cols-[minmax(14rem,1fr)_repeat(4,minmax(8rem,auto))]"
+    class="grid gap-3 md:grid-cols-[minmax(6rem,1fr)_repeat(4,minmax(14rem,auto))]"
   >
     <label class="grid gap-2 text-sm">
       <span class="text-muted-foreground">Search Pokemon</span>
@@ -162,32 +161,13 @@
       </DropdownMenu.Root>
     </div>
 
-    <label class="grid gap-2 text-sm">
-      <span class="text-muted-foreground">Weather</span>
-      <Select.Root
-        type="single"
-        value={filters.weather}
-        onValueChange={(value: string) =>
-          (filters = { ...filters, weather: value as WeatherFilter })}
-      >
-        <Select.Trigger
-          class="w-full"
-          disabled={!filtersReady}
-          aria-label={`Weather: ${weatherLabel(filters.weather)}`}
-        >
-          <span data-slot="select-value">{weatherLabel(filters.weather)}</span>
-        </Select.Trigger>
-        <Select.Content>
-          <Select.Group>
-            <Select.Item value="any" label="All" />
-            <Select.Item value="sun" label="Sun" />
-            <Select.Item value="rain" label="Rain" />
-            <Select.Item value="sand" label="Sand" />
-            <Select.Item value="snow" label="Snow" />
-          </Select.Group>
-        </Select.Content>
-      </Select.Root>
-    </label>
+    <div class="grid gap-2 text-sm">
+      <Label class="text-muted-foreground">Field Condition</Label>
+      <FieldConditionFilter
+        bind:value={filters.fieldConditions}
+        disabled={!filtersReady}
+      />
+    </div>
 
     <label class="grid gap-2 text-sm">
       <span class="text-muted-foreground">Spread</span>

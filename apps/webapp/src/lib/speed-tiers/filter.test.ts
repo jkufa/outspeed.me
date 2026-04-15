@@ -66,6 +66,30 @@ const tiers: SpeedTier[] = [
       },
     ],
   },
+  {
+    speed: 180,
+    pokemon: [
+      {
+        combinationId: "pokemon:4|nature:neutral|evs:0|field:tailwind",
+        id: 4,
+        slug: "charizard",
+        pokedexNo: 6,
+        name: "Charizard",
+        sprite: null,
+        spread: { nature: "neutral", evs: 0, ivs: 31, level: 50, rawSpeed: 90 },
+        effects: [
+          {
+            kind: "field",
+            source: "tailwind",
+            label: "Tailwind",
+            multiplier: 2,
+            condition: "tailwind",
+          },
+        ],
+        finalSpeed: 180,
+      },
+    ],
+  },
 ];
 
 describe("filterSpeedTiers", () => {
@@ -105,7 +129,7 @@ describe("filterSpeedTiers", () => {
   it("preserves group order from input", () => {
     expect(
       filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: [] }).map((tier) => tier.speed),
-    ).toStrictEqual([308, 250, 222]);
+    ).toStrictEqual([308, 250, 222, 180]);
   });
 
   it("shows unboosted rows by default", () => {
@@ -136,12 +160,12 @@ describe("filterSpeedTiers", () => {
     ).toStrictEqual([308, 250]);
   });
 
-  it("filters by effect kind, weather, nature, and stat points", () => {
+  it("filters by effect kind, field condition, nature, and stat points", () => {
     expect(
       filterSpeedTiers(tiers, {
         ...defaultSpeedTierFilters,
         boosts: ["ability"],
-        weather: "sand",
+        fieldConditions: ["sand"],
         nature: "positive",
         statPoints: 32,
       }).map((tier) => tier.speed),
@@ -153,6 +177,26 @@ describe("filterSpeedTiers", () => {
         boosts: ["item"],
       }).map((tier) => tier.speed),
     ).toStrictEqual([250]);
+  });
+
+  it("filters field conditions with OR semantics", () => {
+    expect(
+      filterSpeedTiers(tiers, {
+        ...defaultSpeedTierFilters,
+        boosts: [],
+        fieldConditions: ["sand", "tailwind"],
+      }).map((tier) => tier.speed),
+    ).toStrictEqual([308, 250, 222, 180]);
+  });
+
+  it("keeps rows without field-condition boosts when field conditions are selected", () => {
+    expect(
+      filterSpeedTiers(tiers, {
+        ...defaultSpeedTierFilters,
+        boosts: [],
+        fieldConditions: ["sand"],
+      }).map((tier) => tier.speed),
+    ).toStrictEqual([308, 250, 222]);
   });
 
   it("matches search against slug", () => {

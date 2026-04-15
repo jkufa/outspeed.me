@@ -8,6 +8,8 @@ export type MultiFilterComboboxOption = {
   label: string;
   /** Prevents selecting this option from the default content and toggle helper. */
   disabled?: boolean;
+  /** Group the option belongs to. */
+  group?: string;
 };
 
 /** Helpers and state passed to custom dropdown content snippets. */

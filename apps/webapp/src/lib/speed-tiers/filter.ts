@@ -1,11 +1,14 @@
 import { groupSpeedTierRows } from "./display";
 import { statPointsToEvs } from "./format";
+import { fieldConditionFilterValues } from "./types";
 import type { SpeedTier, SpeedTierDisplayTier, SpeedTierFilters, SpeedTierPokemon } from "./types";
+
+const fieldConditionFilterValueSet = new Set<string>(fieldConditionFilterValues);
 
 export const defaultSpeedTierFilters: SpeedTierFilters = {
   search: "",
   boosts: ["none"],
-  weather: "any",
+  fieldConditions: [],
   nature: "any",
   statPoints: "any",
 };
@@ -39,10 +42,7 @@ function matchesFilters(pokemon: SpeedTierPokemon, filters: SpeedTierFilters, se
     return false;
   }
 
-  if (
-    filters.weather !== "any" &&
-    !pokemon.effects.some((effect) => effect.condition === filters.weather)
-  ) {
+  if (!matchesFieldConditionFilter(pokemon, filters.fieldConditions)) {
     return false;
   }
 
@@ -71,4 +71,27 @@ function matchesBoostFilter(pokemon: SpeedTierPokemon, boosts: SpeedTierFilters[
       ? pokemon.effects.some((effect) => effect.kind === "ability")
       : pokemon.effects.some((effect) => effect.kind === "item"),
   );
+}
+
+function matchesFieldConditionFilter(
+  pokemon: SpeedTierPokemon,
+  fieldConditions: SpeedTierFilters["fieldConditions"],
+) {
+  if (fieldConditions.length === 0) {
+    return true;
+  }
+
+  const selectedConditions = new Set<string>(fieldConditions);
+  const pokemonFieldConditions = pokemon.effects
+    .map((effect) => effect.condition)
+    .filter(
+      (condition): condition is string =>
+        condition !== undefined && fieldConditionFilterValueSet.has(condition),
+    );
+
+  if (pokemonFieldConditions.length === 0) {
+    return true;
+  }
+
+  return pokemonFieldConditions.some((condition) => selectedConditions.has(condition));
 }

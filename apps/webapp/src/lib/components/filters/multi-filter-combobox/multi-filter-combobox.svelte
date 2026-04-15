@@ -6,7 +6,10 @@
   import * as Command from "$lib/components/ui/command";
   import * as Popover from "$lib/components/ui/popover";
   import { cn } from "$lib/utils";
-  import { calculateVisibleChipCount, optionValuesEqual } from "./multi-filter-combobox";
+  import {
+    calculateVisibleChipCount,
+    optionValuesEqual,
+  } from "./multi-filter-combobox";
   import type { MultiFilterComboboxProps } from "./props";
 
   let {
@@ -29,7 +32,9 @@
   const selectedOptions = $derived(
     value
       .map((selectedValue) =>
-        options.find((option) => optionValuesEqual(option.value, selectedValue)),
+        options.find((option) =>
+          optionValuesEqual(option.value, selectedValue),
+        ),
       )
       .filter((option) => option !== undefined),
   );
@@ -42,21 +47,29 @@
       ? placeholder
       : selectedOptions.map((option) => option.label).join(", "),
   );
-  const triggerAriaLabel = $derived(ariaLabel ?? `Selected filters: ${triggerLabel}`);
+  const triggerAriaLabel = $derived(
+    ariaLabel ?? `Selected filters: ${triggerLabel}`,
+  );
 
   function isSelected(optionValue: string | number) {
-    return value.some((selectedValue) => optionValuesEqual(selectedValue, optionValue));
+    return value.some((selectedValue) =>
+      optionValuesEqual(selectedValue, optionValue),
+    );
   }
 
   function toggleOption(optionValue: string | number) {
-    const option = options.find((item) => optionValuesEqual(item.value, optionValue));
+    const option = options.find((item) =>
+      optionValuesEqual(item.value, optionValue),
+    );
 
     if (option?.disabled) {
       return;
     }
 
     if (isSelected(optionValue)) {
-      value = value.filter((selectedValue) => !optionValuesEqual(selectedValue, optionValue));
+      value = value.filter(
+        (selectedValue) => !optionValuesEqual(selectedValue, optionValue),
+      );
       return;
     }
 
@@ -71,10 +84,16 @@
     open = false;
   }
 
-  async function updateVisibleChipCount(selectedOptionCount = selectedOptions.length) {
+  async function updateVisibleChipCount(
+    selectedOptionCount = selectedOptions.length,
+  ) {
     await tick();
 
-    if (selectedOptionCount === 0 || valueAreaRef === null || measurementRef === null) {
+    if (
+      selectedOptionCount === 0 ||
+      valueAreaRef === null ||
+      measurementRef === null
+    ) {
       visibleChipCount = 0;
       return;
     }
@@ -87,13 +106,16 @@
     const chipMeasureElements = Array.from(
       measurementRef.querySelectorAll<HTMLElement>("[data-measure-chip]"),
     );
-    const overflowBadgeElement =
-      measurementRef.querySelector<HTMLElement>("[data-measure-overflow]");
+    const overflowBadgeElement = measurementRef.querySelector<HTMLElement>(
+      "[data-measure-overflow]",
+    );
     const valueAreaWidth =
       valueAreaRef.getBoundingClientRect().width || valueAreaRef.clientWidth;
     const triggerWidth =
-      valueAreaRef.closest("button")?.getBoundingClientRect().width ?? valueAreaWidth;
-    const availableWidth = valueAreaWidth > 0 ? valueAreaWidth : Math.max(0, triggerWidth - 40);
+      valueAreaRef.closest("button")?.getBoundingClientRect().width ??
+      valueAreaWidth;
+    const availableWidth =
+      valueAreaWidth > 0 ? valueAreaWidth : Math.max(0, triggerWidth - 40);
     const chipWidths = chipMeasureElements
       .slice(0, selectedOptionCount)
       .map((chip) => chip.getBoundingClientRect().width);
@@ -106,7 +128,8 @@
     visibleChipCount = calculateVisibleChipCount({
       availableWidth,
       chipWidths,
-      overflowBadgeWidth: overflowBadgeElement?.getBoundingClientRect().width ?? 0,
+      overflowBadgeWidth:
+        overflowBadgeElement?.getBoundingClientRect().width ?? 0,
       gapWidth: 4,
     });
   }
@@ -114,7 +137,8 @@
   $effect(() => {
     const selectedOptionCount = selectedOptions.length;
     const canMeasure =
-      valueAreaRef !== null && (measurementRef !== null || selectedOptionCount === 0);
+      valueAreaRef !== null &&
+      (measurementRef !== null || selectedOptionCount === 0);
 
     if (canMeasure) {
       updateVisibleChipCount(selectedOptionCount);
@@ -164,7 +188,9 @@
             {/each}
 
             {#if hiddenChipCount > 0}
-              <Badge variant="secondary" class="shrink-0">+{hiddenChipCount}</Badge>
+              <Badge variant="secondary" class="shrink-0"
+                >+{hiddenChipCount}</Badge
+              >
             {/if}
           {/if}
         </span>

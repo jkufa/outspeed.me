@@ -29,7 +29,7 @@
   const activeFilters = $derived({
     search: filters.search,
     boosts: filters.boosts,
-    weather: filters.weather,
+    fieldConditions: filters.fieldConditions,
     nature: filters.nature,
     statPoints: filters.statPoints,
   });
