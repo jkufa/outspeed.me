@@ -10,7 +10,7 @@ const SOURCE_FILENAME_EXCEPTIONS = new Map<string, string>([
   ["Menu_CP_0128-Paldea_Blaze.png", "tauros-paldea-blaze-breed"],
   ["Menu_CP_0128-Paldea_Aqua.png", "tauros-paldea-aqua-breed"],
   ["Menu_CP_0678.png", "meowstic-male"],
-  // Bulbagarden renamed Gourgeist Average/Super to Medium/Jumbo in Legends: Z-A.
+  // Gourgeist forms use new Variety display names, but PokeAPI/source slugs still use Average/Super.
   ["Menu_CP_0711.png", "gourgeist-average"],
   ["Menu_CP_0711-Jumbo.png", "gourgeist-super"],
   ["Menu_CP_0745.png", "lycanroc-midday"],

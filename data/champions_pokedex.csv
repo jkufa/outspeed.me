@@ -205,10 +205,11 @@ pokedex_number,name,form,pokeapi_name
 706,Goodra,hisui,goodra-hisui
 707,Klefki,,klefki
 709,Trevenant,,trevenant
-711,Gourgeist,average,gourgeist-average
-711,Gourgeist,small,gourgeist-small
-711,Gourgeist,large,gourgeist-large
-711,Gourgeist,super,gourgeist-super
+# Gourgeist display names use Legends: Z-A Variety names; PokeAPI slugs still use old Average/Super names.
+711,Gourgeist,medium-variety,gourgeist-average
+711,Gourgeist,small-variety,gourgeist-small
+711,Gourgeist,large-variety,gourgeist-large
+711,Gourgeist,jumbo-variety,gourgeist-super
 713,Avalugg,,avalugg
 713,Avalugg,hisui,avalugg-hisui
 715,Noivern,,noivern

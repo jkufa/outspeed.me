@@ -62,7 +62,10 @@ describe("ingestPokedex", () => {
 
   it("adds form names when same-name forms differ without a base row", async () => {
     const pokedex = await ingestPokedex(
-      csv(["711,Gourgeist,average,gourgeist-average", "711,Gourgeist,small,gourgeist-small"]),
+      csv([
+        "711,Gourgeist,medium-variety,gourgeist-average",
+        "711,Gourgeist,small-variety,gourgeist-small",
+      ]),
       {
         fetchPokemon: async (slug) =>
           pokemon({
@@ -78,7 +81,10 @@ describe("ingestPokedex", () => {
       },
     );
 
-    expect(pokedex.map((entry) => entry.name)).toEqual(["Gourgeist Average", "Gourgeist Small"]);
+    expect(pokedex.map((entry) => entry.name)).toEqual([
+      "Gourgeist Medium Variety",
+      "Gourgeist Small Variety",
+    ]);
   });
 
   it("keeps cosmetic form names plain when mechanics match", async () => {

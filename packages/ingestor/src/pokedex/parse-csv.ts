@@ -19,7 +19,11 @@ export function parsePokemonCsv(csvText: string): CsvPokemonRow[] {
   }
 
   return dataLines
-    .filter((line) => line.trim().length > 0)
+    .filter((line) => {
+      const trimmedLine = line.trim();
+
+      return trimmedLine.length > 0 && !trimmedLine.startsWith("#");
+    })
     .map((line, index) => {
       const columns = parseCsvLine(line);
       const pokedexNumber = Number(columns[pokedexNumberIndex]);

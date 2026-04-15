@@ -4,6 +4,8 @@ import { createPokeApiClient } from "./pokeapi";
 import { toPokeApiSlug } from "./slugs";
 import type { CsvPokemonRow, NormalizedPokemon, PokeApiPokemon } from "./types";
 
+const MAX_FETCH_CONCURRENCY = 12;
+
 export type IngestPokedexOptions = {
   fetchPokemon?: (slug: string) => Promise<PokeApiPokemon>;
 };
@@ -46,11 +48,42 @@ async function fetchPokemonBySlug(
   fetchPokemon: (slug: string) => Promise<PokeApiPokemon>,
 ) {
   const uniqueSlugs = [...new Set(slugs)];
-  const fetchedPokemon = await Promise.all(
-    uniqueSlugs.map(async (slug) => [slug, await fetchPokemon(slug)] as const),
+  const fetchedPokemon = await mapWithConcurrency(
+    uniqueSlugs,
+    MAX_FETCH_CONCURRENCY,
+    async (slug) => [slug, await fetchPokemon(slug)] as const,
   );
 
   return new Map(fetchedPokemon);
+}
+
+async function mapWithConcurrency<TValue, TResult>(
+  values: TValue[],
+  concurrency: number,
+  mapper: (value: TValue) => Promise<TResult>,
+) {
+  const results = Array.from<TResult | undefined>({ length: values.length });
+  let nextIndex = 0;
+
+  async function worker() {
+    while (nextIndex < values.length) {
+      const index = nextIndex;
+      nextIndex += 1;
+      const value = values[index];
+
+      if (value === undefined) continue;
+
+      results[index] = await mapper(value);
+    }
+  }
+
+  await Promise.all(
+    Array.from({ length: Math.min(concurrency, values.length) }, async () => {
+      await worker();
+    }),
+  );
+
+  return results.filter((result) => result !== undefined);
 }
 
 function buildDisplayNames(
