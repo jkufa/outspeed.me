@@ -102,14 +102,35 @@ describe("shouldIncludeCombination", () => {
     ).toBe(false);
   });
 
-  it("excludes neutral nature scarf with no speed EVs", () => {
+  it("excludes any boosted setup with no speed EVs", () => {
     expect(
       shouldIncludeCombination({
         pokemon: pokemon(),
         evs: 0,
-        nature: "neutral",
+        nature: "positive",
+        ability: "chlorophyll",
+        item: null,
+      }),
+    ).toBe(false);
+    expect(
+      shouldIncludeCombination({
+        pokemon: pokemon(),
+        evs: 0,
+        nature: "positive",
         ability: null,
         item: "choice-scarf",
+      }),
+    ).toBe(false);
+  });
+
+  it("excludes negative nature with full speed EVs", () => {
+    expect(
+      shouldIncludeCombination({
+        pokemon: pokemon(),
+        evs: 252,
+        nature: "negative",
+        ability: null,
+        item: null,
       }),
     ).toBe(false);
   });
@@ -187,6 +208,18 @@ describe("buildSpeedTierCombinations", () => {
       finalSpeed: 290,
       speed: 290,
     });
+    expect(
+      combinations.some(
+        (combination) =>
+          combination.spread.evs === 0 &&
+          combination.effects.some((effect) => effect.kind === "ability" || effect.kind === "item"),
+      ),
+    ).toBe(false);
+    expect(
+      combinations.some(
+        (combination) => combination.spread.nature === "negative" && combination.spread.evs === 252,
+      ),
+    ).toBe(false);
   });
 
   it("does not build held item combinations for mega Pokemon", () => {

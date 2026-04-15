@@ -40,7 +40,13 @@
 	</div>
 {:else}
 	<div class="hidden md:block">
-		<Table>
+		<Table class="table-fixed">
+			<colgroup>
+				<col class="w-[8%]" />
+				<col class="w-[45%]" />
+				<col class="w-[17%]" />
+				<col class="w-[30%]" />
+			</colgroup>
 			<TableHeader class="sticky top-0 z-20 bg-background">
 				<TableRow>
 					<TableHead class="sticky left-0 z-30 bg-background">Speed</TableHead>

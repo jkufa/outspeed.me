@@ -40,8 +40,12 @@ export const COMBINATION_RULES: CombinationRule[] = [
       nature !== "negative" || (ability === null && item === null),
   },
   {
-    name: "skip choice scarf with neutral nature and no speed EVs",
-    shouldInclude: ({ evs, item, nature }) => nature !== "neutral" || evs !== 0 || item === null,
+    name: "skip any speed modifier with no speed EVs",
+    shouldInclude: ({ ability, evs, item }) => evs !== 0 || (ability === null && item === null),
+  },
+  {
+    name: "skip negative nature with full speed EVs",
+    shouldInclude: ({ evs, nature }) => nature !== "negative" || evs !== 252,
   },
 ];
 

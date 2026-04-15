@@ -2,6 +2,7 @@ import { ingestorConfig } from "../config";
 import type { PokeApiPokemon, PokeApiPokemonSpecies } from "./types";
 
 type Fetch = typeof fetch;
+const MAX_FETCH_ATTEMPTS = 3;
 
 export type PokeApiClientOptions = {
   baseUrl?: string;
@@ -13,7 +14,7 @@ export function createPokeApiClient(options: PokeApiClientOptions = {}) {
   const fetchPokemonResource = options.fetch ?? fetch;
 
   async function fetchPokemon(slug: string): Promise<PokeApiPokemon> {
-    const response = await fetchPokemonResource(`${baseUrl}/pokemon/${slug}`);
+    const response = await fetchWithRetry(`${baseUrl}/pokemon/${slug}`, fetchPokemonResource);
 
     if (response.ok) {
       return (await response.json()) as PokeApiPokemon;
@@ -24,7 +25,10 @@ export function createPokeApiClient(options: PokeApiClientOptions = {}) {
     }
 
     const fallbackSlug = await fetchDefaultPokemonVarietySlug(slug);
-    const fallbackResponse = await fetchPokemonResource(`${baseUrl}/pokemon/${fallbackSlug}`);
+    const fallbackResponse = await fetchWithRetry(
+      `${baseUrl}/pokemon/${fallbackSlug}`,
+      fetchPokemonResource,
+    );
 
     if (!fallbackResponse.ok) {
       throw new Error(
@@ -36,10 +40,13 @@ export function createPokeApiClient(options: PokeApiClientOptions = {}) {
   }
 
   async function fetchDefaultPokemonVarietySlug(slug: string) {
-    const response = await fetchPokemonResource(`${baseUrl}/pokemon-species/${slug}`);
+    const response = await fetchWithRetry(
+      `${baseUrl}/pokemon-species/${slug}`,
+      fetchPokemonResource,
+    );
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch ${slug}: 404 Not Found`);
+      throw new Error(`Failed to fetch ${slug}: ${response.status} ${response.statusText}`);
     }
 
     const species = (await response.json()) as PokeApiPokemonSpecies;
@@ -54,4 +61,26 @@ export function createPokeApiClient(options: PokeApiClientOptions = {}) {
   }
 
   return { fetchPokemon };
+}
+
+async function fetchWithRetry(url: string, fetchResource: Fetch) {
+  let lastError: unknown;
+
+  for (let attempt = 1; attempt <= MAX_FETCH_ATTEMPTS; attempt += 1) {
+    try {
+      return await fetchResource(url);
+    } catch (error) {
+      lastError = error;
+
+      if (attempt === MAX_FETCH_ATTEMPTS) break;
+
+      await sleep(250 * attempt);
+    }
+  }
+
+  throw lastError;
+}
+
+async function sleep(ms: number) {
+  await new Promise((resolve) => setTimeout(resolve, ms));
 }

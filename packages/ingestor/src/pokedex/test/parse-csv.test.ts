@@ -27,6 +27,25 @@ describe("parsePokemonCsv", () => {
     ]);
   });
 
+  it("skips comment lines", () => {
+    expect(
+      parsePokemonCsv(
+        [
+          "pokedex_number,name,form,pokeapi_name",
+          "# Gourgeist uses new Variety display names while PokeAPI keeps old slugs.",
+          "711,Gourgeist,medium-variety,gourgeist-average",
+        ].join("\n"),
+      ),
+    ).toEqual([
+      {
+        pokedexNumber: 711,
+        name: "Gourgeist",
+        form: "medium-variety",
+        pokeApiName: "gourgeist-average",
+      },
+    ]);
+  });
+
   it("requires pokedex_number and name headers", () => {
     expect(() => parsePokemonCsv("name\nPikachu")).toThrow(
       'CSV must include "pokedex_number" and "name" headers',

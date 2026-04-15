@@ -34,6 +34,12 @@ describe("normalizePokemon", () => {
               stat: { name: "speed", url: "https://pokeapi.co/api/v2/stat/6/" },
             },
           ],
+          types: [
+            {
+              slot: 1,
+              type: { name: "electric", url: "https://pokeapi.co/api/v2/type/13/" },
+            },
+          ],
         },
       ),
     ).toEqual({
