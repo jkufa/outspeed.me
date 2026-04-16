@@ -7,7 +7,7 @@
     SpeedTierFilters,
   } from "$lib/speed-tiers";
   import { collectPokemonFilterOptions } from "./filters/pokemon-filter/pokemon-filter-options";
-  import SpeedTierFiltersPanel from "./filters/speed-tier-filters.svelte";
+  import FiltersPanel from "./filters/filters-panel.svelte";
   import {
     buildSpeedTierTableRows,
     rowMatchesPokemonFind,
@@ -231,7 +231,7 @@
   </header>
 
   <div bind:this={stickyFiltersElement} class="sticky top-0 z-40 bg-background pt-6">
-    <SpeedTierFiltersPanel
+    <FiltersPanel
       bind:filters
       bind:findValue
       {filtersReady}
