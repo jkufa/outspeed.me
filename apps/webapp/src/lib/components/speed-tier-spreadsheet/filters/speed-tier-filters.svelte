@@ -37,15 +37,18 @@
   <div
     class="grid gap-4 md:grid-cols-[minmax(6rem,1fr)_repeat(4,minmax(14rem,auto))]"
   >
-    <FindPokemon
-      bind:value={findValue}
-      matchCountLabel={findMatchLabel}
-      hasMatches={hasFindMatches}
-      disabled={!filtersReady}
-      onNext={onFindNext}
-      onPrevious={onFindPrevious}
-      onClear={onFindClear}
-    />
+    <div class="grid text-sm gap-2">
+      <Label class="text-muted-foreground">Find Pokemon</Label>
+      <FindPokemon
+        bind:value={findValue}
+        matchCountLabel={findMatchLabel}
+        hasMatches={hasFindMatches}
+        disabled={!filtersReady}
+        onNext={onFindNext}
+        onPrevious={onFindPrevious}
+        onClear={onFindClear}
+      />
+    </div>
 
     <div class="grid text-sm gap-2">
       <Label class="text-muted-foreground">Pokemon</Label>

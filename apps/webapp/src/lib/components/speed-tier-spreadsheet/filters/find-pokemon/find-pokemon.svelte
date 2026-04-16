@@ -57,8 +57,6 @@
 </script>
 
 <label class="grid gap-2 text-sm">
-  <span class="text-muted-foreground">Find Pokemon</span>
-
   <InputGroup.Root data-disabled={disabled || undefined}>
     <InputGroup.Input
       bind:value
