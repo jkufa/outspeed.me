@@ -1,7 +1,12 @@
 import { groupSpeedTierRows } from "./display";
-import { statPointsToEvs } from "./format";
 import { fieldConditionFilterValues } from "./types";
-import type { SpeedTier, SpeedTierDisplayTier, SpeedTierFilters, SpeedTierPokemon } from "./types";
+import type {
+  SpeedTier,
+  SpeedTierDisplayTier,
+  SpeedTierFilters,
+  SpeedTierPokemon,
+  SpreadFilterKey,
+} from "./types";
 
 const fieldConditionFilterValueSet = new Set<string>(fieldConditionFilterValues);
 
@@ -10,8 +15,7 @@ export const defaultSpeedTierFilters: SpeedTierFilters = {
   pokemon: [],
   boosts: ["none"],
   fieldConditions: [],
-  nature: "any",
-  statPoints: "any",
+  spreads: [],
 };
 
 export function filterSpeedTiers(
@@ -51,15 +55,35 @@ function matchesFilters(pokemon: SpeedTierPokemon, filters: SpeedTierFilters, se
     return false;
   }
 
-  if (filters.nature !== "any" && pokemon.spread.nature !== filters.nature) {
-    return false;
-  }
-
-  if (filters.statPoints !== "any" && pokemon.spread.evs !== statPointsToEvs(filters.statPoints)) {
+  if (!matchesSpreadFilter(pokemon, filters.spreads)) {
     return false;
   }
 
   return true;
+}
+
+function spreadKeyFromPokemon(pokemon: SpeedTierPokemon): SpreadFilterKey | null {
+  const { nature, evs } = pokemon.spread;
+  if (nature === "positive") {
+    return evs === 252 ? "positive-252" : "positive-0";
+  }
+  if (nature === "neutral") {
+    return evs === 252 ? "neutral-252" : "neutral-0";
+  }
+  if (nature === "negative") {
+    return evs === 0 ? "negative-0" : null;
+  }
+  return null;
+}
+
+function matchesSpreadFilter(pokemon: SpeedTierPokemon, spreads: SpeedTierFilters["spreads"]) {
+  if (spreads.length === 0) {
+    return true;
+  }
+
+  const selected = new Set<string>(spreads);
+  const key = spreadKeyFromPokemon(pokemon);
+  return key !== null && selected.has(key);
 }
 
 function matchesBoostFilter(pokemon: SpeedTierPokemon, boosts: SpeedTierFilters["boosts"]) {

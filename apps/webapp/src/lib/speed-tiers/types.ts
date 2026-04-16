@@ -74,8 +74,15 @@ export const fieldConditionFilterValues = [
   "tailwind",
 ] as const;
 export type FieldConditionFilter = (typeof fieldConditionFilterValues)[number];
-export type NatureFilter = "any" | Nature;
-export type StatPointFilter = "any" | 0 | 32;
+/** Canonical spread filter keys; map to EV/nature combos in filter logic. */
+export const spreadFilterKeys = [
+  "positive-252",
+  "positive-0",
+  "neutral-252",
+  "neutral-0",
+  "negative-0",
+] as const;
+export type SpreadFilterKey = (typeof spreadFilterKeys)[number];
 
 export type SpeedTierFilters = {
   search: string;
@@ -83,8 +90,8 @@ export type SpeedTierFilters = {
   pokemon: number[];
   boosts: BoostFilter[];
   fieldConditions: FieldConditionFilter[];
-  nature: NatureFilter;
-  statPoints: StatPointFilter;
+  /** Selected spread rows to include; empty = no spread restriction. */
+  spreads: SpreadFilterKey[];
 };
 
 export type EffectChip = {

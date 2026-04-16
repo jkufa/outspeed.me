@@ -32,8 +32,7 @@
     pokemon: filters.pokemon,
     boosts: filters.boosts,
     fieldConditions: filters.fieldConditions,
-    nature: filters.nature,
-    statPoints: filters.statPoints,
+    spreads: filters.spreads,
   });
   const pokemonFilterOptions = $derived(
     collectPokemonFilterOptions(sourceTiers ?? initialTiers),

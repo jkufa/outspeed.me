@@ -3,17 +3,12 @@
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
   import { Input } from "$lib/components/ui/input";
   import { Label } from "$lib/components/ui/label";
-  import * as Select from "$lib/components/ui/select";
   import { cn } from "$lib/utils";
-  import type {
-    BoostFilter,
-    NatureFilter,
-    SpeedTierFilters,
-    StatPointFilter,
-  } from "$lib/speed-tiers";
+  import type { BoostFilter, SpeedTierFilters } from "$lib/speed-tiers";
   import FieldConditionFilter from "./field-condition-filter/field-condition-filter.svelte";
   import PokemonFilter from "./pokemon-filter/pokemon-filter.svelte";
   import type { PokemonFilterOption } from "./pokemon-filter/pokemon-filter-options";
+  import SpreadFilter from "./spread-filter/spread-filter.svelte";
 
   let {
     filters = $bindable(),
@@ -38,25 +33,6 @@
     searchDebounceTimer = setTimeout(() => {
       filters = { ...filters, search: searchInput };
     }, 300);
-  }
-
-  function natureLabel(nature: NatureFilter) {
-    if (nature === "positive") return "+Spe";
-    if (nature === "negative") return "-Spe";
-    if (nature === "neutral") return "neutral";
-    return "All";
-  }
-
-  function statPointsLabel(statPoints: StatPointFilter) {
-    if (statPoints === "any") return "All";
-    return `${statPoints} SP`;
-  }
-
-  function updateStatPoints(value: string) {
-    filters = {
-      ...filters,
-      statPoints: value === "any" ? "any" : (Number(value) as 0 | 32),
-    };
   }
 
   function boostsLabel(boosts: BoostFilter[]) {
@@ -106,7 +82,7 @@
 
 <section aria-label="Speed tier filters" class="grid gap-3">
   <div
-    class="grid gap-3 md:grid-cols-[minmax(6rem,1fr)_minmax(14rem,auto)_repeat(4,minmax(14rem,auto))]"
+    class="grid gap-4 md:grid-cols-[minmax(6rem,1fr)_minmax(14rem,auto)_repeat(2,minmax(14rem,auto))_10rem]"
   >
     <label class="grid gap-2 text-sm">
       <span class="text-muted-foreground">Search Pokemon</span>
@@ -118,7 +94,7 @@
       />
     </label>
 
-    <div class="grid text-sm">
+    <div class="grid text-sm gap-2">
       <Label class="text-muted-foreground">Pokemon</Label>
       <PokemonFilter
         bind:value={filters.pokemon}
@@ -174,7 +150,7 @@
       </DropdownMenu.Root>
     </div>
 
-    <div class="grid text-sm">
+    <div class="grid text-sm gap-2">
       <Label class="text-muted-foreground">Field Condition</Label>
       <FieldConditionFilter
         bind:value={filters.fieldConditions}
@@ -182,57 +158,10 @@
       />
     </div>
 
-    <label class="grid text-sm">
-      <span class="text-muted-foreground">Spread</span>
-      <Select.Root
-        type="single"
-        value={filters.nature}
-        onValueChange={(value: string) =>
-          (filters = { ...filters, nature: value as NatureFilter })}
-      >
-        <Select.Trigger
-          class="w-full"
-          disabled={!filtersReady}
-          aria-label={`Spread: ${natureLabel(filters.nature)}`}
-        >
-          <span data-slot="select-value">{natureLabel(filters.nature)}</span>
-        </Select.Trigger>
-        <Select.Content>
-          <Select.Group>
-            <Select.Item value="any" label="All" />
-            <Select.Item value="positive" label="+Spe" />
-            <Select.Item value="neutral" label="neutral" />
-            <Select.Item value="negative" label="-Spe" />
-          </Select.Group>
-        </Select.Content>
-      </Select.Root>
-    </label>
-
-    <label class="gridfrp text-sm">
-      <span class="text-muted-foreground">SP</span>
-      <Select.Root
-        type="single"
-        value={String(filters.statPoints)}
-        onValueChange={updateStatPoints}
-      >
-        <Select.Trigger
-          class="w-full"
-          disabled={!filtersReady}
-          aria-label={`SP: ${statPointsLabel(filters.statPoints)}`}
-        >
-          <span data-slot="select-value"
-            >{statPointsLabel(filters.statPoints)}</span
-          >
-        </Select.Trigger>
-        <Select.Content>
-          <Select.Group>
-            <Select.Item value="any" label="All" />
-            <Select.Item value="32" label="32 SP" />
-            <Select.Item value="0" label="0 SP" />
-          </Select.Group>
-        </Select.Content>
-      </Select.Root>
-    </label>
+    <div class="grid text-sm gap-2">
+      <Label class="text-muted-foreground">Spreads</Label>
+      <SpreadFilter bind:value={filters.spreads} disabled={!filtersReady} />
+    </div>
   </div>
 
   <div class="flex flex-wrap items-center gap-2">

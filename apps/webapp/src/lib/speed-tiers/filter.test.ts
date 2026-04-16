@@ -160,14 +160,13 @@ describe("filterSpeedTiers", () => {
     ).toStrictEqual([308, 250]);
   });
 
-  it("filters by effect kind, field condition, nature, and stat points", () => {
+  it("filters by effect kind, field condition, and spreads", () => {
     expect(
       filterSpeedTiers(tiers, {
         ...defaultSpeedTierFilters,
         boosts: ["ability"],
         fieldConditions: ["sand"],
-        nature: "positive",
-        statPoints: 32,
+        spreads: ["positive-252"],
       }).map((tier) => tier.speed),
     ).toStrictEqual([308]);
 
