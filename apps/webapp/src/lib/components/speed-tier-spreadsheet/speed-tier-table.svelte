@@ -15,7 +15,6 @@
     renderComponent,
   } from "$lib/components/ui/data-table";
   import {
-    Table,
     TableBody,
     TableCell,
     TableHead,
@@ -38,11 +37,13 @@
     tiers,
     findMatchIds,
     activeFindMatchId,
+    headerTopOffset,
     onRowOrderChange,
   }: {
     tiers: SpeedTierDisplayTier[];
     findMatchIds: string[];
     activeFindMatchId: string | null;
+    headerTopOffset: number;
     onRowOrderChange: (rowOrder: string[]) => void;
   } = $props();
 
@@ -206,23 +207,27 @@
   </div>
 {:else}
   <div class="hidden md:block">
-    <Table class="table-fixed">
+    <table class="w-full table-fixed caption-bottom text-sm">
       <colgroup>
         <col class="w-[8%]" />
         <col class="w-[45%]" />
         <col class="w-[17%]" />
         <col class="w-[30%]" />
       </colgroup>
-      <TableHeader class="sticky top-0 z-20 bg-background">
+      <TableHeader>
         {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
-          <TableRow>
+          <TableRow class="border-none">
             {#each headerGroup.headers as header (header.id)}
               <TableHead
                 colspan={header.colSpan}
                 aria-sort={sortDirectionLabel(
                   header.column.id === "speed" ? speedSortDirection : false,
                 )}
-                class={header.column.id === "speed" ? "sticky left-0 z-30" : ""}
+                class={cn(
+                  "sticky z-20 bg-background shadow-[inset_0_-1px_0_0_var(--color-border)]",
+                  header.column.id === "speed" ? "left-0 z-30" : "",
+                )}
+                style={`top: ${headerTopOffset}px;`}
               >
                 {#if !header.isPlaceholder}
                   {#if header.column.id === "speed"}
@@ -257,8 +262,12 @@
           {@const isActiveFindMatch = activeFindMatchId === row.id}
           {@const visibleCells = row
             .getVisibleCells()
-            .filter((cell) => cell.column.id !== "speed" || row.original.showSpeed)}
-          {@const borderedCells = visibleCells.filter((cell) => cell.column.id !== "speed")}
+            .filter(
+              (cell) => cell.column.id !== "speed" || row.original.showSpeed,
+            )}
+          {@const borderedCells = visibleCells.filter(
+            (cell) => cell.column.id !== "speed",
+          )}
           <TableRow
             data-find-row={row.id}
             class={cn(
@@ -283,14 +292,16 @@
                       ? "align-top whitespace-normal"
                       : "align-top tabular-nums",
                   cell.column.id === "speed"
-                      ? isFindMatch
-                        ? "bg-accent/25"
-                        : "bg-background"
+                    ? isFindMatch
+                      ? "bg-accent/25"
+                      : "bg-background"
                     : "",
                   isActiveFindMatch && cell.column.id !== "speed"
                     ? cn(
                         "border-y border-ring",
-                        cell === borderedCells[0] ? "border-l border-l-ring" : "",
+                        cell === borderedCells[0]
+                          ? "border-l border-l-ring"
+                          : "",
                         cell === borderedCells[borderedCells.length - 1]
                           ? "border-r border-r-ring"
                           : "",
@@ -322,7 +333,7 @@
           </TableRow>
         {/each}
       </TableBody>
-    </Table>
+    </table>
   </div>
 
   <div class="grid gap-4 md:hidden">

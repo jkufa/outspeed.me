@@ -35,6 +35,8 @@
   let activeFindMatchId = $state<string | null>(null);
   let activeFindMatchIndexHint = $state(0);
   let filtersReady = $state(false);
+  let stickyFiltersElement = $state<HTMLElement | null>(null);
+  let stickyFiltersHeight = $state(0);
   let dataLoadState = $state<"loading" | "ready" | "error">("loading");
   const activeFilters = $derived({
     pokemon: filters.pokemon,
@@ -124,9 +126,32 @@
       }
     }
 
-    const nextIndex = Math.min(activeFindMatchIndexHint, findMatchIds.length - 1);
+    const nextIndex = Math.min(
+      activeFindMatchIndexHint,
+      findMatchIds.length - 1,
+    );
     activeFindMatchIndexHint = nextIndex;
     activeFindMatchId = findMatchIds[nextIndex] ?? null;
+  });
+
+  $effect(() => {
+    const element = stickyFiltersElement;
+
+    if (element === null || typeof ResizeObserver === "undefined") {
+      stickyFiltersHeight = 0;
+      return;
+    }
+
+    const updateStickyFiltersHeight = () => {
+      stickyFiltersHeight = element.offsetHeight;
+    };
+
+    updateStickyFiltersHeight();
+
+    const resizeObserver = new ResizeObserver(updateStickyFiltersHeight);
+    resizeObserver.observe(element);
+
+    return () => resizeObserver.disconnect();
   });
 
   function updateTableRowOrder(nextRowOrder: string[]) {
@@ -166,7 +191,9 @@
     }
 
     setActiveFindMatch(
-      activeFindMatchId === null ? findMatchIds.length - 1 : activeFindMatchIndex - 1,
+      activeFindMatchId === null
+        ? findMatchIds.length - 1
+        : activeFindMatchIndex - 1,
     );
   }
 
@@ -203,23 +230,26 @@
     </p>
   </header>
 
-  <SpeedTierFiltersPanel
-    bind:filters
-    bind:findValue
-    {filtersReady}
-    {rowsLabel}
-    {pokemonFilterOptions}
-    findMatchLabel={findMatchLabel}
-    hasFindMatches={findMatchIds.length > 0}
-    onFindNext={goToNextFindMatch}
-    onFindPrevious={goToPreviousFindMatch}
-    onFindClear={clearFind}
-  />
+  <div bind:this={stickyFiltersElement} class="sticky top-0 z-40 bg-background pt-6">
+    <SpeedTierFiltersPanel
+      bind:filters
+      bind:findValue
+      {filtersReady}
+      {rowsLabel}
+      {pokemonFilterOptions}
+      {findMatchLabel}
+      hasFindMatches={findMatchIds.length > 0}
+      onFindNext={goToNextFindMatch}
+      onFindPrevious={goToPreviousFindMatch}
+      onFindClear={clearFind}
+    />
+  </div>
 
   <SpeedTierTable
     tiers={filteredTiers}
-    findMatchIds={findMatchIds}
-    activeFindMatchId={activeFindMatchId}
+    {findMatchIds}
+    {activeFindMatchId}
+    headerTopOffset={stickyFiltersHeight}
     onRowOrderChange={updateTableRowOrder}
   />
 </main>

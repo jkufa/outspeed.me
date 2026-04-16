@@ -26,7 +26,6 @@
   emptyText="No spreads found"
   ariaLabel={spreadFilterAriaLabel(value)}
   options={spreadFilterOptions}
-  class="rounded-full text-xs"
 >
   {#snippet content({
     options,
@@ -49,13 +48,13 @@
           {#each options as option (option.value)}
             {@const parts = spreadFilterParts[option.value as SpreadFilterKey]}
             <Command.Item
-              class="font-mono text-xs tabular-nums"
+              class="font-mono text-sm tabular-nums"
               value={option.label}
               data-checked={isSelected(option.value)}
               onSelect={() => toggleOption(option.value)}
             >
               <span
-                class="flex min-w-0 max-w-24 flex-1 items-center justify-between gap-4 pr-1"
+                class="flex min-w-0 max-w-26 flex-1 items-center justify-between gap-4 pr-1"
               >
                 <span class="shrink-0 text-end">{parts.nature}</span>
                 <span class="text-end">{parts.points}</span>
