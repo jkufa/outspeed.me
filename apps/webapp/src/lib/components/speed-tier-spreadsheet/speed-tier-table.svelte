@@ -193,7 +193,7 @@
         return;
       }
 
-      rowElement.scrollIntoView({ block: "center", behavior: "smooth" });
+      rowElement.scrollIntoView({ block: "center", behavior: "auto" });
     })();
   });
 </script>
