@@ -10,4 +10,6 @@
   } = $props();
 </script>
 
-<Command.Item value="All" data-checked={checked} {onSelect}>All</Command.Item>
+<Command.Item value="All" data-checked={checked} {onSelect} class="first:mt-1">
+  All
+</Command.Item>
