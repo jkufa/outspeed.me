@@ -226,11 +226,15 @@
   <header class="flex flex-col gap-2">
     <h1 class="text-2xl font-semibold tracking-tight">Speed tiers</h1>
     <p class="max-w-3xl text-sm text-muted-foreground">
-      Find Pokemon by reachable speed, spread, and emitted effect conditions.
+      Find which Pokemon hit key Speed stats with specific spreads and active
+      effects.
     </p>
   </header>
 
-  <div bind:this={stickyFiltersElement} class="sticky top-0 z-40 bg-background pt-6">
+  <div
+    bind:this={stickyFiltersElement}
+    class="sticky top-0 z-40 bg-background pt-6"
+  >
     <FiltersPanel
       bind:filters
       bind:findValue
