@@ -21,6 +21,7 @@
 <MultiFilterCombobox
   bind:value
   {disabled}
+  maxVisibleChips={1}
   placeholder="All spreads"
   searchPlaceholder="Search spreads..."
   emptyText="No spreads found"

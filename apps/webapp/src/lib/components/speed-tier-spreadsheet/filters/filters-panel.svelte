@@ -35,9 +35,9 @@
 
 <section aria-label="Speed tier filters" class="grid gap-3">
   <div
-    class="grid gap-4 md:grid-cols-[minmax(6rem,1fr)_repeat(4,minmax(14rem,auto))]"
+    class="grid gap-4 md:grid-cols-2 lg:grid-cols-[minmax(0,1.2fr)_repeat(2,minmax(0,1fr))_minmax(0,10rem)_minmax(0,12rem)]"
   >
-    <div class="grid text-sm gap-2">
+    <div class="grid min-w-0 gap-2 text-sm md:col-span-2 lg:col-span-1">
       <Label class="text-muted-foreground">Find Pokemon</Label>
       <FindPokemon
         bind:value={findValue}
@@ -50,7 +50,7 @@
       />
     </div>
 
-    <div class="grid text-sm gap-2">
+    <div class="grid min-w-0 gap-2 text-sm">
       <Label class="text-muted-foreground">Pokemon</Label>
       <PokemonFilter
         bind:value={filters.pokemon}
@@ -59,7 +59,7 @@
       />
     </div>
 
-    <div class="grid text-sm gap-2">
+    <div class="grid min-w-0 gap-2 text-sm">
       <Label class="text-muted-foreground">Field Condition</Label>
       <FieldConditionFilter
         bind:value={filters.fieldConditions}
@@ -67,12 +67,12 @@
       />
     </div>
 
-    <div class="grid text-sm gap-2">
+    <div class="grid min-w-0 gap-2 text-sm lg:w-40 lg:max-w-40">
       <Label class="text-muted-foreground">Spreads</Label>
       <SpreadFilter bind:value={filters.spreads} disabled={!filtersReady} />
     </div>
 
-    <div class="grid text-sm gap-2">
+    <div class="grid min-w-0 gap-2 text-sm lg:w-48 lg:max-w-48">
       <Label class="text-muted-foreground">Items</Label>
       <ItemFilter bind:value={filters.items} disabled={!filtersReady} />
     </div>

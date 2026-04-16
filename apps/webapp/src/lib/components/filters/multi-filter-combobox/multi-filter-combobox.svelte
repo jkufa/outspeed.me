@@ -15,6 +15,7 @@
   let {
     options,
     value = $bindable<Array<string | number>>([]),
+    maxVisibleChips = 2,
     placeholder = "All",
     searchPlaceholder = "Search...",
     emptyText = "No results found",
@@ -98,7 +99,7 @@
       return;
     }
 
-    if (selectedOptionCount <= 2) {
+    if (selectedOptionCount <= maxVisibleChips) {
       visibleChipCount = selectedOptionCount;
       return;
     }
@@ -121,17 +122,20 @@
       .map((chip) => chip.getBoundingClientRect().width);
 
     if (availableWidth === 0 || chipWidths.every((width) => width === 0)) {
-      visibleChipCount = selectedOptionCount;
+      visibleChipCount = Math.min(selectedOptionCount, maxVisibleChips);
       return;
     }
 
-    visibleChipCount = calculateVisibleChipCount({
-      availableWidth,
-      chipWidths,
-      overflowBadgeWidth:
-        overflowBadgeElement?.getBoundingClientRect().width ?? 0,
-      gapWidth: 4,
-    });
+    visibleChipCount = Math.min(
+      maxVisibleChips,
+      calculateVisibleChipCount({
+        availableWidth,
+        chipWidths,
+        overflowBadgeWidth:
+          overflowBadgeElement?.getBoundingClientRect().width ?? 0,
+        gapWidth: 4,
+      }),
+    );
   }
 
   $effect(() => {
@@ -172,14 +176,19 @@
         disabled={disabled || Boolean(props.disabled)}
         aria-label={triggerAriaLabel}
         aria-expanded={open}
-        class={cn("w-full justify-between", className)}
+        class={cn(
+          "w-full min-w-0 max-w-full shrink justify-between overflow-hidden px-2",
+          className,
+        )}
       >
         <span
           bind:this={valueAreaRef}
-          class="flex w-full min-w-0 flex-1 items-center gap-1 overflow-hidden"
+          class="flex w-full min-w-0 max-w-full flex-1 items-center gap-1 overflow-hidden"
         >
           {#if selectedOptions.length === 0}
-            <span class="truncate text-muted-foreground">{placeholder}</span>
+            <span class="truncate text-muted-foreground px-2"
+              >{placeholder}</span
+            >
           {:else}
             {#each visibleOptions as option (option.value)}
               <Badge variant="secondary" class="max-w-28 shrink-0">
@@ -235,6 +244,7 @@
 {#if selectedOptions.length > 0}
   <div
     bind:this={measurementRef}
+    aria-hidden="true"
     class="pointer-events-none absolute -z-10 flex h-0 gap-1 overflow-hidden opacity-0"
   >
     {#each selectedOptions as option (option.value)}

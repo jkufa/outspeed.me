@@ -34,6 +34,8 @@ export type MultiFilterComboboxProps = {
   options: MultiFilterComboboxOption[];
   /** Selected option values. Bindable; empty array means all/no restriction for callers. */
   value: Array<string | number>;
+  /** Maximum number of chips shown in trigger before collapsing into overflow badge. Defaults to 2. */
+  maxVisibleChips?: number;
   /** Trigger text when no values are selected. Defaults to "All". */
   placeholder?: string;
   /** Search input placeholder in the default command content. Defaults to "Search...". */
