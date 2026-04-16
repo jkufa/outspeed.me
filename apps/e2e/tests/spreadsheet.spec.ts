@@ -33,14 +33,33 @@ test("sorts speed tiers by the speed header", async ({ page }) => {
 	await expect(page.getByText("Mega Alakazam").first()).toBeVisible();
 });
 
-test("debounces Pokemon search before filtering rows", async ({ page }) => {
+test("debounces find results without filtering visible rows", async ({ page }) => {
 	await page.goto("/");
 
-	const search = page.getByPlaceholder("Excadrill");
-	await search.fill("Excadrill");
+	const find = page.getByLabel("Find Pokemon");
+	await find.fill("Whimsicott");
 
-	await expect(page.getByText("Excadrill").first()).toBeVisible();
-	await expect(page.getByText("Whimsicott")).toHaveCount(0);
+	await expect(page.getByText("1 of 1")).toBeVisible();
+	await expect(page.getByText("Whimsicott").first()).toBeVisible();
+	await expect(page.getByText("Mega Alakazam").first()).toBeVisible();
+
+	await page.getByRole("button", { name: "Clear search" }).click();
+	await expect(page.getByText("1 of 1")).toHaveCount(0);
+});
+
+test("find only matches rows that remain after filters", async ({ page }) => {
+	await page.goto("/");
+
+	await page.getByRole("button", { name: "Pokemon: all species" }).click();
+	await page.getByPlaceholder("Search Pokemon...").fill("Mega Alakazam");
+	await page.getByRole("option", { name: "Mega Alakazam" }).click();
+
+	await expect(page.getByRole("button", { name: "Pokemon: Mega Alakazam" })).toBeVisible();
+
+	const find = page.getByLabel("Find Pokemon");
+	await find.fill("Whimsicott");
+
+	await expect(page.getByText("No matches")).toBeVisible();
 });
 
 test("shows item-boosted rows when Choice Scarf is selected", async ({ page }) => {

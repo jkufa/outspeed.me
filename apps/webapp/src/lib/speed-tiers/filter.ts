@@ -11,7 +11,6 @@ import type {
 const fieldConditionFilterValueSet = new Set<string>(fieldConditionFilterValues);
 
 export const defaultSpeedTierFilters: SpeedTierFilters = {
-  search: "",
   pokemon: [],
   items: [],
   fieldConditions: [],
@@ -22,27 +21,17 @@ export function filterSpeedTiers(
   tiers: SpeedTier[],
   filters: SpeedTierFilters,
 ): SpeedTierDisplayTier[] {
-  const search = filters.search.trim().toLocaleLowerCase();
-
   const filteredTiers = tiers
     .map((tier) => ({
       speed: tier.speed,
-      pokemon: tier.pokemon.filter((pokemon) => matchesFilters(pokemon, filters, search)),
+      pokemon: tier.pokemon.filter((pokemon) => matchesFilters(pokemon, filters)),
     }))
     .filter((tier) => tier.pokemon.length > 0);
 
   return groupSpeedTierRows(filteredTiers);
 }
 
-function matchesFilters(pokemon: SpeedTierPokemon, filters: SpeedTierFilters, search: string) {
-  if (
-    search !== "" &&
-    !pokemon.name.toLocaleLowerCase().includes(search) &&
-    !pokemon.slug?.toLocaleLowerCase().includes(search)
-  ) {
-    return false;
-  }
-
+function matchesFilters(pokemon: SpeedTierPokemon, filters: SpeedTierFilters) {
   if (filters.pokemon.length > 0 && !filters.pokemon.includes(pokemon.pokedexNo)) {
     return false;
   }

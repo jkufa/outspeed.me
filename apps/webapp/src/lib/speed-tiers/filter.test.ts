@@ -94,7 +94,7 @@ const tiers: SpeedTier[] = [
 
 describe("filterSpeedTiers", () => {
   it("keeps matching setup rows and omits empty groups", () => {
-    expect(filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, search: "drill" })).toStrictEqual([
+    expect(filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, pokemon: [530] })).toStrictEqual([
       {
         speed: tiers[0].speed,
         pokemon: [
@@ -170,14 +170,6 @@ describe("filterSpeedTiers", () => {
         fieldConditions: ["sand"],
       }).map((tier) => tier.speed),
     ).toStrictEqual([308, 222]);
-  });
-
-  it("matches search against slug", () => {
-    expect(
-      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, search: "aero" }).map(
-        (tier) => tier.speed,
-      ),
-    ).toStrictEqual([222]);
   });
 
   it("filters to selected species by pokedex number", () => {

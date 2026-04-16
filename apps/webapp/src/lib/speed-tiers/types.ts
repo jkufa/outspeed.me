@@ -87,7 +87,6 @@ export const spreadFilterKeys = [
 export type SpreadFilterKey = (typeof spreadFilterKeys)[number];
 
 export type SpeedTierFilters = {
-  search: string;
   /** Pokedex numbers; empty = no species restriction. */
   pokemon: number[];
   items: ItemFilter[];

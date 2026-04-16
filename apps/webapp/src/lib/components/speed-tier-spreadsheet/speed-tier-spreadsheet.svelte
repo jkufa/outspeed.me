@@ -8,6 +8,10 @@
   } from "$lib/speed-tiers";
   import { collectPokemonFilterOptions } from "./filters/pokemon-filter/pokemon-filter-options";
   import SpeedTierFiltersPanel from "./filters/speed-tier-filters.svelte";
+  import {
+    buildSpeedTierTableRows,
+    rowMatchesPokemonFind,
+  } from "./speed-tier-table-rows";
   import SpeedTierTable from "./speed-tier-table.svelte";
 
   let {
@@ -25,10 +29,14 @@
   let initialTiers = $state([...tiers]);
   let sourceTiers = $state<SpeedTier[] | null>(null);
   let filters = $state<SpeedTierFilters>({ ...defaultSpeedTierFilters });
+  let findValue = $state("");
+  let debouncedFindValue = $state("");
+  let tableRowOrder = $state<string[]>([]);
+  let activeFindMatchId = $state<string | null>(null);
+  let activeFindMatchIndexHint = $state(0);
   let filtersReady = $state(false);
   let dataLoadState = $state<"loading" | "ready" | "error">("loading");
   const activeFilters = $derived({
-    search: filters.search,
     pokemon: filters.pokemon,
     items: filters.items,
     fieldConditions: filters.fieldConditions,
@@ -45,6 +53,38 @@
   const visibleRows = $derived(
     filteredTiers.reduce((total, tier) => total + tier.pokemon.length, 0),
   );
+  const tableRows = $derived(buildSpeedTierTableRows(filteredTiers));
+  const orderedTableRows = $derived.by(() => {
+    if (tableRowOrder.length !== tableRows.length) {
+      return tableRows;
+    }
+
+    const rowsByKey = new Map(tableRows.map((row) => [row.rowKey, row]));
+    const orderedRows = tableRowOrder
+      .map((rowKey) => rowsByKey.get(rowKey))
+      .filter((row) => row !== undefined);
+
+    return orderedRows.length === tableRows.length ? orderedRows : tableRows;
+  });
+  const findMatchIds = $derived(
+    orderedTableRows
+      .filter((row) => rowMatchesPokemonFind(row, debouncedFindValue))
+      .map((row) => row.rowKey),
+  );
+  const activeFindMatchIndex = $derived(
+    activeFindMatchId === null ? -1 : findMatchIds.indexOf(activeFindMatchId),
+  );
+  const findMatchLabel = $derived.by(() => {
+    if (debouncedFindValue.trim() === "") {
+      return null;
+    }
+
+    if (findMatchIds.length === 0) {
+      return "No matches";
+    }
+
+    return `${Math.max(activeFindMatchIndex, 0) + 1} of ${findMatchIds.length}`;
+  });
   const rowsLabel = $derived(
     dataLoadState === "loading"
       ? `${visibleRows} of ${totalRows} rows. Loading full table...`
@@ -52,6 +92,90 @@
         ? `${visibleRows} rows. Full table failed to load.`
         : `${visibleRows} rows`,
   );
+
+  $effect(() => {
+    const nextValue = findValue;
+
+    if (nextValue.trim() === "") {
+      debouncedFindValue = "";
+      return;
+    }
+
+    const debounceTimer = setTimeout(() => {
+      debouncedFindValue = nextValue;
+    }, 300);
+
+    return () => clearTimeout(debounceTimer);
+  });
+
+  $effect(() => {
+    if (debouncedFindValue.trim() === "" || findMatchIds.length === 0) {
+      activeFindMatchId = null;
+      activeFindMatchIndexHint = 0;
+      return;
+    }
+
+    if (activeFindMatchId !== null) {
+      const currentIndex = findMatchIds.indexOf(activeFindMatchId);
+
+      if (currentIndex !== -1) {
+        activeFindMatchIndexHint = currentIndex;
+        return;
+      }
+    }
+
+    const nextIndex = Math.min(activeFindMatchIndexHint, findMatchIds.length - 1);
+    activeFindMatchIndexHint = nextIndex;
+    activeFindMatchId = findMatchIds[nextIndex] ?? null;
+  });
+
+  function updateTableRowOrder(nextRowOrder: string[]) {
+    if (
+      nextRowOrder.length === tableRowOrder.length &&
+      nextRowOrder.every((rowKey, index) => rowKey === tableRowOrder[index])
+    ) {
+      return;
+    }
+
+    tableRowOrder = nextRowOrder;
+  }
+
+  function setActiveFindMatch(index: number) {
+    if (findMatchIds.length === 0) {
+      return;
+    }
+
+    const normalizedIndex = (index + findMatchIds.length) % findMatchIds.length;
+    activeFindMatchIndexHint = normalizedIndex;
+    activeFindMatchId = findMatchIds[normalizedIndex] ?? null;
+  }
+
+  function goToNextFindMatch() {
+    if (findMatchIds.length === 0) {
+      return;
+    }
+
+    setActiveFindMatch(
+      activeFindMatchId === null ? 0 : activeFindMatchIndex + 1,
+    );
+  }
+
+  function goToPreviousFindMatch() {
+    if (findMatchIds.length === 0) {
+      return;
+    }
+
+    setActiveFindMatch(
+      activeFindMatchId === null ? findMatchIds.length - 1 : activeFindMatchIndex - 1,
+    );
+  }
+
+  function clearFind() {
+    findValue = "";
+    debouncedFindValue = "";
+    activeFindMatchId = null;
+    activeFindMatchIndexHint = 0;
+  }
 
   onMount(async () => {
     try {
@@ -81,10 +205,21 @@
 
   <SpeedTierFiltersPanel
     bind:filters
+    bind:findValue
     {filtersReady}
     {rowsLabel}
     {pokemonFilterOptions}
+    findMatchLabel={findMatchLabel}
+    hasFindMatches={findMatchIds.length > 0}
+    onFindNext={goToNextFindMatch}
+    onFindPrevious={goToPreviousFindMatch}
+    onFindClear={clearFind}
   />
 
-  <SpeedTierTable tiers={filteredTiers} />
+  <SpeedTierTable
+    tiers={filteredTiers}
+    findMatchIds={findMatchIds}
+    activeFindMatchId={activeFindMatchId}
+    onRowOrderChange={updateTableRowOrder}
+  />
 </main>

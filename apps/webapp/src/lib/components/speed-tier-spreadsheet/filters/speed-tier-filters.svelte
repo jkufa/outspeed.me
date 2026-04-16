@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Input } from "$lib/components/ui/input";
   import { Label } from "$lib/components/ui/label";
   import type { SpeedTierFilters } from "$lib/speed-tiers";
+  import FindPokemon from "./find-pokemon/find-pokemon.svelte";
   import FieldConditionFilter from "./field-condition-filter/field-condition-filter.svelte";
   import ItemFilter from "./item-filter/item-filter.svelte";
   import PokemonFilter from "./pokemon-filter/pokemon-filter.svelte";
@@ -13,40 +13,39 @@
     filtersReady,
     rowsLabel,
     pokemonFilterOptions,
+    findValue = $bindable(""),
+    findMatchLabel,
+    hasFindMatches,
+    onFindNext,
+    onFindPrevious,
+    onFindClear,
   }: {
     filters: SpeedTierFilters;
     filtersReady: boolean;
     rowsLabel: string;
     pokemonFilterOptions: PokemonFilterOption[];
+    findValue?: string;
+    findMatchLabel: string | null;
+    hasFindMatches: boolean;
+    onFindNext: () => void;
+    onFindPrevious: () => void;
+    onFindClear: () => void;
   } = $props();
-
-  let searchInput = $state(filters.search);
-  let searchDebounceTimer: ReturnType<typeof setTimeout> | undefined =
-    undefined;
-
-  function updateSearch(event: Event) {
-    searchInput = (event.currentTarget as HTMLInputElement).value;
-    clearTimeout(searchDebounceTimer);
-
-    searchDebounceTimer = setTimeout(() => {
-      filters = { ...filters, search: searchInput };
-    }, 300);
-  }
 </script>
 
 <section aria-label="Speed tier filters" class="grid gap-3">
   <div
     class="grid gap-4 md:grid-cols-[minmax(6rem,1fr)_repeat(4,minmax(14rem,auto))]"
   >
-    <label class="grid gap-2 text-sm">
-      <span class="text-muted-foreground">Search Pokemon</span>
-      <Input
-        value={searchInput}
-        placeholder="Excadrill"
-        disabled={!filtersReady}
-        oninput={updateSearch}
-      />
-    </label>
+    <FindPokemon
+      bind:value={findValue}
+      matchCountLabel={findMatchLabel}
+      hasMatches={hasFindMatches}
+      disabled={!filtersReady}
+      onNext={onFindNext}
+      onPrevious={onFindPrevious}
+      onClear={onFindClear}
+    />
 
     <div class="grid text-sm gap-2">
       <Label class="text-muted-foreground">Pokemon</Label>
