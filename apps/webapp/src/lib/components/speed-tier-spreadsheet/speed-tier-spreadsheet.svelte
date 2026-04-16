@@ -30,7 +30,7 @@
   const activeFilters = $derived({
     search: filters.search,
     pokemon: filters.pokemon,
-    boosts: filters.boosts,
+    items: filters.items,
     fieldConditions: filters.fieldConditions,
     spreads: filters.spreads,
   });

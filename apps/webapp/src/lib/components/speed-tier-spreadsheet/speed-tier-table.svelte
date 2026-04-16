@@ -228,7 +228,7 @@
                     ? row.original.speedGroupSize
                     : undefined}
                   class={cell.column.id === "speed"
-                    ? "sticky left-0 z-10 bg-background align-top tabular-nums transition-colors group-hover/row:bg-muted/50"
+                    ? "sticky left-0 z-10 bg-background align-top tabular-nums transition-colors"
                     : cell.column.id === "pokemon" ||
                         cell.column.id === "boosts"
                       ? "align-top whitespace-normal"

@@ -13,7 +13,7 @@ const fieldConditionFilterValueSet = new Set<string>(fieldConditionFilterValues)
 export const defaultSpeedTierFilters: SpeedTierFilters = {
   search: "",
   pokemon: [],
-  boosts: ["none"],
+  items: [],
   fieldConditions: [],
   spreads: [],
 };
@@ -47,7 +47,7 @@ function matchesFilters(pokemon: SpeedTierPokemon, filters: SpeedTierFilters, se
     return false;
   }
 
-  if (!matchesBoostFilter(pokemon, filters.boosts)) {
+  if (!matchesItemFilter(pokemon, filters.items)) {
     return false;
   }
 
@@ -76,6 +76,23 @@ function spreadKeyFromPokemon(pokemon: SpeedTierPokemon): SpreadFilterKey | null
   return null;
 }
 
+function matchesItemFilter(pokemon: SpeedTierPokemon, items: SpeedTierFilters["items"]) {
+  const pokemonItems = pokemon.effects
+    .filter((effect) => effect.kind === "item")
+    .map((effect) => effect.source);
+
+  if (pokemonItems.length === 0) {
+    return true;
+  }
+
+  if (items.length === 0) {
+    return false;
+  }
+
+  const selected = new Set<string>(items);
+  return pokemonItems.some((item) => selected.has(item));
+}
+
 function matchesSpreadFilter(pokemon: SpeedTierPokemon, spreads: SpeedTierFilters["spreads"]) {
   if (spreads.length === 0) {
     return true;
@@ -84,22 +101,6 @@ function matchesSpreadFilter(pokemon: SpeedTierPokemon, spreads: SpeedTierFilter
   const selected = new Set<string>(spreads);
   const key = spreadKeyFromPokemon(pokemon);
   return key !== null && selected.has(key);
-}
-
-function matchesBoostFilter(pokemon: SpeedTierPokemon, boosts: SpeedTierFilters["boosts"]) {
-  if (boosts.length === 0) {
-    return true;
-  }
-
-  if (boosts.includes("none")) {
-    return pokemon.effects.length === 0;
-  }
-
-  return boosts.some((boost) =>
-    boost === "ability"
-      ? pokemon.effects.some((effect) => effect.kind === "ability")
-      : pokemon.effects.some((effect) => effect.kind === "item"),
-  );
 }
 
 function matchesFieldConditionFilter(

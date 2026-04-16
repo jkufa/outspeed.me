@@ -61,7 +61,6 @@ export type SpeedTierDisplayTier = {
   pokemon: SpeedTierDisplayPokemon[];
 };
 
-export type BoostFilter = "none" | "ability" | "item";
 export const fieldConditionFilterValues = [
   "sun",
   "rain",
@@ -74,7 +73,10 @@ export const fieldConditionFilterValues = [
   "tailwind",
 ] as const;
 export type FieldConditionFilter = (typeof fieldConditionFilterValues)[number];
-/** Canonical spread filter keys; map to EV/nature combos in filter logic. */
+
+export const itemFilterValues = ["choice-scarf"] as const;
+export type ItemFilter = (typeof itemFilterValues)[number];
+
 export const spreadFilterKeys = [
   "positive-252",
   "positive-0",
@@ -88,9 +90,8 @@ export type SpeedTierFilters = {
   search: string;
   /** Pokedex numbers; empty = no species restriction. */
   pokemon: number[];
-  boosts: BoostFilter[];
+  items: ItemFilter[];
   fieldConditions: FieldConditionFilter[];
-  /** Selected spread rows to include; empty = no spread restriction. */
   spreads: SpreadFilterKey[];
 };
 
