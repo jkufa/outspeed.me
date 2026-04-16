@@ -26,6 +26,7 @@
   searchPlaceholder="Search spreads..."
   emptyText="No spreads found"
   ariaLabel={spreadFilterAriaLabel(value)}
+  clearAriaLabel="Clear spread filter"
   options={spreadFilterOptions}
 >
   {#snippet content({

@@ -46,6 +46,8 @@ export type MultiFilterComboboxProps = {
   disabled?: boolean;
   /** Accessible trigger label. Defaults to a summary of selected filters. */
   ariaLabel?: string;
+  /** Accessible label for trigger clear button. Defaults to "Clear selected filters". */
+  clearAriaLabel?: string;
   /** Optional custom shadcn-based dropdown content. */
   content?: Snippet<[MultiFilterComboboxContentContext]>;
   /** Optional classes applied to the trigger button. */

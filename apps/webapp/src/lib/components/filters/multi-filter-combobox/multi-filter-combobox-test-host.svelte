@@ -20,7 +20,13 @@
 <div class="flex flex-col gap-2" style:width>
   <Label>Filters</Label>
   {#if customContent}
-    <MultiFilterCombobox bind:value {options} placeholder="All" ariaLabel="Filters">
+    <MultiFilterCombobox
+      bind:value
+      {options}
+      placeholder="All"
+      ariaLabel="Filters"
+      clearAriaLabel="Clear filters"
+    >
       {#snippet content({ options, toggleOption, close })}
         <div class="flex flex-col gap-2 p-2">
           {#each options as option (option.value)}
@@ -37,7 +43,13 @@
       {/snippet}
     </MultiFilterCombobox>
   {:else}
-    <MultiFilterCombobox bind:value {options} placeholder="All" ariaLabel="Filters" />
+    <MultiFilterCombobox
+      bind:value
+      {options}
+      placeholder="All"
+      ariaLabel="Filters"
+      clearAriaLabel="Clear filters"
+    />
   {/if}
   <output aria-label="Selected value">{JSON.stringify(value)}</output>
 </div>

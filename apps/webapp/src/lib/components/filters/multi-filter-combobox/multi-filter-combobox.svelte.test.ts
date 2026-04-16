@@ -28,6 +28,12 @@ describe("MultiFilterCombobox", () => {
     await expect.element(trigger).toHaveTextContent("Rain");
   });
 
+  it("shows a clear button when filters are selected", async () => {
+    render(MultiFilterComboboxTestHost, { options, value: ["sun"] });
+
+    await expect.element(page.getByRole("button", { name: "Clear filters" })).toBeInTheDocument();
+  });
+
   it("collapses overflowing selected options into a count chip", async () => {
     render(MultiFilterComboboxTestHost, {
       options: [
@@ -53,6 +59,15 @@ describe("MultiFilterCombobox", () => {
     await page.getByRole("option", { name: "Sun" }).click();
 
     await expect.element(page.getByLabelText("Selected value")).toHaveTextContent("[]");
+  });
+
+  it("clears selected options from the trigger button", async () => {
+    render(MultiFilterComboboxTestHost, { options, value: ["sun", "rain"] });
+
+    await page.getByRole("button", { name: "Clear filters" }).click();
+
+    await expect.element(page.getByLabelText("Selected value")).toHaveTextContent("[]");
+    await expect.element(page.getByRole("button", { name: "Filters" })).toHaveTextContent("All");
   });
 
   it("does not select disabled options", async () => {

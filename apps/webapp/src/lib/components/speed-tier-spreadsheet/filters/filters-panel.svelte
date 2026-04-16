@@ -35,7 +35,7 @@
 
 <section aria-label="Speed tier filters" class="grid gap-3">
   <div
-    class="grid gap-4 md:grid-cols-2 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,10rem)_minmax(0,12rem)]"
+    class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,12.5rem)_minmax(0,12rem)_minmax(0,12rem)]"
   >
     <div class="grid min-w-0 gap-2 text-sm md:col-span-2 lg:col-span-1">
       <Label class="text-muted-foreground">Find Pokemon</Label>
@@ -67,12 +67,12 @@
       />
     </div>
 
-    <div class="grid min-w-0 gap-2 text-sm lg:w-40 lg:max-w-40">
+    <div class="grid min-w-0 gap-2 text-sm">
       <Label class="text-muted-foreground">Spreads</Label>
       <SpreadFilter bind:value={filters.spreads} disabled={!filtersReady} />
     </div>
 
-    <div class="grid min-w-0 gap-2 text-sm lg:w-48 lg:max-w-48">
+    <div class="grid min-w-0 gap-2 text-sm">
       <Label class="text-muted-foreground">Items</Label>
       <ItemFilter bind:value={filters.items} disabled={!filtersReady} />
     </div>

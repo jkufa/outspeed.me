@@ -25,6 +25,7 @@
   searchPlaceholder="Search field conditions..."
   emptyText="No field conditions found"
   ariaLabel={fieldConditionAriaLabel(value)}
+  clearAriaLabel="Clear field condition filter"
   options={fieldConditionFilterOptions}
 >
   {#snippet content({ options, value, isSelected, toggleOption, clear })}

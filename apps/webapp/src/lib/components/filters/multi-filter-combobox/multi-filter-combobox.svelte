@@ -1,5 +1,6 @@
 <script lang="ts">
   import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
+  import XIcon from "@lucide/svelte/icons/x";
   import { onMount, tick } from "svelte";
   import { Badge } from "$lib/components/ui/badge";
   import { Button } from "$lib/components/ui/button";
@@ -21,6 +22,7 @@
     emptyText = "No results found",
     disabled = false,
     ariaLabel,
+    clearAriaLabel = "Clear selected filters",
     content,
     class: className,
   }: MultiFilterComboboxProps = $props();
@@ -43,6 +45,7 @@
   const hiddenChipCount = $derived(
     Math.max(0, selectedOptions.length - visibleOptions.length),
   );
+  const canClear = $derived(!disabled && selectedOptions.length > 0);
   const triggerLabel = $derived(
     selectedOptions.length === 0
       ? placeholder
@@ -83,6 +86,12 @@
 
   function close() {
     open = false;
+  }
+
+  function handleClearClick(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    clear();
   }
 
   async function updateVisibleChipCount(
@@ -167,46 +176,64 @@
 </script>
 
 <Popover.Root bind:open>
-  <Popover.Trigger>
-    {#snippet child({ props })}
-      <Button
-        {...props}
-        type="button"
-        variant="outline"
-        disabled={disabled || Boolean(props.disabled)}
-        aria-label={triggerAriaLabel}
-        aria-expanded={open}
-        class={cn(
-          "w-full min-w-0 max-w-full shrink justify-between overflow-hidden px-2",
-          className,
-        )}
-      >
-        <span
-          bind:this={valueAreaRef}
-          class="flex w-full min-w-0 max-w-full flex-1 items-center gap-1 overflow-hidden"
+  <div class="relative">
+    <Popover.Trigger>
+      {#snippet child({ props })}
+        <Button
+          {...props}
+          type="button"
+          variant="outline"
+          disabled={disabled || Boolean(props.disabled)}
+          aria-label={triggerAriaLabel}
+          aria-expanded={open}
+          class={cn(
+            "w-full min-w-0 max-w-full shrink justify-between overflow-hidden px-2",
+            className,
+          )}
         >
-          {#if selectedOptions.length === 0}
-            <span class="truncate text-muted-foreground px-2"
-              >{placeholder}</span
-            >
-          {:else}
-            {#each visibleOptions as option (option.value)}
-              <Badge variant="secondary" class="max-w-28 shrink-0">
-                <span class="truncate">{option.label}</span>
-              </Badge>
-            {/each}
-
-            {#if hiddenChipCount > 0}
-              <Badge variant="secondary" class="shrink-0"
-                >+{hiddenChipCount}</Badge
+          <span
+            bind:this={valueAreaRef}
+            class="flex w-full min-w-0 max-w-full flex-1 items-center gap-1 overflow-hidden"
+          >
+            {#if selectedOptions.length === 0}
+              <span class="truncate text-muted-foreground px-2"
+                >{placeholder}</span
               >
+            {:else}
+              {#each visibleOptions as option (option.value)}
+                <Badge variant="secondary" class="max-w-28 shrink-0">
+                  <span class="truncate">{option.label}</span>
+                </Badge>
+              {/each}
+
+              {#if hiddenChipCount > 0}
+                <Badge variant="secondary" class="shrink-0"
+                  >+{hiddenChipCount}</Badge
+                >
+              {/if}
             {/if}
+          </span>
+          {#if canClear}
+            <span aria-hidden="true" class="size-6 shrink-0"></span>
           {/if}
-        </span>
-        <ChevronDownIcon data-icon="inline-end" class="text-muted-foreground" />
+          <ChevronDownIcon data-icon="inline-end" class="text-muted-foreground" />
+        </Button>
+      {/snippet}
+    </Popover.Trigger>
+
+    {#if canClear}
+      <Button
+        type="button"
+        variant="ghost"
+        size="icon-xs"
+        aria-label={clearAriaLabel}
+        class="absolute top-1/2 right-[1.875rem] z-10 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+        onclick={handleClearClick}
+      >
+        <XIcon />
       </Button>
-    {/snippet}
-  </Popover.Trigger>
+    {/if}
+  </div>
 
   <Popover.Content align="start" class="w-(--bits-popover-anchor-width) p-0">
     {#if content}

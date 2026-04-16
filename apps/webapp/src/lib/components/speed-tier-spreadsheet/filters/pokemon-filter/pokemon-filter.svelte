@@ -27,6 +27,7 @@
   searchPlaceholder="Search Pokemon..."
   emptyText="No Pokemon found"
   ariaLabel={pokemonFilterAriaLabel(value, options)}
+  clearAriaLabel="Clear Pokemon filter"
 >
   {#snippet content({ options: commandOptions, value: selected, isSelected, toggleOption, clear })}
     <Command.Root>

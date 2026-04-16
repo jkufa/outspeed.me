@@ -24,6 +24,7 @@
   placeholder="Items"
   emptyText="No items found"
   ariaLabel={itemFilterAriaLabel(value)}
+  clearAriaLabel="Clear item filter"
   class="rounded-full"
 >
   {#snippet content({ options, isSelected, toggleOption })}
