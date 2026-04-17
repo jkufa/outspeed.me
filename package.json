@@ -1,15 +1,15 @@
 {
   "name": "outspeed.me",
   "type": "module",
-	"private": true,
-	"scripts": {
-		"test": "bun --cwd apps/webapp test && bun --cwd packages/ingestor test",
-		"lint": "bun --cwd apps/webapp lint && bun --cwd packages/ingestor lint",
-		"fmt": "bun --cwd apps/webapp fmt && bun --cwd packages/ingestor fmt",
-		"typecheck": "bun --cwd apps/webapp typecheck && bun --cwd packages/ingestor typecheck",
-		"build": "bun --cwd apps/webapp build",
-		"dev": "bun --cwd apps/webapp dev"
-	},
+  "private": true,
+  "scripts": {
+    "test": "bun --cwd apps/webapp test && bun --cwd packages/ingestor test",
+    "lint": "bun --cwd apps/webapp lint && bun --cwd packages/ingestor lint",
+    "fmt": "bun --cwd apps/webapp fmt && bun --cwd packages/ingestor fmt",
+    "typecheck": "bun --cwd apps/webapp typecheck && bun --cwd packages/ingestor typecheck",
+    "build": "bun --cwd apps/webapp build",
+    "dev": "bun --cwd apps/webapp dev"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },

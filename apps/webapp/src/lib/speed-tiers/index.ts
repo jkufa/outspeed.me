@@ -18,22 +18,22 @@ export {
   querySpeedTiers,
 } from "./query";
 export type { SpeedTierQuery, SpeedTierQueryResult } from "./query";
+export { fieldConditionFilterValues, itemFilterValues, spreadFilterKeys } from "./types";
 export type {
-  BoostFilter,
   EffectChip,
+  FieldConditionFilter,
+  ItemFilter,
   Nature,
-  NatureFilter,
   PokemonSprite,
   SpeedEffect,
   SpeedEffectKind,
   SpeedEv,
   SpeedSpread,
+  SpreadFilterKey,
   SpeedTier,
   SpeedTierDisplayMember,
   SpeedTierDisplayPokemon,
   SpeedTierDisplayTier,
   SpeedTierFilters,
   SpeedTierPokemon,
-  StatPointFilter,
-  WeatherFilter,
 } from "./types";

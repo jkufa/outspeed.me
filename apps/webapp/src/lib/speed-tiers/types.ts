@@ -61,17 +61,37 @@ export type SpeedTierDisplayTier = {
   pokemon: SpeedTierDisplayPokemon[];
 };
 
-export type BoostFilter = "none" | "ability" | "item";
-export type WeatherFilter = "any" | "sun" | "rain" | "sand" | "snow";
-export type NatureFilter = "any" | Nature;
-export type StatPointFilter = "any" | 0 | 32;
+export const fieldConditionFilterValues = [
+  "sun",
+  "rain",
+  "sand",
+  "snow",
+  "electric-terrain",
+  "grassy-terrain",
+  "misty-terrain",
+  "psychic-terrain",
+  "tailwind",
+] as const;
+export type FieldConditionFilter = (typeof fieldConditionFilterValues)[number];
+
+export const itemFilterValues = ["choice-scarf"] as const;
+export type ItemFilter = (typeof itemFilterValues)[number];
+
+export const spreadFilterKeys = [
+  "positive-252",
+  "positive-0",
+  "neutral-252",
+  "neutral-0",
+  "negative-0",
+] as const;
+export type SpreadFilterKey = (typeof spreadFilterKeys)[number];
 
 export type SpeedTierFilters = {
-  search: string;
-  boosts: BoostFilter[];
-  weather: WeatherFilter;
-  nature: NatureFilter;
-  statPoints: StatPointFilter;
+  /** Pokedex numbers; empty = no species restriction. */
+  pokemon: number[];
+  items: ItemFilter[];
+  fieldConditions: FieldConditionFilter[];
+  spreads: SpreadFilterKey[];
 };
 
 export type EffectChip = {

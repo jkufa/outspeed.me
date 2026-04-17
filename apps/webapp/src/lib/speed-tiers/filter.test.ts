@@ -66,13 +66,35 @@ const tiers: SpeedTier[] = [
       },
     ],
   },
+  {
+    speed: 180,
+    pokemon: [
+      {
+        combinationId: "pokemon:4|nature:neutral|evs:0|field:tailwind",
+        id: 4,
+        slug: "charizard",
+        pokedexNo: 6,
+        name: "Charizard",
+        sprite: null,
+        spread: { nature: "neutral", evs: 0, ivs: 31, level: 50, rawSpeed: 90 },
+        effects: [
+          {
+            kind: "field",
+            source: "tailwind",
+            label: "Tailwind",
+            multiplier: 2,
+            condition: "tailwind",
+          },
+        ],
+        finalSpeed: 180,
+      },
+    ],
+  },
 ];
 
 describe("filterSpeedTiers", () => {
   it("keeps matching setup rows and omits empty groups", () => {
-    expect(
-      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: [], search: "drill" }),
-    ).toStrictEqual([
+    expect(filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, pokemon: [530] })).toStrictEqual([
       {
         speed: tiers[0].speed,
         pokemon: [
@@ -104,62 +126,68 @@ describe("filterSpeedTiers", () => {
 
   it("preserves group order from input", () => {
     expect(
-      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: [] }).map((tier) => tier.speed),
-    ).toStrictEqual([308, 250, 222]);
+      filterSpeedTiers(tiers, defaultSpeedTierFilters).map((tier) => tier.speed),
+    ).toStrictEqual([308, 222, 180]);
   });
 
-  it("shows unboosted rows by default", () => {
+  it("hides item-boosted rows by default", () => {
     expect(
       filterSpeedTiers(tiers, defaultSpeedTierFilters).map((tier) => tier.speed),
-    ).toStrictEqual([222]);
+    ).toStrictEqual([308, 222, 180]);
   });
 
-  it("filters unboosted rows with the none boost option", () => {
+  it("includes item-boosted rows when selected", () => {
     expect(
-      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: ["none"] }).map(
+      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, items: ["choice-scarf"] }).map(
         (tier) => tier.speed,
       ),
-    ).toStrictEqual([222]);
+    ).toStrictEqual([308, 250, 222, 180]);
   });
 
-  it("filters ability and item boosts with OR semantics", () => {
-    expect(
-      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: ["ability"] }).map(
-        (tier) => tier.speed,
-      ),
-    ).toStrictEqual([308]);
-
-    expect(
-      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: ["ability", "item"] }).map(
-        (tier) => tier.speed,
-      ),
-    ).toStrictEqual([308, 250]);
-  });
-
-  it("filters by effect kind, weather, nature, and stat points", () => {
+  it("filters by field condition and spreads", () => {
     expect(
       filterSpeedTiers(tiers, {
         ...defaultSpeedTierFilters,
-        boosts: ["ability"],
-        weather: "sand",
-        nature: "positive",
-        statPoints: 32,
+        fieldConditions: ["sand"],
+        spreads: ["positive-252"],
       }).map((tier) => tier.speed),
     ).toStrictEqual([308]);
+  });
 
+  it("filters field conditions with OR semantics", () => {
     expect(
       filterSpeedTiers(tiers, {
         ...defaultSpeedTierFilters,
-        boosts: ["item"],
+        fieldConditions: ["sand", "tailwind"],
       }).map((tier) => tier.speed),
-    ).toStrictEqual([250]);
+    ).toStrictEqual([308, 222, 180]);
   });
 
-  it("matches search against slug", () => {
+  it("keeps rows without field-condition boosts when field conditions are selected", () => {
     expect(
-      filterSpeedTiers(tiers, { ...defaultSpeedTierFilters, boosts: [], search: "aero" }).map(
-        (tier) => tier.speed,
-      ),
+      filterSpeedTiers(tiers, {
+        ...defaultSpeedTierFilters,
+        fieldConditions: ["sand"],
+      }).map((tier) => tier.speed),
+    ).toStrictEqual([308, 222]);
+  });
+
+  it("filters to selected species by pokedex number", () => {
+    expect(
+      filterSpeedTiers(tiers, {
+        ...defaultSpeedTierFilters,
+        pokemon: [25, 142],
+      }).map((tier) => tier.speed),
     ).toStrictEqual([222]);
+  });
+
+  it("keeps non-item rows while matching selected item boosts", () => {
+    expect(
+      filterSpeedTiers(tiers, {
+        ...defaultSpeedTierFilters,
+        items: ["choice-scarf"],
+        pokemon: [25, 142],
+      }).map((tier) => tier.speed),
+    ).toStrictEqual([250, 222]);
   });
 });
