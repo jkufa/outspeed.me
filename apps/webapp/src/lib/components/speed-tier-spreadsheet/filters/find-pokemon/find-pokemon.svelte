@@ -72,8 +72,6 @@
       </InputGroup.Addon>
     {/if}
 
-    <!-- <div class="border-e h-[65%] mx-1"></div> -->
-
     <InputGroup.Addon align="inline-end" class="gap-0">
       <InputGroup.Button
         size="icon-sm"

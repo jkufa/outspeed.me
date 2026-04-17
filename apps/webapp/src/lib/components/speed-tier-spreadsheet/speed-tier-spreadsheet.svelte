@@ -214,10 +214,10 @@
 
       sourceTiers = (await response.json()) as SpeedTier[];
       dataLoadState = "ready";
+      filtersReady = true;
     } catch {
       dataLoadState = "error";
-    } finally {
-      filtersReady = true;
+      filtersReady = false;
     }
   });
 </script>

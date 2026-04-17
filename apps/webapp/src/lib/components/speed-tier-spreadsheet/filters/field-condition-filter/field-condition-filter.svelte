@@ -39,11 +39,11 @@
         </Command.Group>
         <Command.Separator />
 
-        {#each Object.entries(fieldConditionByGroup) as [group, options]}
+        {#each Object.entries(fieldConditionByGroup) as [group, groupOptions]}
           <Command.Group
             heading={group.charAt(0).toUpperCase() + group.slice(1)}
           >
-            {#each options as option (option.value)}
+            {#each groupOptions as option (option.value)}
               <Command.Item
                 value={option.label}
                 data-checked={isSelected(option.value)}
