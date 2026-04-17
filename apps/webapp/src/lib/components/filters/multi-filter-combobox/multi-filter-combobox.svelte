@@ -216,7 +216,10 @@
           {#if canClear}
             <span aria-hidden="true" class="size-6 shrink-0"></span>
           {/if}
-          <ChevronDownIcon data-icon="inline-end" class="text-muted-foreground" />
+          <ChevronDownIcon
+            data-icon="inline-end"
+            class="text-muted-foreground"
+          />
         </Button>
       {/snippet}
     </Popover.Trigger>
@@ -227,7 +230,7 @@
         variant="ghost"
         size="icon-xs"
         aria-label={clearAriaLabel}
-        class="absolute top-1/2 right-[1.875rem] z-10 -translate-y-1/2 text-muted-foreground hover:text-foreground active:translate-y-0"
+        class="absolute top-1/2 right-7.5 z-10 -translate-y-1/2 text-muted-foreground hover:text-foreground active:-translate-y-1/2!"
         onclick={handleClearClick}
       >
         <XIcon />
