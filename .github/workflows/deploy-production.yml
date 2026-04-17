@@ -34,13 +34,13 @@ jobs:
         uses: oven-sh/setup-bun@v2
 
       - name: Install root dependencies
-        run: bun install --frozen-lockfile
+        run: bun install
 
       - name: Install webapp dependencies
-        run: bun install --cwd apps/webapp --frozen-lockfile
+        run: bun install --cwd apps/webapp
 
       - name: Install ingestor dependencies
-        run: bun install --cwd packages/ingestor --frozen-lockfile
+        run: bun install --cwd packages/ingestor
 
       - name: Generate webapp i18n files
         working-directory: apps/webapp
