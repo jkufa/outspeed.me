@@ -227,7 +227,7 @@
         variant="ghost"
         size="icon-xs"
         aria-label={clearAriaLabel}
-        class="absolute top-1/2 right-[1.875rem] z-10 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+        class="absolute top-1/2 right-[1.875rem] z-10 -translate-y-1/2 text-muted-foreground hover:text-foreground active:translate-y-0"
         onclick={handleClearClick}
       >
         <XIcon />
