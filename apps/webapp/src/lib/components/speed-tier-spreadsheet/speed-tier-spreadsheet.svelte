@@ -1,5 +1,8 @@
 <script lang="ts">
+  import ArrowDownIcon from "@lucide/svelte/icons/arrow-down";
+  import ArrowUpIcon from "@lucide/svelte/icons/arrow-up";
   import { onMount } from "svelte";
+  import { Button } from "$lib/components/ui/button";
   import { defaultSpeedTierFilters, filterSpeedTiers } from "$lib/speed-tiers";
   import type {
     SpeedTier,
@@ -8,10 +11,17 @@
   } from "$lib/speed-tiers";
   import { collectPokemonFilterOptions } from "./filters/pokemon-filter/pokemon-filter-options";
   import FiltersPanel from "./filters/filters-panel.svelte";
+  import MobileFilterDrawer from "./filters/mobile-filter-drawer.svelte";
   import {
     buildSpeedTierTableRows,
     rowMatchesPokemonFind,
   } from "./speed-tier-table-rows";
+  import {
+    currentSpeedSort,
+    defaultSpeedTierSorting,
+    speedSortLabel,
+    toggleSpeedSorting,
+  } from "./speed-tier-sorting";
   import SpeedTierTable from "./speed-tier-table.svelte";
 
   let {
@@ -34,6 +44,7 @@
   let tableRowOrder = $state<string[]>([]);
   let activeFindMatchId = $state<string | null>(null);
   let activeFindMatchIndexHint = $state(0);
+  let sorting = $state([...defaultSpeedTierSorting]);
   let filtersReady = $state(false);
   let stickyFiltersElement = $state<HTMLElement | null>(null);
   let stickyFiltersHeight = $state(0);
@@ -94,6 +105,8 @@
         ? `${visibleRows} rows. Full table failed to load.`
         : `${visibleRows} rows`,
   );
+  const speedSortDirection = $derived(currentSpeedSort(sorting));
+  const speedSortButtonLabel = $derived(speedSortLabel(speedSortDirection));
 
   $effect(() => {
     const nextValue = findValue;
@@ -204,6 +217,10 @@
     activeFindMatchIndexHint = 0;
   }
 
+  function toggleMobileSpeedSorting() {
+    sorting = toggleSpeedSorting(sorting);
+  }
+
   onMount(async () => {
     try {
       const response = await fetch(fullDataUrl);
@@ -246,11 +263,37 @@
       onFindNext={goToNextFindMatch}
       onFindPrevious={goToPreviousFindMatch}
       onFindClear={clearFind}
-    />
+    >
+      <div class="grid gap-3 md:hidden pb-4">
+        <div class="grid grid-cols-2 gap-3">
+          <Button
+            type="button"
+            variant="secondary"
+            aria-label={speedSortButtonLabel}
+            onclick={toggleMobileSpeedSorting}
+          >
+            Speed
+            {#if speedSortDirection === "asc"}
+              <ArrowUpIcon data-icon="inline-end" />
+            {:else}
+              <ArrowDownIcon data-icon="inline-end" />
+            {/if}
+          </Button>
+          <MobileFilterDrawer
+            bind:filters
+            {filtersReady}
+            {pokemonFilterOptions}
+            {visibleRows}
+          />
+        </div>
+        <span class="ml-auto text-sm text-muted-foreground">{rowsLabel}</span>
+      </div>
+    </FiltersPanel>
   </div>
 
   <SpeedTierTable
     tiers={filteredTiers}
+    bind:sorting
     {findMatchIds}
     {activeFindMatchId}
     headerTopOffset={stickyFiltersHeight}

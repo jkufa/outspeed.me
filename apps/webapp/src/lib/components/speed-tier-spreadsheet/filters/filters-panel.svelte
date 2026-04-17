@@ -1,12 +1,10 @@
 <script lang="ts">
+  import type { Snippet } from "svelte";
   import { Label } from "$lib/components/ui/label";
   import type { SpeedTierFilters } from "$lib/speed-tiers";
+  import FilterControls from "./filter-controls.svelte";
   import FindPokemon from "./find-pokemon/find-pokemon.svelte";
-  import FieldConditionFilter from "./field-condition-filter/field-condition-filter.svelte";
-  import ItemFilter from "./item-filter/item-filter.svelte";
-  import PokemonFilter from "./pokemon-filter/pokemon-filter.svelte";
   import type { PokemonFilterOption } from "./pokemon-filter/pokemon-filter-options";
-  import SpreadFilter from "./spread-filter/spread-filter.svelte";
 
   let {
     filters = $bindable(),
@@ -19,6 +17,7 @@
     onFindNext,
     onFindPrevious,
     onFindClear,
+    children,
   }: {
     filters: SpeedTierFilters;
     filtersReady: boolean;
@@ -30,55 +29,34 @@
     onFindNext: () => void;
     onFindPrevious: () => void;
     onFindClear: () => void;
+    children?: Snippet;
   } = $props();
 </script>
 
 <section aria-label="Speed tier filters" class="grid gap-3">
-  <div
-    class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,12.5rem)_minmax(0,12rem)_minmax(0,12rem)]"
-  >
-    <div class="grid min-w-0 gap-2 text-sm md:col-span-2 lg:col-span-1">
-      <Label class="text-muted-foreground">Find Pokemon</Label>
-      <FindPokemon
-        bind:value={findValue}
-        matchCountLabel={findMatchLabel}
-        hasMatches={hasFindMatches}
-        disabled={!filtersReady}
-        onNext={onFindNext}
-        onPrevious={onFindPrevious}
-        onClear={onFindClear}
-      />
-    </div>
-
-    <div class="grid min-w-0 gap-2 text-sm">
-      <Label class="text-muted-foreground">Pokemon</Label>
-      <PokemonFilter
-        bind:value={filters.pokemon}
-        options={pokemonFilterOptions}
-        disabled={!filtersReady}
-      />
-    </div>
-
-    <div class="grid min-w-0 gap-2 text-sm">
-      <Label class="text-muted-foreground">Field Condition</Label>
-      <FieldConditionFilter
-        bind:value={filters.fieldConditions}
-        disabled={!filtersReady}
-      />
-    </div>
-
-    <div class="grid min-w-0 gap-2 text-sm">
-      <Label class="text-muted-foreground">Spreads</Label>
-      <SpreadFilter bind:value={filters.spreads} disabled={!filtersReady} />
-    </div>
-
-    <div class="grid min-w-0 gap-2 text-sm">
-      <Label class="text-muted-foreground">Items</Label>
-      <ItemFilter bind:value={filters.items} disabled={!filtersReady} />
-    </div>
+  <div class="grid min-w-0 gap-2 text-sm md:max-w-[32rem]">
+    <Label class="text-muted-foreground">Find Pokemon</Label>
+    <FindPokemon
+      bind:value={findValue}
+      matchCountLabel={findMatchLabel}
+      hasMatches={hasFindMatches}
+      disabled={!filtersReady}
+      onNext={onFindNext}
+      onPrevious={onFindPrevious}
+      onClear={onFindClear}
+    />
   </div>
 
-  <div class="flex flex-wrap items-center gap-2">
+  {@render children?.()}
+
+  <FilterControls
+    bind:filters
+    {filtersReady}
+    {pokemonFilterOptions}
+    class="hidden md:grid"
+  />
+
+  <div class="hidden flex-wrap items-center gap-2 md:flex">
     <span class="ml-auto text-sm text-muted-foreground">{rowsLabel}</span>
   </div>
 </section>

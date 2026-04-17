@@ -11,18 +11,22 @@ const options: MultiFilterComboboxOption[] = [
   { value: "snow", label: "Snow", disabled: true },
 ];
 
+function filterTrigger() {
+  return page.getByLabelText("Filters", { exact: true });
+}
+
 describe("MultiFilterCombobox", () => {
   it("shows the placeholder when value is empty", async () => {
     render(MultiFilterComboboxTestHost, { options });
 
-    await expect.element(page.getByRole("button", { name: "Filters" })).toHaveTextContent("All");
+    await expect.element(filterTrigger()).toHaveTextContent("All");
     await expect.element(page.getByLabelText("Selected value")).toHaveTextContent("[]");
   });
 
   it("renders selected options as chips", async () => {
     render(MultiFilterComboboxTestHost, { options, value: ["sun", "rain"], width: "40rem" });
 
-    const trigger = page.getByRole("button", { name: "Filters" });
+    const trigger = filterTrigger();
 
     await expect.element(trigger).toHaveTextContent("Sun");
     await expect.element(trigger).toHaveTextContent("Rain");
@@ -45,13 +49,13 @@ describe("MultiFilterCombobox", () => {
       width: "9rem",
     });
 
-    await expect.element(page.getByRole("button", { name: "Filters" })).toHaveTextContent("+");
+    await expect.element(filterTrigger()).toHaveTextContent("+");
   });
 
   it("toggles options and updates bound value", async () => {
     render(MultiFilterComboboxTestHost, { options });
 
-    await page.getByRole("button", { name: "Filters" }).click();
+    await filterTrigger().click();
     await page.getByRole("option", { name: "Sun" }).click();
 
     await expect.element(page.getByLabelText("Selected value")).toHaveTextContent('["sun"]');
@@ -67,13 +71,13 @@ describe("MultiFilterCombobox", () => {
     await page.getByRole("button", { name: "Clear filters" }).click();
 
     await expect.element(page.getByLabelText("Selected value")).toHaveTextContent("[]");
-    await expect.element(page.getByRole("button", { name: "Filters" })).toHaveTextContent("All");
+    await expect.element(filterTrigger()).toHaveTextContent("All");
   });
 
   it("does not select disabled options", async () => {
     render(MultiFilterComboboxTestHost, { options });
 
-    await page.getByRole("button", { name: "Filters" }).click();
+    await filterTrigger().click();
     await page.getByRole("option", { name: "Snow" }).click({ force: true });
 
     await expect.element(page.getByLabelText("Selected value")).toHaveTextContent("[]");
@@ -82,7 +86,7 @@ describe("MultiFilterCombobox", () => {
   it("allows custom content to toggle with provided helpers", async () => {
     render(MultiFilterComboboxTestHost, { options, customContent: true });
 
-    await page.getByRole("button", { name: "Filters" }).click();
+    await filterTrigger().click();
     await page.getByRole("button", { name: "Custom Rain" }).click();
 
     await expect.element(page.getByLabelText("Selected value")).toHaveTextContent('["rain"]');

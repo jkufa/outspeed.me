@@ -32,15 +32,23 @@
     buildSpeedTierTableRows,
     type SpeedTierTableRow,
   } from "./speed-tier-table-rows";
+  import {
+    currentSpeedSort,
+    sortDirectionLabel,
+    speedSortLabel,
+    toggleSpeedSorting,
+  } from "./speed-tier-sorting";
 
   let {
     tiers,
+    sorting = $bindable(),
     findMatchIds,
     activeFindMatchId,
     headerTopOffset,
     onRowOrderChange,
   }: {
     tiers: SpeedTierDisplayTier[];
+    sorting: SortingState;
     findMatchIds: string[];
     activeFindMatchId: string | null;
     headerTopOffset: number;
@@ -48,7 +56,6 @@
   } = $props();
 
   let expandedKeys = $state(new Set<string>());
-  let sorting = $state<SortingState>([{ id: "speed", desc: true }]);
   const speedSortDirection = $derived(currentSpeedSort(sorting));
   const speedSortButtonLabel = $derived(speedSortLabel(speedSortDirection));
   const findMatchIdSet = $derived(new Set(findMatchIds));
@@ -64,34 +71,6 @@
     }
 
     expandedKeys = nextKeys;
-  }
-
-  function sortDirectionLabel(direction: false | "asc" | "desc") {
-    if (direction === "asc") return "ascending";
-    if (direction === "desc") return "descending";
-    return undefined;
-  }
-
-  function speedSortLabel(direction: false | "asc" | "desc") {
-    if (direction === "asc") return "Speed sorted ascending";
-    return "Speed sorted descending";
-  }
-
-  function currentSpeedSort(currentSorting: SortingState) {
-    const sort = currentSorting.find((entry) => entry.id === "speed");
-    if (sort === undefined) return false;
-    return sort.desc ? "desc" : "asc";
-  }
-
-  function toggleSpeedSorting(currentSorting: SortingState) {
-    const speedSort = currentSpeedSort(currentSorting);
-
-    if (speedSort === "desc") {
-      sorting = [{ id: "speed", desc: false }];
-      return;
-    }
-
-    sorting = [{ id: "speed", desc: true }];
   }
 
   function buildColumns(
@@ -160,6 +139,23 @@
   });
 
   const rowOrder = $derived(table.getRowModel().rows.map((row) => row.id));
+  const mobileSpeedGroups = $derived.by(() => {
+    const groups: Array<{ speed: number; rows: SpeedTierTableRow[] }> = [];
+
+    for (const row of table.getRowModel().rows) {
+      const speed = row.original.speed;
+      const currentGroup = groups.at(-1);
+
+      if (currentGroup?.speed === speed) {
+        currentGroup.rows.push(row.original);
+        continue;
+      }
+
+      groups.push({ speed, rows: [row.original] });
+    }
+
+    return groups;
+  });
 
   $effect(() => {
     onRowOrderChange(rowOrder);
@@ -235,7 +231,7 @@
                       type="button"
                       class={cn(buttonVariants({ variant: "ghost" }), "-ms-3")}
                       aria-label={speedSortButtonLabel}
-                      onclick={() => toggleSpeedSorting(sorting)}
+                      onclick={() => (sorting = toggleSpeedSorting(sorting))}
                     >
                       Speed
                       {#if speedSortDirection === "asc"}
@@ -336,8 +332,8 @@
     </table>
   </div>
 
-  <div class="grid gap-4 md:hidden">
-    {#each tiers as tier (tier.speed)}
+  <div data-speed-tier-mobile-list class="grid gap-4 md:hidden">
+    {#each mobileSpeedGroups as tier (tier.speed)}
       <section class="rounded-lg border border-border">
         <div
           class="border-b border-border p-3 text-lg font-semibold tabular-nums"
@@ -345,8 +341,9 @@
           {tier.speed}
         </div>
         <div class="divide-y divide-border">
-          {#each tier.pokemon as pokemon (pokemon.combinationId)}
-            {@const mobileRowKey = pokemon.combinationId}
+          {#each tier.rows as row (row.rowKey)}
+            {@const pokemon = row.pokemon}
+            {@const mobileRowKey = row.rowKey}
             {@const mobileDetailId = `speed-tier-details-mobile-${mobileRowKey}`}
             {@const isFindMatch = findMatchIdSet.has(mobileRowKey)}
             {@const isActiveFindMatch = activeFindMatchId === mobileRowKey}
