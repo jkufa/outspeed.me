@@ -1,6 +1,7 @@
 <script lang="ts">
   import SlidersHorizontalIcon from "@lucide/svelte/icons/sliders-horizontal";
   import XIcon from "@lucide/svelte/icons/x";
+  import EyeIcon from "@lucide/svelte/icons/eye";
   import { Button, buttonVariants } from "$lib/components/ui/button";
   import * as Dialog from "$lib/components/ui/dialog";
   import * as Drawer from "$lib/components/ui/drawer";
@@ -35,7 +36,7 @@
 </script>
 
 <Drawer.Root bind:open>
-  <Drawer.Trigger class={buttonVariants({ variant: "secondary" })}>
+  <Drawer.Trigger class={`${buttonVariants({ variant: "secondary" })} w-full`}>
     <SlidersHorizontalIcon data-icon="inline-start" />
     Filters ({selectedFilterCount})
   </Drawer.Trigger>
@@ -98,6 +99,7 @@
           class={buttonVariants({ variant: "default" })}
           onclick={() => (open = false)}
         >
+          <EyeIcon data-icon="inline-start" />
           Show {visibleRows} results
         </Drawer.Close>
       </Drawer.Footer>
