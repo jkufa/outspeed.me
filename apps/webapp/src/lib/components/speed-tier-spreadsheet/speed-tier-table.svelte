@@ -56,10 +56,13 @@
   } = $props();
 
   let expandedKeys = $state(new Set<string>());
+  let tableHeaderElement = $state<HTMLTableSectionElement | null>(null);
+  let tableHeaderHeight = $state(0);
   const speedSortDirection = $derived(currentSpeedSort(sorting));
   const speedSortButtonLabel = $derived(speedSortLabel(speedSortDirection));
   const findMatchIdSet = $derived(new Set(findMatchIds));
   const rows = $derived(buildSpeedTierTableRows(tiers));
+  const speedGroupTopOffset = $derived(headerTopOffset + tableHeaderHeight);
 
   function toggleRow(key: string) {
     const nextKeys = new Set(expandedKeys);
@@ -161,6 +164,15 @@
     onRowOrderChange(rowOrder);
   });
 
+  $effect(() => {
+    updateTableHeaderHeight();
+  });
+
+  function updateTableHeaderHeight() {
+    tableHeaderHeight =
+      tableHeaderElement?.getBoundingClientRect().height ?? 0;
+  }
+
   function getVisibleFindRowElement(rowKey: string) {
     if (typeof document === "undefined") {
       return null;
@@ -195,6 +207,8 @@
   });
 </script>
 
+<svelte:window onresize={updateTableHeaderHeight} />
+
 {#if tiers.length === 0}
   <div
     class="rounded-lg border border-border p-6 text-sm text-muted-foreground"
@@ -210,7 +224,7 @@
         <col class="w-[17%]" />
         <col class="w-[30%]" />
       </colgroup>
-      <TableHeader>
+      <TableHeader bind:ref={tableHeaderElement}>
         {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
           <TableRow class="border-none">
             {#each headerGroup.headers as header (header.id)}
@@ -307,7 +321,8 @@
               >
                 {#if cell.column.id === "speed"}
                   <div
-                    class="text-4xl font-semibold tabular-nums sticky top-28.5"
+                    class="text-4xl font-semibold tabular-nums sticky"
+                    style={`top: ${speedGroupTopOffset}px;`}
                   >
                     <FlexRender
                       content={cell.column.columnDef.cell}
