@@ -56,7 +56,7 @@
     bind:filters
     {filtersReady}
     {pokemonFilterOptions}
-    class="hidden md:grid"
+    class="hidden md:contents"
   />
 
   <div
