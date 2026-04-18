@@ -41,7 +41,7 @@
     Filters ({selectedFilterCount})
   </Drawer.Trigger>
   <Drawer.Content>
-    <div class="mx-auto flex max-h-[80vh] w-full max-w-xl flex-col">
+    <div class="mx-auto flex max-h-[80vh] w-full max-w-xl flex-col px-2">
       <Drawer.Header class="text-left">
         <Drawer.Title>Filters</Drawer.Title>
         <Drawer.Description>
@@ -49,7 +49,7 @@
         </Drawer.Description>
       </Drawer.Header>
 
-      <div class="min-h-0 flex-1 overflow-y-auto px-4 pb-4">
+      <div class="flex flex-col gap-4 pb-4">
         <FilterControls
           bind:filters
           {filtersReady}
@@ -58,7 +58,7 @@
         />
       </div>
 
-      <Drawer.Footer class="border-t">
+      <Drawer.Footer class="mt-8 space-y-2">
         <Dialog.Root bind:open={clearDialogOpen}>
           <Dialog.Trigger>
             {#snippet child({ props })}

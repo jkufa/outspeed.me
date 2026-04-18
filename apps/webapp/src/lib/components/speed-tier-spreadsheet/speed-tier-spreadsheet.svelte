@@ -48,6 +48,8 @@
   let sorting = $state([...defaultSpeedTierSorting]);
   let filtersReady = $state(false);
   let dataLoadState = $state<"loading" | "ready" | "error">("loading");
+  let desktopFiltersElement = $state<HTMLDivElement | null>(null);
+  let headerTopOffset = $state(0);
   const activeFilters = $derived({
     pokemon: filters.pokemon,
     items: filters.items,
@@ -146,6 +148,15 @@
     activeFindMatchId = findMatchIds[nextIndex] ?? null;
   });
 
+  $effect(() => {
+    updateHeaderTopOffset();
+  });
+
+  function updateHeaderTopOffset() {
+    headerTopOffset =
+      desktopFiltersElement?.getBoundingClientRect().height ?? 0;
+  }
+
   function updateTableRowOrder(nextRowOrder: string[]) {
     if (
       nextRowOrder.length === tableRowOrder.length &&
@@ -218,6 +229,8 @@
   });
 </script>
 
+<svelte:window onresize={updateHeaderTopOffset} />
+
 <main class="mx-auto flex w-full max-w-7xl flex-col gap-5 p-4 pb-44 md:p-6">
   <header class="flex flex-col gap-2">
     <h1 class="text-2xl font-semibold tracking-tight">Speed tiers</h1>
@@ -227,7 +240,10 @@
     </p>
   </header>
 
-  <div class="hidden bg-background pt-6 md:block sticky top-0 z-40">
+  <div
+    bind:this={desktopFiltersElement}
+    class="hidden bg-background pt-6 md:block sticky top-0 z-40"
+  >
     <FiltersPanel
       bind:filters
       bind:findValue
@@ -247,7 +263,7 @@
     bind:sorting
     {findMatchIds}
     {activeFindMatchId}
-    headerTopOffset={0}
+    {headerTopOffset}
     onRowOrderChange={updateTableRowOrder}
   />
 
