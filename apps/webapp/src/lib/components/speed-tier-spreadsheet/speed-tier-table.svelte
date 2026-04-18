@@ -307,7 +307,7 @@
               >
                 {#if cell.column.id === "speed"}
                   <div
-                    class="text-4xl font-semibold tabular-nums sticky top-12"
+                    class="text-4xl font-semibold tabular-nums sticky top-28.5"
                   >
                     <FlexRender
                       content={cell.column.columnDef.cell}
