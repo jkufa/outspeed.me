@@ -8,6 +8,8 @@ export {
   formatMultiplier,
   formatNature,
   formatSpread,
+  formatSpreadNature,
+  formatSpreadPoints,
   statPointsToEvs,
 } from "./format";
 export {

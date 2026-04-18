@@ -32,15 +32,23 @@
     buildSpeedTierTableRows,
     type SpeedTierTableRow,
   } from "./speed-tier-table-rows";
+  import {
+    currentSpeedSort,
+    sortDirectionLabel,
+    speedSortLabel,
+    toggleSpeedSorting,
+  } from "./speed-tier-sorting";
 
   let {
     tiers,
+    sorting = $bindable(),
     findMatchIds,
     activeFindMatchId,
     headerTopOffset,
     onRowOrderChange,
   }: {
     tiers: SpeedTierDisplayTier[];
+    sorting: SortingState;
     findMatchIds: string[];
     activeFindMatchId: string | null;
     headerTopOffset: number;
@@ -48,11 +56,13 @@
   } = $props();
 
   let expandedKeys = $state(new Set<string>());
-  let sorting = $state<SortingState>([{ id: "speed", desc: true }]);
+  let tableHeaderElement = $state<HTMLTableSectionElement | null>(null);
+  let tableHeaderHeight = $state(0);
   const speedSortDirection = $derived(currentSpeedSort(sorting));
   const speedSortButtonLabel = $derived(speedSortLabel(speedSortDirection));
   const findMatchIdSet = $derived(new Set(findMatchIds));
   const rows = $derived(buildSpeedTierTableRows(tiers));
+  const speedGroupTopOffset = $derived(headerTopOffset + tableHeaderHeight);
 
   function toggleRow(key: string) {
     const nextKeys = new Set(expandedKeys);
@@ -64,34 +74,6 @@
     }
 
     expandedKeys = nextKeys;
-  }
-
-  function sortDirectionLabel(direction: false | "asc" | "desc") {
-    if (direction === "asc") return "ascending";
-    if (direction === "desc") return "descending";
-    return undefined;
-  }
-
-  function speedSortLabel(direction: false | "asc" | "desc") {
-    if (direction === "asc") return "Speed sorted ascending";
-    return "Speed sorted descending";
-  }
-
-  function currentSpeedSort(currentSorting: SortingState) {
-    const sort = currentSorting.find((entry) => entry.id === "speed");
-    if (sort === undefined) return false;
-    return sort.desc ? "desc" : "asc";
-  }
-
-  function toggleSpeedSorting(currentSorting: SortingState) {
-    const speedSort = currentSpeedSort(currentSorting);
-
-    if (speedSort === "desc") {
-      sorting = [{ id: "speed", desc: false }];
-      return;
-    }
-
-    sorting = [{ id: "speed", desc: true }];
   }
 
   function buildColumns(
@@ -160,10 +142,36 @@
   });
 
   const rowOrder = $derived(table.getRowModel().rows.map((row) => row.id));
+  const mobileSpeedGroups = $derived.by(() => {
+    const groups: Array<{ speed: number; rows: SpeedTierTableRow[] }> = [];
+
+    for (const row of table.getRowModel().rows) {
+      const speed = row.original.speed;
+      const currentGroup = groups.at(-1);
+
+      if (currentGroup?.speed === speed) {
+        currentGroup.rows.push(row.original);
+        continue;
+      }
+
+      groups.push({ speed, rows: [row.original] });
+    }
+
+    return groups;
+  });
 
   $effect(() => {
     onRowOrderChange(rowOrder);
   });
+
+  $effect(() => {
+    updateTableHeaderHeight();
+  });
+
+  function updateTableHeaderHeight() {
+    tableHeaderHeight =
+      tableHeaderElement?.getBoundingClientRect().height ?? 0;
+  }
 
   function getVisibleFindRowElement(rowKey: string) {
     if (typeof document === "undefined") {
@@ -199,6 +207,8 @@
   });
 </script>
 
+<svelte:window onresize={updateTableHeaderHeight} />
+
 {#if tiers.length === 0}
   <div
     class="rounded-lg border border-border p-6 text-sm text-muted-foreground"
@@ -214,7 +224,7 @@
         <col class="w-[17%]" />
         <col class="w-[30%]" />
       </colgroup>
-      <TableHeader>
+      <TableHeader bind:ref={tableHeaderElement}>
         {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
           <TableRow class="border-none">
             {#each headerGroup.headers as header (header.id)}
@@ -235,7 +245,7 @@
                       type="button"
                       class={cn(buttonVariants({ variant: "ghost" }), "-ms-3")}
                       aria-label={speedSortButtonLabel}
-                      onclick={() => toggleSpeedSorting(sorting)}
+                      onclick={() => (sorting = toggleSpeedSorting(sorting))}
                     >
                       Speed
                       {#if speedSortDirection === "asc"}
@@ -286,7 +296,7 @@
                   : undefined}
                 class={cn(
                   cell.column.id === "speed"
-                    ? "sticky left-0 z-10 align-top tabular-nums transition-colors"
+                    ? "z-10 align-top tabular-nums transition-colors"
                     : cell.column.id === "pokemon" ||
                         cell.column.id === "boosts"
                       ? "align-top whitespace-normal"
@@ -310,7 +320,10 @@
                 )}
               >
                 {#if cell.column.id === "speed"}
-                  <div class="text-lg font-semibold">
+                  <div
+                    class="text-4xl font-semibold tabular-nums sticky"
+                    style={`top: ${speedGroupTopOffset}px;`}
+                  >
                     <FlexRender
                       content={cell.column.columnDef.cell}
                       context={cell.getContext()}
@@ -336,62 +349,61 @@
     </table>
   </div>
 
-  <div class="grid gap-4 md:hidden">
-    {#each tiers as tier (tier.speed)}
-      <section class="rounded-lg border border-border">
+  <div data-speed-tier-mobile-list class="grid gap-4 md:hidden">
+    {#each mobileSpeedGroups as tier (tier.speed)}
+      <section class="border-t border-border -mx-4">
         <div
-          class="border-b border-border p-3 text-lg font-semibold tabular-nums"
+          class="pt-3 px-3 pb-1 mb-2 text-3xl font-semibold tabular-nums bg-background sticky top-0"
         >
           {tier.speed}
         </div>
-        <div class="divide-y divide-border">
-          {#each tier.pokemon as pokemon (pokemon.combinationId)}
-            {@const mobileRowKey = pokemon.combinationId}
-            {@const mobileDetailId = `speed-tier-details-mobile-${mobileRowKey}`}
-            {@const isFindMatch = findMatchIdSet.has(mobileRowKey)}
-            {@const isActiveFindMatch = activeFindMatchId === mobileRowKey}
-            <div
-              data-find-row={mobileRowKey}
-              class={cn(
-                "grid gap-2 p-3",
-                isActiveFindMatch
-                  ? "relative z-10 bg-accent/60 ring-2 ring-ring"
-                  : isFindMatch
-                    ? "bg-accent/25"
-                    : "",
-              )}
-            >
-              <div class="flex items-center justify-between gap-3">
-                <div
-                  class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-medium"
-                >
-                  {#each pokemon.members as member (member.slug)}
-                    <span class="inline-flex items-center gap-1.5">
-                      <PokemonSprite sprite={member.sprite} />
-                      <span>{member.name}</span>
-                    </span>
-                  {/each}
-                </div>
-                <Button
-                  variant="ghost"
-                  size="xs"
-                  aria-expanded={expandedKeys.has(mobileRowKey)}
-                  aria-controls={mobileDetailId}
-                  onclick={() => toggleRow(mobileRowKey)}
-                >
-                  {expandedKeys.has(mobileRowKey) ? "Hide" : "Details"}
-                </Button>
+        {#each tier.rows as row (row.rowKey)}
+          {@const pokemon = row.pokemon}
+          {@const mobileRowKey = row.rowKey}
+          {@const mobileDetailId = `speed-tier-details-mobile-${mobileRowKey}`}
+          {@const isFindMatch = findMatchIdSet.has(mobileRowKey)}
+          {@const isActiveFindMatch = activeFindMatchId === mobileRowKey}
+          <div
+            data-find-row={mobileRowKey}
+            class={cn(
+              "grid gap-2 p-3",
+              isActiveFindMatch
+                ? "relative z-10 bg-accent/60 ring-2 ring-ring"
+                : isFindMatch
+                  ? "bg-accent/25"
+                  : "",
+            )}
+          >
+            <div class="flex items-center justify-between gap-3">
+              <div
+                class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-medium"
+              >
+                {#each pokemon.members as member (member.slug)}
+                  <span class="inline-flex items-center gap-1.5">
+                    <PokemonSprite sprite={member.sprite} />
+                    <span>{member.name}</span>
+                  </span>
+                {/each}
               </div>
-              <div class="text-sm tabular-nums text-muted-foreground">
-                {formatSpread(pokemon.spread)}
-              </div>
-              <EffectChips effects={pokemon.effects} />
-              {#if expandedKeys.has(mobileRowKey)}
-                <SetupDetails id={mobileDetailId} {pokemon} />
-              {/if}
+              <Button
+                variant="ghost"
+                size="xs"
+                aria-expanded={expandedKeys.has(mobileRowKey)}
+                aria-controls={mobileDetailId}
+                onclick={() => toggleRow(mobileRowKey)}
+              >
+                {expandedKeys.has(mobileRowKey) ? "Hide" : "Details"}
+              </Button>
             </div>
-          {/each}
-        </div>
+            <div class="text-sm tabular-nums text-muted-foreground font-mono">
+              {formatSpread(pokemon.spread)}
+            </div>
+            <EffectChips effects={pokemon.effects} />
+            {#if expandedKeys.has(mobileRowKey)}
+              <SetupDetails id={mobileDetailId} {pokemon} />
+            {/if}
+          </div>
+        {/each}
       </section>
     {/each}
   </div>

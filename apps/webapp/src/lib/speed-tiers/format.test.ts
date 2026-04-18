@@ -5,6 +5,8 @@ import {
   evsToStatPoints,
   formatMultiplier,
   formatSpread,
+  formatSpreadNature,
+  formatSpreadPoints,
   statPointsToEvs,
 } from "./format";
 
@@ -16,7 +18,7 @@ describe("speed tier formatting", () => {
     expect(statPointsToEvs(0)).toBe(0);
   });
 
-  it("formats spreads with stat points", () => {
+  it("formats spreads with the same copy used by spread filters", () => {
     expect(
       formatSpread({
         nature: "positive",
@@ -25,7 +27,7 @@ describe("speed tier formatting", () => {
         level: 50,
         rawSpeed: 154,
       }),
-    ).toBe("+Spe 32 SP");
+    ).toBe("+Spd 32 SP");
 
     expect(
       formatSpread({
@@ -35,7 +37,10 @@ describe("speed tier formatting", () => {
         level: 50,
         rawSpeed: 90,
       }),
-    ).toBe("-Spe 0 SP");
+    ).toBe("-Spd 0 SP");
+
+    expect(formatSpreadNature("neutral")).toBe("Neut");
+    expect(formatSpreadPoints(252)).toBe("32 SP");
   });
 
   it("formats multipliers without unnecessary decimals", () => {

@@ -196,7 +196,7 @@
             class="flex w-full min-w-0 max-w-full flex-1 items-center gap-1 overflow-hidden"
           >
             {#if selectedOptions.length === 0}
-              <span class="truncate text-muted-foreground px-2"
+              <span class="truncate text-muted-foreground px-2 font-normal"
                 >{placeholder}</span
               >
             {:else}

@@ -1,5 +1,8 @@
 <script lang="ts">
+  import ArrowDownIcon from "@lucide/svelte/icons/arrow-down";
+  import ArrowUpIcon from "@lucide/svelte/icons/arrow-up";
   import { onMount } from "svelte";
+  import { Button } from "$lib/components/ui/button";
   import { defaultSpeedTierFilters, filterSpeedTiers } from "$lib/speed-tiers";
   import type {
     SpeedTier,
@@ -8,10 +11,18 @@
   } from "$lib/speed-tiers";
   import { collectPokemonFilterOptions } from "./filters/pokemon-filter/pokemon-filter-options";
   import FiltersPanel from "./filters/filters-panel.svelte";
+  import FindPokemon from "./filters/find-pokemon/find-pokemon.svelte";
+  import MobileFilterDrawer from "./filters/mobile-filter-drawer.svelte";
   import {
     buildSpeedTierTableRows,
     rowMatchesPokemonFind,
   } from "./speed-tier-table-rows";
+  import {
+    currentSpeedSort,
+    defaultSpeedTierSorting,
+    speedSortLabel,
+    toggleSpeedSorting,
+  } from "./speed-tier-sorting";
   import SpeedTierTable from "./speed-tier-table.svelte";
 
   let {
@@ -34,10 +45,11 @@
   let tableRowOrder = $state<string[]>([]);
   let activeFindMatchId = $state<string | null>(null);
   let activeFindMatchIndexHint = $state(0);
+  let sorting = $state([...defaultSpeedTierSorting]);
   let filtersReady = $state(false);
-  let stickyFiltersElement = $state<HTMLElement | null>(null);
-  let stickyFiltersHeight = $state(0);
   let dataLoadState = $state<"loading" | "ready" | "error">("loading");
+  let desktopFiltersElement = $state<HTMLDivElement | null>(null);
+  let headerTopOffset = $state(0);
   const activeFilters = $derived({
     pokemon: filters.pokemon,
     items: filters.items,
@@ -94,6 +106,8 @@
         ? `${visibleRows} rows. Full table failed to load.`
         : `${visibleRows} rows`,
   );
+  const speedSortDirection = $derived(currentSpeedSort(sorting));
+  const speedSortButtonLabel = $derived(speedSortLabel(speedSortDirection));
 
   $effect(() => {
     const nextValue = findValue;
@@ -135,24 +149,13 @@
   });
 
   $effect(() => {
-    const element = stickyFiltersElement;
-
-    if (element === null || typeof ResizeObserver === "undefined") {
-      stickyFiltersHeight = 0;
-      return;
-    }
-
-    const updateStickyFiltersHeight = () => {
-      stickyFiltersHeight = element.offsetHeight;
-    };
-
-    updateStickyFiltersHeight();
-
-    const resizeObserver = new ResizeObserver(updateStickyFiltersHeight);
-    resizeObserver.observe(element);
-
-    return () => resizeObserver.disconnect();
+    updateHeaderTopOffset();
   });
+
+  function updateHeaderTopOffset() {
+    headerTopOffset =
+      desktopFiltersElement?.getBoundingClientRect().height ?? 0;
+  }
 
   function updateTableRowOrder(nextRowOrder: string[]) {
     if (
@@ -204,6 +207,10 @@
     activeFindMatchIndexHint = 0;
   }
 
+  function toggleMobileSpeedSorting() {
+    sorting = toggleSpeedSorting(sorting);
+  }
+
   onMount(async () => {
     try {
       const response = await fetch(fullDataUrl);
@@ -222,7 +229,9 @@
   });
 </script>
 
-<main class="mx-auto flex w-full max-w-7xl flex-col gap-5 p-4 md:p-6">
+<svelte:window onresize={updateHeaderTopOffset} />
+
+<main class="mx-auto flex w-full max-w-7xl flex-col gap-5 p-4 pb-44 md:p-6">
   <header class="flex flex-col gap-2">
     <h1 class="text-2xl font-semibold tracking-tight">Speed tiers</h1>
     <p class="max-w-3xl text-sm text-muted-foreground">
@@ -232,8 +241,8 @@
   </header>
 
   <div
-    bind:this={stickyFiltersElement}
-    class="sticky top-0 z-40 bg-background pt-6"
+    bind:this={desktopFiltersElement}
+    class="hidden bg-background pt-6 md:block sticky top-0 z-40"
   >
     <FiltersPanel
       bind:filters
@@ -251,9 +260,51 @@
 
   <SpeedTierTable
     tiers={filteredTiers}
+    bind:sorting
     {findMatchIds}
     {activeFindMatchId}
-    headerTopOffset={stickyFiltersHeight}
+    {headerTopOffset}
     onRowOrderChange={updateTableRowOrder}
   />
+
+  <div
+    class="fixed inset-x-0 bottom-0 z-40 border-t bg-background/95 px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-[0_-12px_30px_rgba(0,0,0,0.24)] backdrop-blur md:hidden"
+  >
+    <div class="mx-auto grid w-full max-w-7xl gap-2">
+      <div class="flex items-center justify-between gap-3 text-sm">
+        <span class="font-medium">Find Pokemon</span>
+        <span class="text-muted-foreground">{rowsLabel}</span>
+      </div>
+      <FindPokemon
+        bind:value={findValue}
+        matchCountLabel={findMatchLabel}
+        hasMatches={findMatchIds.length > 0}
+        disabled={!filtersReady}
+        onNext={goToNextFindMatch}
+        onPrevious={goToPreviousFindMatch}
+        onClear={clearFind}
+      />
+      <div class="grid grid-cols-2 gap-3">
+        <Button
+          type="button"
+          variant="secondary"
+          aria-label={speedSortButtonLabel}
+          onclick={toggleMobileSpeedSorting}
+        >
+          Speed
+          {#if speedSortDirection === "asc"}
+            <ArrowUpIcon data-icon="inline-end" />
+          {:else}
+            <ArrowDownIcon data-icon="inline-end" />
+          {/if}
+        </Button>
+        <MobileFilterDrawer
+          bind:filters
+          {filtersReady}
+          {pokemonFilterOptions}
+          {visibleRows}
+        />
+      </div>
+    </div>
+  </div>
 </main>
