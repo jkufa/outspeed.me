@@ -28,8 +28,24 @@ export function statPointsToEvs(statPoints: 0 | 32): SpeedEv {
   return 0;
 }
 
+export function formatSpreadNature(nature: Nature) {
+  if (nature === "positive") {
+    return "+Spd";
+  }
+
+  if (nature === "negative") {
+    return "-Spd";
+  }
+
+  return "Neut";
+}
+
+export function formatSpreadPoints(evs: SpeedEv) {
+  return `${evsToStatPoints(evs)} SP`;
+}
+
 export function formatSpread(spread: SpeedSpread) {
-  return `${formatNature(spread.nature)} ${evsToStatPoints(spread.evs)} SP`;
+  return `${formatSpreadNature(spread.nature)} ${formatSpreadPoints(spread.evs)}`;
 }
 
 export function formatMultiplier(multiplier: number) {

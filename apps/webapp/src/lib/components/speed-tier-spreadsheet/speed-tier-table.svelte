@@ -380,7 +380,7 @@
                 {expandedKeys.has(mobileRowKey) ? "Hide" : "Details"}
               </Button>
             </div>
-            <div class="text-sm tabular-nums text-muted-foreground">
+            <div class="text-sm tabular-nums text-muted-foreground font-mono">
               {formatSpread(pokemon.spread)}
             </div>
             <EffectChips effects={pokemon.effects} />
