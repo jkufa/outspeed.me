@@ -82,7 +82,7 @@
               </Dialog.Description>
             </Dialog.Header>
             <Dialog.Footer>
-              <Dialog.Close class={buttonVariants({ variant: "outline" })}>
+              <Dialog.Close class={buttonVariants({ variant: "ghost" })}>
                 Keep filters
               </Dialog.Close>
               <Button
