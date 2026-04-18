@@ -227,7 +227,7 @@
     </p>
   </header>
 
-  <div class="hidden bg-background pt-6 md:block">
+  <div class="hidden bg-background pt-6 md:block sticky top-0 z-40">
     <FiltersPanel
       bind:filters
       bind:findValue

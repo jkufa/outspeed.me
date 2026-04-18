@@ -282,7 +282,7 @@
                   : undefined}
                 class={cn(
                   cell.column.id === "speed"
-                    ? "sticky left-0 z-10 align-top tabular-nums transition-colors"
+                    ? "z-10 align-top tabular-nums transition-colors"
                     : cell.column.id === "pokemon" ||
                         cell.column.id === "boosts"
                       ? "align-top whitespace-normal"
@@ -306,7 +306,9 @@
                 )}
               >
                 {#if cell.column.id === "speed"}
-                  <div class="text-lg font-semibold">
+                  <div
+                    class="text-4xl font-semibold tabular-nums sticky top-12"
+                  >
                     <FlexRender
                       content={cell.column.columnDef.cell}
                       context={cell.getContext()}
@@ -334,61 +336,59 @@
 
   <div data-speed-tier-mobile-list class="grid gap-4 md:hidden">
     {#each mobileSpeedGroups as tier (tier.speed)}
-      <section class="rounded-lg border border-border">
+      <section class="border-t border-border -mx-4">
         <div
-          class="border-b border-border p-3 text-lg font-semibold tabular-nums"
+          class="pt-3 px-3 pb-1 mb-2 text-3xl font-semibold tabular-nums bg-background sticky top-0"
         >
           {tier.speed}
         </div>
-        <div class="divide-y divide-border">
-          {#each tier.rows as row (row.rowKey)}
-            {@const pokemon = row.pokemon}
-            {@const mobileRowKey = row.rowKey}
-            {@const mobileDetailId = `speed-tier-details-mobile-${mobileRowKey}`}
-            {@const isFindMatch = findMatchIdSet.has(mobileRowKey)}
-            {@const isActiveFindMatch = activeFindMatchId === mobileRowKey}
-            <div
-              data-find-row={mobileRowKey}
-              class={cn(
-                "grid gap-2 p-3",
-                isActiveFindMatch
-                  ? "relative z-10 bg-accent/60 ring-2 ring-ring"
-                  : isFindMatch
-                    ? "bg-accent/25"
-                    : "",
-              )}
-            >
-              <div class="flex items-center justify-between gap-3">
-                <div
-                  class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-medium"
-                >
-                  {#each pokemon.members as member (member.slug)}
-                    <span class="inline-flex items-center gap-1.5">
-                      <PokemonSprite sprite={member.sprite} />
-                      <span>{member.name}</span>
-                    </span>
-                  {/each}
-                </div>
-                <Button
-                  variant="ghost"
-                  size="xs"
-                  aria-expanded={expandedKeys.has(mobileRowKey)}
-                  aria-controls={mobileDetailId}
-                  onclick={() => toggleRow(mobileRowKey)}
-                >
-                  {expandedKeys.has(mobileRowKey) ? "Hide" : "Details"}
-                </Button>
+        {#each tier.rows as row (row.rowKey)}
+          {@const pokemon = row.pokemon}
+          {@const mobileRowKey = row.rowKey}
+          {@const mobileDetailId = `speed-tier-details-mobile-${mobileRowKey}`}
+          {@const isFindMatch = findMatchIdSet.has(mobileRowKey)}
+          {@const isActiveFindMatch = activeFindMatchId === mobileRowKey}
+          <div
+            data-find-row={mobileRowKey}
+            class={cn(
+              "grid gap-2 p-3",
+              isActiveFindMatch
+                ? "relative z-10 bg-accent/60 ring-2 ring-ring"
+                : isFindMatch
+                  ? "bg-accent/25"
+                  : "",
+            )}
+          >
+            <div class="flex items-center justify-between gap-3">
+              <div
+                class="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-medium"
+              >
+                {#each pokemon.members as member (member.slug)}
+                  <span class="inline-flex items-center gap-1.5">
+                    <PokemonSprite sprite={member.sprite} />
+                    <span>{member.name}</span>
+                  </span>
+                {/each}
               </div>
-              <div class="text-sm tabular-nums text-muted-foreground">
-                {formatSpread(pokemon.spread)}
-              </div>
-              <EffectChips effects={pokemon.effects} />
-              {#if expandedKeys.has(mobileRowKey)}
-                <SetupDetails id={mobileDetailId} {pokemon} />
-              {/if}
+              <Button
+                variant="ghost"
+                size="xs"
+                aria-expanded={expandedKeys.has(mobileRowKey)}
+                aria-controls={mobileDetailId}
+                onclick={() => toggleRow(mobileRowKey)}
+              >
+                {expandedKeys.has(mobileRowKey) ? "Hide" : "Details"}
+              </Button>
             </div>
-          {/each}
-        </div>
+            <div class="text-sm tabular-nums text-muted-foreground">
+              {formatSpread(pokemon.spread)}
+            </div>
+            <EffectChips effects={pokemon.effects} />
+            {#if expandedKeys.has(mobileRowKey)}
+              <SetupDetails id={mobileDetailId} {pokemon} />
+            {/if}
+          </div>
+        {/each}
       </section>
     {/each}
   </div>

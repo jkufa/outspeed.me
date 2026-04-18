@@ -33,8 +33,11 @@
   } = $props();
 </script>
 
-<section aria-label="Speed tier filters" class="grid gap-3">
-  <div class="grid min-w-0 gap-2 text-sm md:max-w-[32rem]">
+<section
+  aria-label="Speed tier filters"
+  class="grid gap-3 md:grid-cols-2 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,12.5rem)_minmax(0,12rem)_minmax(0,12rem)]"
+>
+  <div class="grid min-w-0 gap-2 md:col-span-2 xl:col-span-1">
     <Label class="text-muted-foreground">Find Pokemon</Label>
     <FindPokemon
       bind:value={findValue}
@@ -56,7 +59,9 @@
     class="hidden md:grid"
   />
 
-  <div class="hidden flex-wrap items-center gap-2 md:flex">
+  <div
+    class="hidden flex-wrap items-center gap-2 md:flex md:col-span-2 xl:col-span-5"
+  >
     <span class="ml-auto text-sm text-muted-foreground">{rowsLabel}</span>
   </div>
 </section>
