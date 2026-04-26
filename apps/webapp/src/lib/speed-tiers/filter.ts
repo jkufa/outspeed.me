@@ -5,6 +5,7 @@ import type {
   SpeedTierDisplayTier,
   SpeedTierFilters,
   SpeedTierPokemon,
+  SpeedEv,
   SpreadFilterKey,
 } from "./types";
 
@@ -53,6 +54,11 @@ function matchesFilters(pokemon: SpeedTierPokemon, filters: SpeedTierFilters) {
 
 function spreadKeyFromPokemon(pokemon: SpeedTierPokemon): SpreadFilterKey | null {
   const { nature, evs } = pokemon.spread;
+
+  if (!isPresetSpeedEv(evs)) {
+    return null;
+  }
+
   if (nature === "positive") {
     return evs === 252 ? "positive-252" : "positive-0";
   }
@@ -63,6 +69,10 @@ function spreadKeyFromPokemon(pokemon: SpeedTierPokemon): SpreadFilterKey | null
     return evs === 0 ? "negative-0" : null;
   }
   return null;
+}
+
+function isPresetSpeedEv(evs: number): evs is SpeedEv {
+  return evs === 0 || evs === 252;
 }
 
 function matchesItemFilter(pokemon: SpeedTierPokemon, items: SpeedTierFilters["items"]) {

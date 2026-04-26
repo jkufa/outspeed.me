@@ -44,8 +44,16 @@ export function formatSpreadPoints(evs: SpeedEv) {
   return `${evsToStatPoints(evs)} SP`;
 }
 
+export function formatStatPoints(statPoints: number) {
+  return `${statPoints} SP`;
+}
+
+export function spreadToStatPoints(spread: SpeedSpread) {
+  return spread.statPoints ?? evsToStatPoints(toPresetSpeedEv(spread.evs));
+}
+
 export function formatSpread(spread: SpeedSpread) {
-  return `${formatSpreadNature(spread.nature)} ${formatSpreadPoints(spread.evs)}`;
+  return `${formatSpreadNature(spread.nature)} ${formatStatPoints(spreadToStatPoints(spread))}`;
 }
 
 export function formatMultiplier(multiplier: number) {
@@ -111,4 +119,12 @@ function formatEffectFactor(effect: SpeedEffect) {
   const multiplier =
     effect.multiplier === undefined ? "" : `x ${formatMultiplier(effect.multiplier)} `;
   return `${multiplier}${effect.label}`.trim();
+}
+
+function toPresetSpeedEv(evs: number): SpeedEv {
+  if (evs === 0 || evs === 252) {
+    return evs;
+  }
+
+  throw new Error("Non-preset speed investment must include statPoints for display");
 }

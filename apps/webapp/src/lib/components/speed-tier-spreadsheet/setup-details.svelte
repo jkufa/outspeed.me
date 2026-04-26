@@ -1,8 +1,8 @@
 <script lang="ts">
   import {
-    evsToStatPoints,
     formatEffectFormula,
     formatNature,
+    spreadToStatPoints,
   } from "$lib/speed-tiers";
   import type { SpeedTierDisplayPokemon } from "$lib/speed-tiers";
 
@@ -19,7 +19,7 @@
   <div>Raw speed: {pokemon.spread.rawSpeed}</div>
   <div>Level: {pokemon.spread.level}</div>
   <div>
-    Stat points: {evsToStatPoints(pokemon.spread.evs)} SP
+    Stat points: {spreadToStatPoints(pokemon.spread)} SP
   </div>
   <div>Nature: {formatNature(pokemon.spread.nature)}</div>
   <div>

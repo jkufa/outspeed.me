@@ -8,6 +8,7 @@ import {
   calculateUnmodifiedSpeed,
   getBaseSpeed,
   shouldIncludeCombination,
+  statPointsToEvs,
 } from "../calculate";
 import type { PokedexPokemon } from "../types";
 
@@ -28,6 +29,15 @@ describe("calculateUnmodifiedSpeed", () => {
     expect(calculateUnmodifiedSpeed(100, 0, "neutral")).toBe(120);
     expect(calculateUnmodifiedSpeed(100, 252, "positive")).toBe(167);
     expect(calculateUnmodifiedSpeed(100, 252, "negative")).toBe(136);
+  });
+});
+
+describe("statPointsToEvs", () => {
+  it("maps arbitrary Champions SP into stat formula EV input", () => {
+    expect(statPointsToEvs(0)).toBe(0);
+    expect(statPointsToEvs(16)).toBe(128);
+    expect(statPointsToEvs(31)).toBe(248);
+    expect(statPointsToEvs(32)).toBe(252);
   });
 });
 

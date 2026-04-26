@@ -1,0 +1,40 @@
+export {
+  applyAbilityModifier,
+  calculateModifiedSpeed,
+  calculateRawSpeed,
+  calculateRawSpeedFromEvs,
+  calculateSpeed,
+  getNatureModifier,
+  statPointsToEvs,
+} from "./calculate";
+export { buildAbilityEffect, buildItemEffect, buildSpeedEffects, toDisplayLabel } from "./effects";
+export {
+  DEFAULT_IVS,
+  DEFAULT_LEVEL,
+  DOUBLE_SPEED_ABILITIES,
+  getSupportedSpeedModifier,
+  getSupportedSpeedModifiers,
+  HELD_ITEMS,
+  isSpeedAbility,
+  MAX_SPEED_EVS,
+  MAX_SPEED_STAT_POINTS,
+  NATURES,
+  normalizeSpeedModifierSource,
+  PRESET_SPEED_EVS,
+  SPEED_ABILITIES,
+  STAGE_SPEED_ABILITIES,
+  SUPPORTED_SPEED_MODIFIERS,
+  WEATHER_SPEED_ABILITY_EFFECTS,
+} from "./rules";
+export type {
+  CalculateSpeedInput,
+  Nature,
+  SpeedCalculation,
+  SpeedCalculationStep,
+  SpeedEffect,
+  SpeedEffectKind,
+  SpeedModifierInput,
+  SpeedModifierKind,
+  SpeedModifierOrigin,
+  SupportedSpeedModifierMetadata,
+} from "./types";

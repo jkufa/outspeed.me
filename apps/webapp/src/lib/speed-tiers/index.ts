@@ -10,6 +10,8 @@ export {
   formatSpread,
   formatSpreadNature,
   formatSpreadPoints,
+  formatStatPoints,
+  spreadToStatPoints,
   statPointsToEvs,
 } from "./format";
 export {
@@ -30,7 +32,9 @@ export type {
   SpeedEffect,
   SpeedEffectKind,
   SpeedEv,
+  SpeedInvestmentEvs,
   SpeedSpread,
+  SpeedStatPoints,
   SpreadFilterKey,
   SpeedTier,
   SpeedTierDisplayMember,
@@ -38,4 +42,5 @@ export type {
   SpeedTierDisplayTier,
   SpeedTierFilters,
   SpeedTierPokemon,
+  SpeedTierRowSource,
 } from "./types";

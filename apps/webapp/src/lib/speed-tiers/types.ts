@@ -1,10 +1,25 @@
 export type Nature = "neutral" | "positive" | "negative";
 export type SpeedEv = 0 | 252;
+export type SpeedInvestmentEvs = number;
+export type SpeedStatPoints = number;
 export type SpeedEffectKind = "ability" | "item" | "field" | "weather" | "terrain" | "stage";
+
+export type SpeedTierRowSource =
+  | {
+      kind: "built-in";
+    }
+  | {
+      kind: "custom-build";
+      buildId: string;
+      origin: "manual" | "showdown";
+      storageSchemaVersion: number;
+      label: string;
+    };
 
 export type SpeedSpread = {
   nature: Nature;
-  evs: SpeedEv;
+  evs: SpeedInvestmentEvs;
+  statPoints?: SpeedStatPoints;
   ivs: number;
   level: number;
   rawSpeed: number;
@@ -35,6 +50,7 @@ export type SpeedTierPokemon = {
   spread: SpeedSpread;
   effects: SpeedEffect[];
   finalSpeed: number;
+  source?: SpeedTierRowSource;
 };
 
 export type SpeedTier = {

@@ -1,4 +1,11 @@
 import {
+  applyAbilityModifier as applyRuntimeAbilityModifier,
+  calculateModifiedSpeed,
+  calculateRawSpeedFromEvs,
+  getNatureModifier as getRuntimeNatureModifier,
+  statPointsToEvs,
+} from "../../../speed-runtime/src";
+import {
   COMBINATION_RULES,
   HELD_ITEMS,
   IV,
@@ -7,7 +14,6 @@ import {
   SPEED_EVS,
   isSpeedAbility,
 } from "./rules";
-import { buildAbilityEffect, buildSpeedEffects } from "./effects";
 import type {
   CombinationContext,
   HeldItem,
@@ -99,29 +105,7 @@ export function calculateSpeed(
   ability: string | null,
   item: HeldItem | null,
 ): SpeedCalculation {
-  const effects = buildSpeedEffects(ability, item);
-  const steps: SpeedCalculation["steps"] = [{ label: "base", speed: rawSpeed }];
-  let speed = rawSpeed;
-
-  for (const effect of effects) {
-    if (effect.multiplier === undefined) {
-      continue;
-    }
-
-    speed = Math.floor(speed * effect.multiplier);
-    steps.push({
-      label: effect.label,
-      multiplier: effect.multiplier,
-      speed,
-    });
-  }
-
-  return {
-    rawSpeed,
-    finalSpeed: speed,
-    effects,
-    steps,
-  };
+  return calculateModifiedSpeed(rawSpeed, ability, item);
 }
 
 export function buildSpeedSpread(nature: Nature, evs: SpeedEv, rawSpeed: number): SpeedSpread {
@@ -135,10 +119,7 @@ export function buildSpeedSpread(nature: Nature, evs: SpeedEv, rawSpeed: number)
 }
 
 export function calculateUnmodifiedSpeed(baseSpeed: number, evs: SpeedEv, nature: Nature) {
-  const statBeforeNature =
-    Math.floor(((2 * baseSpeed + IV + Math.floor(evs / 4)) * LEVEL) / 100) + 5;
-
-  return Math.floor(statBeforeNature * getNatureModifier(nature));
+  return calculateRawSpeedFromEvs({ baseSpeed, evs, nature });
 }
 
 export function getSpeedAbilityNames(pokemon: PokedexPokemon) {
@@ -146,23 +127,11 @@ export function getSpeedAbilityNames(pokemon: PokedexPokemon) {
 }
 
 export function applyAbilityModifier(speed: number, ability: string | null) {
-  const effect = buildAbilityEffect(ability);
-
-  if (effect?.multiplier === undefined) {
-    return speed;
-  }
-
-  return Math.floor(speed * effect.multiplier);
+  return applyRuntimeAbilityModifier(speed, ability);
 }
 
 export function getNatureModifier(nature: Nature) {
-  if (nature === "positive") {
-    return 1.1;
-  }
-
-  if (nature === "negative") {
-    return 0.9;
-  }
-
-  return 1;
+  return getRuntimeNatureModifier(nature);
 }
+
+export { statPointsToEvs };
