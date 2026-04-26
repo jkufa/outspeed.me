@@ -11,6 +11,46 @@ export type {
   ShowdownParseResult,
   ShowdownParserApi,
 } from "./showdown-parser";
+export {
+  buildCustomBuildSpeciesLookup,
+  mergeCustomSpeedTiers,
+  resolveCustomBuild,
+  resolveCustomBuilds,
+  resolveShowdownBuildInput,
+  toCustomSpeedTiers,
+} from "./resolve";
+export type {
+  CustomBuildResolveResult,
+  CustomBuildsResolveResult,
+  CustomBuildSpeciesLookup,
+  ShowdownBuildInputResolveResult,
+} from "./resolve";
+export {
+  clearCustomBuildStorage,
+  getBrowserCustomBuildStorage,
+  readCustomBuildStorage,
+  writeCustomBuildStorage,
+} from "./persistence";
+export type {
+  CustomBuildStorage,
+  CustomBuildStorageReadResult,
+  CustomBuildStorageWriteResult,
+} from "./persistence";
+export { createCustomBuildId, createCustomBuildStore, createCustomBuildStored } from "./store";
+export type {
+  CreateCustomBuildStoreOptions,
+  CustomBuildMutationResult,
+  CustomBuildStore,
+  CustomBuildStoreHydrationStatus,
+  CustomBuildStoreState,
+} from "./store";
+export {
+  isSupportedCustomBuildModifier,
+  normalizeModifierSource,
+  validateCustomBuildInput,
+  validateCustomBuildStored,
+} from "./validation";
+export type { CustomBuildValidationOptions } from "./validation";
 export { CUSTOM_BUILD_STORAGE_KEY, CUSTOM_BUILD_STORAGE_SCHEMA_VERSION } from "./types";
 export type {
   CustomBuildId,
@@ -27,6 +67,8 @@ export type {
   CustomBuildStorageEnvelope,
   CustomBuildStorageSchemaVersion,
   CustomBuildStored,
+  CustomBuildValidationIssue,
+  CustomBuildValidationResult,
   CustomSpeedCalculationResult,
   IsoDateTimeString,
   SpeedCalculationStep,

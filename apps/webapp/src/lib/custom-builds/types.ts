@@ -54,6 +54,29 @@ export type CustomBuildStorageEnvelope = {
   builds: CustomBuildStored[];
 };
 
+export type CustomBuildValidationIssue = {
+  code:
+    | "invalid-ability"
+    | "invalid-item"
+    | "invalid-nature"
+    | "invalid-origin"
+    | "invalid-speed-stat-points"
+    | "invalid-species"
+    | "invalid-storage-schema"
+    | "missing-species";
+  message: string;
+  path?: string;
+};
+
+export type CustomBuildValidationResult =
+  | {
+      ok: true;
+    }
+  | {
+      ok: false;
+      issues: CustomBuildValidationIssue[];
+    };
+
 export type CustomBuildPokemonRuntimeData = CustomBuildSpeciesRef & {
   baseSpeed: number;
   sprite: PokemonSprite | null;
