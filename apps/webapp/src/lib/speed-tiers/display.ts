@@ -31,10 +31,19 @@ function groupPokemonRows(pokemon: SpeedTierPokemon[]): SpeedTierDisplayPokemon[
 function buildDisplayGroupKey(pokemon: SpeedTierPokemon) {
   return [
     `pokedex:${pokemon.pokedexNo}`,
+    `source:${sourceSignature(pokemon)}`,
     `spread:${spreadSignature(pokemon.spread)}`,
     `final:${pokemon.finalSpeed}`,
     `effects:${effectGroupSignature(pokemon.effects)}`,
   ].join("|");
+}
+
+function sourceSignature(pokemon: SpeedTierPokemon) {
+  if (pokemon.source?.kind === "custom-build") {
+    return `custom-build:${pokemon.source.buildId}`;
+  }
+
+  return "built-in";
 }
 
 function spreadSignature(spread: SpeedSpread) {

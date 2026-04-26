@@ -85,7 +85,7 @@ function matchesItemFilter(pokemon: SpeedTierPokemon, items: SpeedTierFilters["i
   }
 
   if (items.length === 0) {
-    return false;
+    return pokemon.source?.kind === "custom-build";
   }
 
   const selected = new Set<string>(items);

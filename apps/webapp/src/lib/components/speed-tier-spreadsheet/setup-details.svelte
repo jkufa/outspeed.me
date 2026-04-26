@@ -16,6 +16,9 @@
 </script>
 
 <div {id} class="grid gap-1 text-xs text-muted-foreground">
+  {#if pokemon.source?.kind === "custom-build"}
+    <div>Source: My build ({pokemon.source.origin})</div>
+  {/if}
   <div>Raw speed: {pokemon.spread.rawSpeed}</div>
   <div>Level: {pokemon.spread.level}</div>
   <div>

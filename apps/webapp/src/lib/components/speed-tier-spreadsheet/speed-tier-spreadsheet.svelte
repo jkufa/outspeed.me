@@ -2,8 +2,37 @@
   import ArrowDownIcon from "@lucide/svelte/icons/arrow-down";
   import ArrowUpIcon from "@lucide/svelte/icons/arrow-up";
   import { onMount } from "svelte";
+  import {
+    MyBuildsDrawer,
+    UnsupportedModifiersNotice,
+    type CustomBuildDisplayBuild,
+    type CustomBuildImportPreview,
+    type CustomBuildImportState,
+    type CustomBuildModifierOption,
+    type CustomBuildSpeciesOption,
+  } from "$lib/components/custom-builds";
   import { Button } from "$lib/components/ui/button";
-  import { defaultSpeedTierFilters, filterSpeedTiers } from "$lib/speed-tiers";
+  import {
+    buildCustomBuildSpeciesLookup,
+    createCustomBuildStore,
+    getSupportedSpeedModifiers,
+    mergeCustomSpeedTiers,
+    parseShowdownSet,
+    resolveCustomBuilds,
+    resolveShowdownBuildInput,
+    toCustomSpeedTiers,
+    type CustomBuildId,
+    type CustomBuildInput,
+    type CustomBuildStoreState,
+    type CustomBuildValidationIssue,
+    type ShowdownParseIssue,
+    type UnsupportedSpeedModifier,
+  } from "$lib/custom-builds";
+  import {
+    defaultSpeedTierFilters,
+    filterSpeedTiers,
+    formatMultiplier,
+  } from "$lib/speed-tiers";
   import type {
     SpeedTier,
     SpeedTierDisplayTier,
@@ -35,10 +64,26 @@
     totalRows: number;
   } = $props();
 
+  type CustomBuildNotice = {
+    tone: "success" | "warning" | "error";
+    message: string;
+    modifiers?: UnsupportedSpeedModifier[];
+  };
+
   // Snapshot the SSR row slice; the full dataset replaces it after hydration.
   // svelte-ignore state_referenced_locally
   let initialTiers = $state([...tiers]);
   let sourceTiers = $state<SpeedTier[] | null>(null);
+  let customBuildStoreState = $state<CustomBuildStoreState>({
+    builds: [],
+    hydrationStatus: "idle",
+    lastWriteStatus: null,
+  });
+  let customBuildNotice = $state<CustomBuildNotice | null>(null);
+  let customBuildsOnly = $state(false);
+  let editingBuild = $state<CustomBuildDisplayBuild | null>(null);
+  let importText = $state("");
+  let importState = $state<CustomBuildImportState>({ status: "idle" });
   let filters = $state<SpeedTierFilters>({ ...defaultSpeedTierFilters });
   let findValue = $state("");
   let debouncedFindValue = $state("");
@@ -50,19 +95,62 @@
   let dataLoadState = $state<"loading" | "ready" | "error">("loading");
   let desktopFiltersElement = $state<HTMLDivElement | null>(null);
   let headerTopOffset = $state(0);
+  const customBuildSpeciesLookup = $derived(
+    sourceTiers === null ? null : buildCustomBuildSpeciesLookup(sourceTiers),
+  );
+  const customBuildStore = createCustomBuildStore({
+    hasSpecies: (species) => customBuildSpeciesLookup?.hasSpecies(species) ?? false,
+  });
   const activeFilters = $derived({
     pokemon: filters.pokemon,
     items: filters.items,
     fieldConditions: filters.fieldConditions,
     spreads: filters.spreads,
   });
+  const resolvedCustomBuilds = $derived(
+    customBuildSpeciesLookup === null
+      ? { resolved: [], failures: [] }
+      : resolveCustomBuilds(customBuildStoreState.builds, customBuildSpeciesLookup),
+  );
+  const mergedSourceTiers = $derived.by(() => {
+    if (sourceTiers === null) {
+      return null;
+    }
+
+    return mergeCustomSpeedTiers(
+      sourceTiers,
+      toCustomSpeedTiers(resolvedCustomBuilds.resolved),
+    );
+  });
+  const visibleSourceTiers = $derived.by(() => {
+    if (mergedSourceTiers === null) {
+      return null;
+    }
+
+    return customBuildsOnly ? customOnlySpeedTiers(mergedSourceTiers) : mergedSourceTiers;
+  });
   const pokemonFilterOptions = $derived(
-    collectPokemonFilterOptions(sourceTiers ?? initialTiers),
+    collectPokemonFilterOptions(visibleSourceTiers ?? initialTiers),
   );
   const filteredTiers = $derived(
-    sourceTiers === null
+    visibleSourceTiers === null
       ? initialTiers
-      : filterSpeedTiers(sourceTiers, activeFilters),
+      : filterSpeedTiers(visibleSourceTiers, activeFilters),
+  );
+  const supportedModifierOptions = $derived(buildSupportedModifierOptions());
+  const customBuildSpeciesOptions = $derived(
+    (customBuildSpeciesLookup?.species ?? []).map(
+      (species): CustomBuildSpeciesOption => ({
+        id: species.id,
+        slug: species.slug,
+        pokedexNo: species.pokedexNo,
+        name: species.name,
+      }),
+    ),
+  );
+  const customBuildDisplayBuilds = $derived(buildCustomBuildDisplayBuilds());
+  const customBuildControlsDisabled = $derived(
+    dataLoadState !== "ready" || customBuildSpeciesLookup === null,
   );
   const visibleRows = $derived(
     filteredTiers.reduce((total, tier) => total + tier.pokemon.length, 0),
@@ -152,6 +240,12 @@
     updateHeaderTopOffset();
   });
 
+  $effect(() => {
+    if (customBuildsOnly && customBuildDisplayBuilds.length === 0) {
+      customBuildsOnly = false;
+    }
+  });
+
   function updateHeaderTopOffset() {
     headerTopOffset =
       desktopFiltersElement?.getBoundingClientRect().height ?? 0;
@@ -211,7 +305,234 @@
     sorting = toggleSpeedSorting(sorting);
   }
 
-  onMount(async () => {
+  function customOnlySpeedTiers(tiers: readonly SpeedTier[]): SpeedTier[] {
+    return tiers
+      .map((tier) => ({
+        speed: tier.speed,
+        pokemon: tier.pokemon.filter(
+          (pokemon) => pokemon.source?.kind === "custom-build",
+        ),
+      }))
+      .filter((tier) => tier.pokemon.length > 0);
+  }
+
+  function buildSupportedModifierOptions() {
+    return getSupportedSpeedModifiers().reduce(
+      (options, modifier) => {
+        const option: CustomBuildModifierOption = {
+          kind: modifier.kind,
+          source: modifier.source,
+          label: modifier.label,
+          description: describeModifier(modifier),
+        };
+
+        if (modifier.kind === "ability") {
+          options.abilityOptions.push(option);
+        } else {
+          options.itemOptions.push(option);
+        }
+
+        return options;
+      },
+      {
+        abilityOptions: [] as CustomBuildModifierOption[],
+        itemOptions: [] as CustomBuildModifierOption[],
+      },
+    );
+  }
+
+  function describeModifier(modifier: ReturnType<typeof getSupportedSpeedModifiers>[number]) {
+    if (modifier.multiplier !== undefined) {
+      return `${formatMultiplier(modifier.multiplier)} Speed`;
+    }
+
+    if (modifier.stage !== undefined) {
+      return `${modifier.stage > 0 ? "+" : ""}${modifier.stage} Speed stage`;
+    }
+
+    return undefined;
+  }
+
+  function buildCustomBuildDisplayBuilds(): CustomBuildDisplayBuild[] {
+    const resolvedById = new Map(
+      resolvedCustomBuilds.resolved.map((resolved) => [resolved.build.id, resolved]),
+    );
+    const failuresById = new Map(
+      resolvedCustomBuilds.failures.map((failure) => [failure.build.id, failure]),
+    );
+
+    return customBuildStoreState.builds.map((build) => {
+      const resolved = resolvedById.get(build.id);
+      const failure = failuresById.get(build.id);
+
+      return {
+        ...build,
+        finalSpeed: resolved?.calculation.finalSpeed,
+        rawSpeed: resolved?.calculation.rawSpeed,
+        strippedModifiers: resolved?.strippedModifiers ?? failure?.strippedModifiers,
+      };
+    });
+  }
+
+  function hydrationNotice(
+    status: CustomBuildStoreState["hydrationStatus"],
+  ): CustomBuildNotice | null {
+    if (status === "corrupt") {
+      return {
+        tone: "warning",
+        message:
+          "Saved custom builds could not be read, so the table is using built-in rows only.",
+      };
+    }
+
+    if (status === "schema-mismatch") {
+      return {
+        tone: "warning",
+        message:
+          "Saved custom builds use an older format and were skipped for this session.",
+      };
+    }
+
+    if (status === "unavailable") {
+      return {
+        tone: "warning",
+        message:
+          "Local storage is unavailable. Custom builds can be edited during this session, but may not persist.",
+      };
+    }
+
+    return null;
+  }
+
+  function mutationNotice(
+    result: ReturnType<typeof customBuildStore.add> | ReturnType<typeof customBuildStore.remove>,
+    successMessage: string,
+    modifiers: UnsupportedSpeedModifier[] = [],
+  ) {
+    if (!result.ok) {
+      customBuildNotice = {
+        tone: "error",
+        message: result.issues.map((issue) => issue.message).join(" "),
+      };
+      return false;
+    }
+
+    if (!result.write.ok) {
+      customBuildNotice = {
+        tone: "warning",
+        message:
+          "Build updated in memory, but local storage is unavailable so it may not persist after refresh.",
+        modifiers,
+      };
+      return true;
+    }
+
+    customBuildNotice = {
+      tone: modifiers.length > 0 ? "warning" : "success",
+      message: successMessage,
+      modifiers,
+    };
+    return true;
+  }
+
+  function createManualBuild(build: CustomBuildInput) {
+    if (customBuildControlsDisabled) {
+      return;
+    }
+
+    mutationNotice(customBuildStore.add(build), "Custom build saved.");
+  }
+
+  function updateManualBuild(id: CustomBuildId, build: CustomBuildInput) {
+    if (customBuildControlsDisabled) {
+      return;
+    }
+
+    if (mutationNotice(customBuildStore.update(id, build), "Custom build updated.")) {
+      editingBuild = null;
+    }
+  }
+
+  function deleteBuild(build: CustomBuildDisplayBuild) {
+    if (mutationNotice(customBuildStore.remove(build.id), "Custom build deleted.")) {
+      if (editingBuild?.id === build.id) {
+        editingBuild = null;
+      }
+    }
+  }
+
+  function previewShowdownImport(showdownText: string) {
+    if (customBuildSpeciesLookup === null) {
+      importState = {
+        status: "error",
+        errors: [
+          {
+            code: "unsupported-syntax",
+            message: "Wait for the full speed tier data to load before importing.",
+          },
+        ],
+      };
+      return;
+    }
+
+    const parsed = parseShowdownSet(showdownText);
+    if (!parsed.ok) {
+      importState = { status: "error", errors: parsed.errors };
+      return;
+    }
+
+    const preview = resolveShowdownBuildInput(parsed.build, customBuildSpeciesLookup);
+    if (!preview.ok) {
+      importState = {
+        status: "error",
+        errors: validationIssuesToShowdownIssues(preview.issues),
+      };
+      return;
+    }
+
+    importState = {
+      status: "parsed",
+      preview: {
+        build: parsed.build,
+        resolvedInput: preview.input,
+        strippedModifiers: preview.strippedModifiers,
+      },
+      warnings: parsed.warnings,
+    };
+  }
+
+  function saveShowdownImport(preview: CustomBuildImportPreview) {
+    if (preview.resolvedInput === undefined) {
+      return;
+    }
+
+    if (
+      mutationNotice(
+        customBuildStore.add(preview.resolvedInput),
+        "Showdown build imported.",
+        preview.strippedModifiers,
+      )
+    ) {
+      importText = "";
+      importState = { status: "idle" };
+    }
+  }
+
+  function clearShowdownImport() {
+    importText = "";
+    importState = { status: "idle" };
+  }
+
+  function validationIssuesToShowdownIssues(
+    issues: CustomBuildValidationIssue[],
+  ): ShowdownParseIssue[] {
+    return issues.map((issue) => ({
+      code: "unsupported-syntax",
+      message: issue.message,
+    }));
+  }
+
+  async function loadFullData() {
     try {
       const response = await fetch(fullDataUrl);
 
@@ -226,6 +547,18 @@
       dataLoadState = "error";
       filtersReady = false;
     }
+  }
+
+  onMount(() => {
+    const unsubscribe = customBuildStore.subscribe((state) => {
+      customBuildStoreState = state;
+    });
+
+    const read = customBuildStore.hydrate();
+    customBuildNotice = hydrationNotice(read.status);
+    void loadFullData();
+
+    return unsubscribe;
   });
 </script>
 
@@ -239,6 +572,47 @@
       effects.
     </p>
   </header>
+
+  {#if customBuildNotice}
+    <section
+      aria-live="polite"
+      class={`grid gap-3 rounded-lg border p-4 text-sm ${
+        customBuildNotice.tone === "error"
+          ? "border-destructive/30 bg-destructive/10 text-destructive"
+          : customBuildNotice.tone === "warning"
+            ? "border-border bg-muted/50"
+            : "border-border bg-card"
+      }`}
+    >
+      <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <p>{customBuildNotice.message}</p>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          class="self-start"
+          onclick={() => (customBuildNotice = null)}
+        >
+          Dismiss
+        </Button>
+      </div>
+      {#if customBuildNotice.modifiers && customBuildNotice.modifiers.length > 0}
+        <UnsupportedModifiersNotice modifiers={customBuildNotice.modifiers} />
+      {/if}
+    </section>
+  {/if}
+
+  {#if resolvedCustomBuilds.failures.length > 0}
+    <section
+      aria-live="polite"
+      class="rounded-lg border border-border bg-muted/50 p-4 text-sm text-muted-foreground"
+    >
+      {resolvedCustomBuilds.failures.length}
+      saved custom
+      {resolvedCustomBuilds.failures.length === 1 ? "build" : "builds"} could not
+      be resolved against the loaded speed tier data.
+    </section>
+  {/if}
 
   <div
     bind:this={desktopFiltersElement}
@@ -255,7 +629,41 @@
       onFindNext={goToNextFindMatch}
       onFindPrevious={goToPreviousFindMatch}
       onFindClear={clearFind}
-    />
+    >
+      <div class="grid gap-2 md:col-span-2 xl:col-span-1">
+        <span class="text-sm font-medium text-muted-foreground">Custom builds</span>
+        <div class="flex flex-wrap gap-2">
+          <MyBuildsDrawer
+            triggerLabel={dataLoadState === "loading" ? "Loading builds" : "My builds"}
+            builds={customBuildDisplayBuilds}
+            {editingBuild}
+            speciesOptions={customBuildSpeciesOptions}
+            abilityOptions={supportedModifierOptions.abilityOptions}
+            itemOptions={supportedModifierOptions.itemOptions}
+            bind:importText
+            {importState}
+            disabled={customBuildControlsDisabled}
+            onCreateManual={createManualBuild}
+            onUpdateManual={updateManualBuild}
+            onCancelEdit={() => (editingBuild = null)}
+            onStartEdit={(build) => (editingBuild = build)}
+            onDelete={deleteBuild}
+            onPreviewImport={previewShowdownImport}
+            onSaveImport={saveShowdownImport}
+            onClearImport={clearShowdownImport}
+          />
+          <Button
+            type="button"
+            variant={customBuildsOnly ? "default" : "secondary"}
+            aria-pressed={customBuildsOnly}
+            disabled={!filtersReady || customBuildDisplayBuilds.length === 0}
+            onclick={() => (customBuildsOnly = !customBuildsOnly)}
+          >
+            My builds only
+          </Button>
+        </div>
+      </div>
+    </FiltersPanel>
   </div>
 
   <SpeedTierTable
@@ -304,6 +712,34 @@
           {pokemonFilterOptions}
           {visibleRows}
         />
+        <MyBuildsDrawer
+          triggerLabel={dataLoadState === "loading" ? "Loading builds" : "My builds"}
+          builds={customBuildDisplayBuilds}
+          {editingBuild}
+          speciesOptions={customBuildSpeciesOptions}
+          abilityOptions={supportedModifierOptions.abilityOptions}
+          itemOptions={supportedModifierOptions.itemOptions}
+          bind:importText
+          {importState}
+          disabled={customBuildControlsDisabled}
+          onCreateManual={createManualBuild}
+          onUpdateManual={updateManualBuild}
+          onCancelEdit={() => (editingBuild = null)}
+          onStartEdit={(build) => (editingBuild = build)}
+          onDelete={deleteBuild}
+          onPreviewImport={previewShowdownImport}
+          onSaveImport={saveShowdownImport}
+          onClearImport={clearShowdownImport}
+        />
+        <Button
+          type="button"
+          variant={customBuildsOnly ? "default" : "secondary"}
+          aria-pressed={customBuildsOnly}
+          disabled={!filtersReady || customBuildDisplayBuilds.length === 0}
+          onclick={() => (customBuildsOnly = !customBuildsOnly)}
+        >
+          My builds only
+        </Button>
       </div>
     </div>
   </div>

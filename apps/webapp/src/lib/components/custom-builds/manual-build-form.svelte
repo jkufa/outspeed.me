@@ -307,11 +307,21 @@
 
   <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
     {#if onCancel}
-      <Button type="button" variant="secondary" disabled={disabled} onclick={onCancel}>
+      <Button
+        type="button"
+        variant="secondary"
+        disabled={disabled}
+        onclick={onCancel}
+        class="w-full sm:w-auto"
+      >
         {cancelLabel}
       </Button>
     {/if}
-    <Button type="submit" disabled={disabled || speciesOptions.length === 0}>
+    <Button
+      type="submit"
+      disabled={disabled || speciesOptions.length === 0}
+      class="w-full sm:w-auto"
+    >
       {submitLabel}
     </Button>
   </div>

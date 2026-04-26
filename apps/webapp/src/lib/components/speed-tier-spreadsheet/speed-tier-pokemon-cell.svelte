@@ -3,6 +3,7 @@
 	import type { SpeedTierDisplayPokemon } from "$lib/speed-tiers";
 	import PokemonSprite from "./pokemon-sprite.svelte";
 	import SetupDetails from "./setup-details.svelte";
+	import SpeedTierSourceBadge from "./speed-tier-source-badge.svelte";
 
 	let {
 		pokemon,
@@ -27,6 +28,7 @@
 				<span>{member.name}</span>
 			</span>
 		{/each}
+		<SpeedTierSourceBadge source={pokemon.source} />
 	</div>
 	<Button
 		variant="ghost"

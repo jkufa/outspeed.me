@@ -68,7 +68,7 @@
   {:else}
     <ul class="grid gap-3">
       {#each builds as build (build.id)}
-        <li class="rounded-2xl border border-border bg-card p-4">
+        <li class="rounded-2xl border border-border bg-card p-4 shadow-sm">
           <article class="grid gap-4">
             <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div class="min-w-0">
@@ -88,40 +88,47 @@
                 </p>
               </div>
 
-              <div class="flex shrink-0 gap-2">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="sm"
-                  disabled={disabled}
-                  onclick={() => onEdit(build)}
-                >
-                  <PencilIcon data-icon="inline-start" />
-                  Edit
-                </Button>
-                <Button
-                  type="button"
-                  variant="destructive"
-                  size="sm"
-                  disabled={disabled}
-                  onclick={() => (deleteTarget = build)}
-                >
-                  <Trash2Icon data-icon="inline-start" />
-                  Delete
-                </Button>
+              <div class="grid shrink-0 gap-3 sm:justify-items-end">
+                <div class="rounded-xl border border-border bg-muted/35 px-3 py-2 text-right">
+                  <div class="text-[0.68rem] font-medium uppercase tracking-wide text-muted-foreground">
+                    {build.finalSpeed !== undefined ? "Final speed" : "Raw speed"}
+                  </div>
+                  <div class="text-2xl font-semibold tabular-nums text-foreground">
+                    {build.finalSpeed ?? build.rawSpeed ?? "Pending"}
+                  </div>
+                </div>
+                <div class="flex flex-col gap-2 sm:flex-row">
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    disabled={disabled}
+                    onclick={() => onEdit(build)}
+                    class="min-h-10 w-full sm:w-auto"
+                  >
+                    <PencilIcon data-icon="inline-start" />
+                    Edit
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    size="sm"
+                    disabled={disabled}
+                    onclick={() => (deleteTarget = build)}
+                    class="min-h-10 w-full sm:w-auto"
+                  >
+                    <Trash2Icon data-icon="inline-start" />
+                    Delete
+                  </Button>
+                </div>
               </div>
             </div>
 
             <Separator />
 
-            <div class="grid gap-2 text-sm text-muted-foreground sm:grid-cols-3">
+            <div class="grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
               <span>Saved on this device</span>
               <span>Updated {formatUpdatedAt(build.updatedAt)}</span>
-              {#if build.finalSpeed !== undefined}
-                <span>Final speed {build.finalSpeed}</span>
-              {:else if build.rawSpeed !== undefined}
-                <span>Raw speed {build.rawSpeed}</span>
-              {/if}
             </div>
 
             {#if build.strippedModifiers && build.strippedModifiers.length > 0}

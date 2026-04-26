@@ -117,4 +117,26 @@ describe("groupSpeedTierRows", () => {
     ]);
     expect(groupSpeedTierRows(tiers)[0].pokemon[0].sourceEffects).toHaveLength(2);
   });
+
+  it("does not group custom builds into matching built-in rows", () => {
+    const builtIn = pokemon();
+    const custom = pokemon({
+      combinationId: "custom:build-1|species:1|nature:neutral|sp:0|ability:none|item:none",
+      source: {
+        kind: "custom-build",
+        buildId: "build-1",
+        origin: "manual",
+        storageSchemaVersion: 1,
+        label: "My Rotom",
+      },
+    });
+
+    const grouped = groupSpeedTierRows([{ speed: 120, pokemon: [builtIn, custom] }]);
+
+    expect(grouped[0].pokemon).toHaveLength(2);
+    expect(grouped[0].pokemon.map((row) => row.source?.kind ?? "built-in")).toStrictEqual([
+      "built-in",
+      "custom-build",
+    ]);
+  });
 });

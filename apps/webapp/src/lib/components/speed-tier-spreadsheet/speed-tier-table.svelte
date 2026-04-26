@@ -28,6 +28,7 @@
   import PokemonSprite from "./pokemon-sprite.svelte";
   import SetupDetails from "./setup-details.svelte";
   import SpeedTierPokemonCell from "./speed-tier-pokemon-cell.svelte";
+  import SpeedTierSourceBadge from "./speed-tier-source-badge.svelte";
   import {
     buildSpeedTierTableRows,
     type SpeedTierTableRow,
@@ -270,6 +271,7 @@
         {#each table.getRowModel().rows as row (row.id)}
           {@const isFindMatch = findMatchIdSet.has(row.id)}
           {@const isActiveFindMatch = activeFindMatchId === row.id}
+          {@const isCustomBuildRow = row.original.pokemon.source?.kind === "custom-build"}
           {@const visibleCells = row
             .getVisibleCells()
             .filter(
@@ -286,7 +288,9 @@
                 ? "bg-accent/60"
                 : isFindMatch
                   ? "bg-accent/25"
-                  : "",
+                  : isCustomBuildRow
+                    ? "border-l-2 border-l-primary/60 bg-primary/5"
+                    : "",
             )}
           >
             {#each visibleCells as cell (cell.id)}
@@ -363,6 +367,7 @@
           {@const mobileDetailId = `speed-tier-details-mobile-${mobileRowKey}`}
           {@const isFindMatch = findMatchIdSet.has(mobileRowKey)}
           {@const isActiveFindMatch = activeFindMatchId === mobileRowKey}
+          {@const isCustomBuildRow = pokemon.source?.kind === "custom-build"}
           <div
             data-find-row={mobileRowKey}
             class={cn(
@@ -371,7 +376,9 @@
                 ? "relative z-10 bg-accent/60 ring-2 ring-ring"
                 : isFindMatch
                   ? "bg-accent/25"
-                  : "",
+                  : isCustomBuildRow
+                    ? "border-l-2 border-l-primary/60 bg-primary/5"
+                    : "",
             )}
           >
             <div class="flex items-center justify-between gap-3">
@@ -384,6 +391,7 @@
                     <span>{member.name}</span>
                   </span>
                 {/each}
+                <SpeedTierSourceBadge source={pokemon.source} />
               </div>
               <Button
                 variant="ghost"

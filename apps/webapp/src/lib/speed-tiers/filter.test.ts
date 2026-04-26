@@ -144,6 +144,57 @@ describe("filterSpeedTiers", () => {
     ).toStrictEqual([308, 250, 222, 180]);
   });
 
+  it("keeps custom item builds visible without selecting built-in item boosts", () => {
+    const customTiers: SpeedTier[] = [
+      ...tiers,
+      {
+        speed: 251,
+        pokemon: [
+          {
+            combinationId:
+              "custom:build-1|species:3|nature:positive|sp:32|ability:none|item:choice-scarf",
+            id: 3,
+            slug: "pikachu",
+            pokedexNo: 25,
+            name: "Scarf Pikachu",
+            sprite: null,
+            spread: {
+              nature: "positive",
+              evs: 252,
+              statPoints: 32,
+              ivs: 31,
+              level: 50,
+              rawSpeed: 167,
+            },
+            effects: [
+              {
+                kind: "item",
+                source: "choice-scarf",
+                label: "Choice Scarf",
+                multiplier: 1.5,
+              },
+            ],
+            finalSpeed: 251,
+            source: {
+              kind: "custom-build",
+              buildId: "build-1",
+              origin: "manual",
+              storageSchemaVersion: 1,
+              label: "Scarf Pikachu",
+            },
+          },
+        ],
+      },
+    ];
+
+    const visibleSpeeds = filterSpeedTiers(customTiers, defaultSpeedTierFilters).map(
+      (tier) => tier.speed,
+    );
+
+    expect(visibleSpeeds).toContain(251);
+    expect(visibleSpeeds).not.toContain(250);
+  });
+
   it("filters by field condition and spreads", () => {
     expect(
       filterSpeedTiers(tiers, {

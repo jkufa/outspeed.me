@@ -62,12 +62,18 @@ Timid Nature`}
 
   <div class="flex flex-col gap-2 sm:flex-row sm:justify-end">
     {#if onClear}
-      <Button type="button" variant="secondary" disabled={disabled} onclick={onClear}>
+      <Button
+        type="button"
+        variant="secondary"
+        disabled={disabled}
+        onclick={onClear}
+        class="w-full sm:w-auto"
+      >
         <XIcon data-icon="inline-start" />
         Clear
       </Button>
     {/if}
-    <Button type="button" disabled={!canPreview} onclick={preview}>
+    <Button type="button" disabled={!canPreview} onclick={preview} class="w-full sm:w-auto">
       <ClipboardPasteIcon data-icon="inline-start" />
       Preview import
     </Button>
@@ -99,7 +105,7 @@ Timid Nature`}
           </div>
           <p class="text-sm text-muted-foreground">
             {state.preview.resolvedInput
-              ? `${formatStatPoints(state.preview.resolvedInput.speedStatPoints)} / ${formatNature(state.preview.resolvedInput.nature)}`
+              ? `${state.preview.resolvedInput.species.name} / ${formatStatPoints(state.preview.resolvedInput.speedStatPoints)} / ${formatNature(state.preview.resolvedInput.nature)}`
               : "Waiting for species resolver"}
           </p>
         </div>
@@ -108,6 +114,7 @@ Timid Nature`}
           type="button"
           disabled={disabled || state.preview.resolvedInput === undefined}
           onclick={() => onSave(state.preview)}
+          class="w-full sm:w-auto"
         >
           <SaveIcon data-icon="inline-start" />
           Save build
